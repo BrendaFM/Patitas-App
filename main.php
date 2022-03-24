@@ -12,7 +12,7 @@
     <title>Patitas App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Custom fonts for this template-->    
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> -->
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -58,14 +58,14 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item active">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="main.php?view=filtro-mascotas">
                 <i class="fa-solid fa-filter"></i>
                     <span>Filtro de Mascotas</span></a>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item active">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="main.php?view=mascotas-adoptadas">
                 <i class="fa-solid fa-house-chimney"></i>
                     <span>Mascotas Adoptadas</span></a>
             </li>
@@ -80,15 +80,19 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item active">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="main.php?view=comentarios">
                     <i class="fa-solid fa-comments"></i>
                     <span>Comentarios</span></a>
             </li>
 
-
-
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
+
+            <li class="nav-item active">
+                <a class="nav-link" href="main.php?view=info-albergue">
+                    <i class="fa-solid fa-comments"></i>
+                    <span>Acerca del albergue</span></a>
+            </li>
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -165,16 +169,11 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
     <!-- Bootstrap core JavaScript-->
     <script src="libs/jquery/jquery.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="libs/jquery-easing/jquery.easing.min.js"></script>
+    <!-- <script src="libs/jquery-easing/jquery.easing.min.js"></script> -->
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
@@ -184,12 +183,11 @@
 
     <!-- Invocar a la libreria de navegacion -->
     <script src="js/loadweb.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         $(document).ready(function(){
             //JQuery activado...
             var view = getParam("view");
-
             if (view != false)
             $("#contenido").load(`views/${view}.php`);
             else
