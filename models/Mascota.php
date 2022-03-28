@@ -14,7 +14,15 @@ class Mascota extends ModelMaster{
             die($error->getMessage());
         }
     }
-
+    
+    public function listarMascotasAdoptadas(){
+        try{
+            return parent::getRows("spu_mascotas_adoptadas_listar");
+        } 
+        catch (Exception $error){
+            die($error->getMessage());
+        }
+    }
 }
 
 ?>

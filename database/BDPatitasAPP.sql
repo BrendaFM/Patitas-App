@@ -93,12 +93,16 @@ CREATE TABLE mascotas
 ) ENGINE = INNODB;
 
 INSERT INTO mascotas (idusuario, idraza, nombremascota, genero, fechanacimiento, observaciones, esterilizacion, estado, vive) 
-VALUES 	(3, 3, 'Nacho', 'M', '2020-04-12', 'descripcion muchotexto', 'S', 'A', 'S'),
-			(1, 2, 'Paco Rex', 'M', '2021-08-17', 'descripcion2', 'N', 'A', 'S'),
-			(2, 1, 'Danna', 'H','2021-12-21', 'descripcion3', 'N', 'R', 'N'),
-			(1, 2, 'Mishifu', 'H', '2021-07-03', 'descripcion4', 'N', 'A', 'S');
+VALUES 	(3, 3, 'Nacho', 'M', '2020-04-12', 'descripcion muchotexto', 'S', 'A', 'S'), -- adoptado
+			(1, 2, 'Paco Rex', 'M', '2021-08-17', 'descripcion2', 'N', 'A', 'S'), -- adoptado
+			(2, 1, 'Danna', 'H','2021-12-21', 'descripcion3', 'N', 'R', 'N'), -- refugiado
+			(1, 2, 'Mishifu', 'H', '2021-07-03', 'descripcion4', 'N', 'A', 'S'); -- refugiado
 INSERT INTO mascotas (idusuario, idraza, nombremascota, genero, fechanacimiento, observaciones, esterilizacion, estado, vive) 
-VALUES (3, 1, "Nacho2", "M", '2020-04-12', 'descripcion muchotexto', 'S', 'A', 'S');
+VALUES (3, 1, "Nacho2", "M", '2020-04-12', 'descripcion muchotexto', 'S', 'A', 'S'); -- adoptado
+INSERT INTO mascotas (idusuario, idraza, nombremascota, genero, fechanacimiento, observaciones, esterilizacion, estado, vive) 
+VALUES (3, 1, "Luis", "M", '2020-04-12', 'descripcion muchotexto', 'S', 'R', 'S'), -- refugiado
+		(3, 1, "Anderson", "M", '2020-04-12', 'descripcion muchotexto', 'S', 'R', 'S'); -- refugiado
+
 
 SELECT * FROM mascotas;
 

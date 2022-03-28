@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.4.20-MariaDB : Database - patitasapp
+MySQL - 10.4.22-MariaDB : Database - patitasapp
 *********************************************************************
 */
 
@@ -141,7 +141,7 @@ CREATE TABLE `mascotas` (
   KEY `fk_idraza_mas` (`idraza`),
   CONSTRAINT `fk_idraza_mas` FOREIGN KEY (`idraza`) REFERENCES `razas` (`idraza`),
   CONSTRAINT `fk_idusuario_mas` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `mascotas` */
 
@@ -149,7 +149,10 @@ insert  into `mascotas`(`idmascota`,`idusuario`,`idraza`,`nombremascota`,`genero
 (1,3,3,'Nacho','M','2020-04-12','descripcion muchotexto','S','A','S'),
 (2,1,2,'Paco Rex','M','2021-08-17','descripcion2','N','A','S'),
 (3,2,1,'Danna','H','2021-12-21','descripcion3','N','R','N'),
-(4,1,2,'Mishifu','H','2021-07-03','descripcion4','N','A','S');
+(4,1,2,'Mishifu','H','2021-07-03','descripcion4','N','A','S'),
+(5,3,1,'Nacho2','M','2020-04-12','descripcion muchotexto','S','A','S'),
+(6,3,1,'Luis','M','2020-04-12','descripcion muchotexto','S','R','S'),
+(7,3,1,'Anderson','M','2020-04-12','descripcion muchotexto','S','R','S');
 
 /*Table structure for table `padrinos` */
 
@@ -297,6 +300,26 @@ CREATE TABLE `voluntarios` (
 insert  into `voluntarios`(`idvoluntario`,`idpersona`,`fechahora`,`descripcionvol`) values 
 (1,4,'2022-02-20 00:00:00','Apoyo con la limpieza');
 
+/* Procedure structure for procedure `spu_mascotas_adoptadas_listar` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_mascotas_adoptadas_listar` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotas_adoptadas_listar`()
+BEGIN
+	SELECT mascotas.nombremascota, razas.raza, 
+		CASE
+			WHEN genero = 'H' THEN 'Hembra'
+			WHEN genero = "M" THEN 'Macho'           
+		END 'genero'
+	, mascotas.fechanacimiento, mascotas.estado, mascotas.vive, mascotas.esterilizacion 
+	FROM mascotas
+	INNER JOIN razas ON razas.idraza = mascotas.idraza
+	WHERE estado = "A" AND vive = "S";
+END */$$
+DELIMITER ;
+
 /* Procedure structure for procedure `spu_mascotas_listar` */
 
 /*!50003 DROP PROCEDURE IF EXISTS  `spu_mascotas_listar` */;
@@ -305,14 +328,15 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotas_listar`()
 BEGIN
-	SELECT
-		mascotas.nombremascota, razas.raza, 
+	SELECT mascotas.nombremascota, razas.raza, 
 		CASE
-			WHEN genero = 'M' THEN 'Macho'
-			WHEN genero = 'H' THEN 'Hembra'      
-			END 'genero', 
-		mascotas.fechanacimiento FROM mascotas
-		inner join razas oN razas.idraza = mascotas.idraza;
+			WHEN genero = 'H' THEN 'Hembra'
+			WHEN genero = "M" THEN 'Macho'           
+		END 'genero'
+	, mascotas.fechanacimiento, mascotas.estado, mascotas.vive, mascotas.esterilizacion 
+	FROM mascotas
+	INNER JOIN razas ON razas.idraza = mascotas.idraza
+	where estado = "R" AND vive = "S";
 END */$$
 DELIMITER ;
 
