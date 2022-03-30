@@ -1,9 +1,9 @@
 <div style="margin: 50px 90px 50px 90px">
 
-<p class="display-4" style="text-align:center">Información del Albergue</p>
+<p class="display-4" style="text-align:center;">Información del Albergue</p>
 
 <br>
-    <div class="row">
+    <div class="row" style="color:#505050;">
         <!-- <div class="card col-md-4 mr-5">
         <img src="./img/patitas.jpg" class="card-img-top" alt="..." style='opacity:0.9;'>
         </div> -->
@@ -27,7 +27,7 @@
     <div class="row">
             <div class="card col-md-3 ">
                 <div class="card-body">
-                    <img src="./img/BCP.png" class="card-img-top" alt="..." style="opacity:0.8;">
+                    <img src="./img/BCP.png" class="card-img-top" alt="..." style="opacity:0.9;">
                     <div style='text-align:center; font-size:20px'>
                         <p class='card-text mt-3'><b>BCP:</b> 315-22463724-027</p>
                     </div>
@@ -36,7 +36,7 @@
             
             <div class="card col-md-3 ">
                 <div class="card-body">
-                    <img src="./img/icono-yape-plin.jpg" class="card-img-top" alt="..."  style="opacity:0.65;">
+                    <img src="./img/icono-yape-plin.jpg" class="card-img-top" alt="..."  style="opacity:0.7;">
                     <div style='text-align:center; font-size:20px'>
                         <p class='card-text mt-3'><b>Yape y Plin:</b> 941110100</p>
                     </div>
@@ -45,7 +45,7 @@
             
             <div class="card col-md-3 ">
                 <div class="card-body">
-                    <img src="./img/interbank" class="card-img-top" alt="..." style="opacity:0.7;">
+                    <img src="./img/interbank" class="card-img-top" alt="..." style="opacity:0.8;">
                     <div style='text-align:center; font-size:20px'>
                         <p class='card-text mt-3'><b>Interbank:</b> 4023090086690</p>
                     </div>
@@ -54,7 +54,7 @@
             
             <div class="card col-md-3 ">
                 <div class="card-body">
-                    <img src="./img/scotiabank_web.png" class="card-img-top" alt="..." style="opacity:0.7;">
+                    <img src="./img/scotiabank_web.png" class="card-img-top" alt="..." style="opacity:0.8;">
                     <div style='text-align:center; font-size:20px'>
                         <p class='card-text mt-3'><b>Scotiabank:</b> 164-0491138</p>
                     </div>
@@ -68,8 +68,8 @@
 
         <div class="card col-md-5 m-5">
             <div class="card-body">
-                <div style='font-size:20px'>
-                <h5 class="card-title" style="text-align:center">¿Quieres ser colaborador?</h5>
+                <div style='font-size:20px;'>
+                <p class="card-title h5" style="text-align:center">¿Quieres ser colaborador?</p>
                     <p class='card-text mt-3'>Requisitos: </p>
                     <p class='card-text mt-3'>
                         - Ser mayor de edad (18 años). <br>
@@ -84,8 +84,8 @@
         
         <div class="card col-md-5 m-5">
             <div class="card-body">
-                <div style='font-size:20px'>
-                <h5 class="card-title" style="text-align:center">¿Quieres ser Padrino?</h5>
+                <div style="font-size:20px;">
+                    <p class="card-title h5" style="text-align:center">¿Quieres ser Padrino?</p>
                     <p class='card-text mt-3'>Requisitos: </p>
                     <p class='card-text mt-3'>
                         - Ser mayor de edad (18 años). <br>

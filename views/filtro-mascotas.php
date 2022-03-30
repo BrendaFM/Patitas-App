@@ -1,1 +1,2 @@
-<h1>este es el filtro de mascotas</h1>
+
+<p class="display-4" style="text-align:center;">este es el filtro de mascotas</p>

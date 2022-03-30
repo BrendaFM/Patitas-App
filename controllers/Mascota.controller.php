@@ -26,7 +26,7 @@ if (isset($_GET['op'])){
                     <div class='card col-md-3 mt-2 mb-2' style='width: 18rem;'>
                         <img src='./img/gato.jpg'>
                         <div class='card-body'>
-                            <h5> $fila->nombremascota </h5> 
+                            <p class='h5'> $fila->nombremascota </p>
                             <p class='card-text' style='text-align:justif'><b>Raza:</b> $fila->raza</p>
                             <p class='card-text' style='text-align:justify'><b>Género:</b> $fila->genero</p>
                             <p class='card-text' style='text-align:justify'><b>Fecha de Nacimiento:</b> $fila->fechanacimiento</p>
@@ -62,7 +62,7 @@ if (isset($_GET['op'])){
                     <div class='card col-md-3 mt-2 mb-2' style='width: 18rem;'>
                         <img src='./img/gato.jpg'>
                         <div class='card-body'>
-                            <h5> $fila->nombremascota </h5> 
+                            <p class='h5'> $fila->nombremascota </p> 
                             <p class='card-text' style='text-align:justif'><b>Raza:</b> $fila->raza</p>
                             <p class='card-text' style='text-align:justify'><b>Género:</b> $fila->genero</p>
                             <p class='card-text' style='text-align:justify'><b>Fecha de Nacimiento:</b> $fila->fechanacimiento</p>

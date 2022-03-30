@@ -29,7 +29,11 @@
 </head>
 
 <body >
-
+<style>
+    p {
+    color:#505050;
+}
+</style>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
