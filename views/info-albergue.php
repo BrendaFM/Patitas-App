@@ -1,20 +1,24 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-
 <div style="margin: 50px 90px 50px 90px">
 
 <p class="display-4" style="text-align:center">Información del Albergue</p>
 
 <br>
     <div class="row">
-        <div class="card col-md-4 mr-5">
+        <!-- <div class="card col-md-4 mr-5">
         <img src="./img/patitas.jpg" class="card-img-top" alt="..." style='opacity:0.9;'>
+        </div> -->
+        <div class="col-md-5">
+            <div class="card mr-5" style='border-radius:60px;'>
+                <img src="./img/patitas.jpg" alt="..." style='opacity:0.9; border-radius:60px;'>
+            </div>
         </div>
 
         <div class="col-md-7" style="text-align:justify">
             <p style="font-size:20px">Este proyecto nace con la esperanza de poder ayudar a nuestros hermanos pequeños de la calle, dándoles una SEGUNDA OPORTUNIDAD DE VIVIR Y DE CONOCER EL AMOR, ya que el espacio donde están es pequeño, reducido y cada día se suman más, que necesitan un ambiente más grande y calido, necesitamos del apoyo incondicional tuyo o de los que deseen sumarse a este sueño, sigamos con esta labor en favor de ellos. "Los que hablan solo con una mirada"</p>
-            <p style="font-size:20px" class="text-right fst-italic">~ Patitas App</p>
+            <p style="font-size:20px" class="text-right font-italic font-weight-bold">~ Patitas App</p>
         </div>
     </div>
+
 
     <br>
     <hr>

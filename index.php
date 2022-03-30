@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -10,7 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- todo ok -->
-    <title>RECORSEN</title>
+    <title>PATITAS APP</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
     <!-- Font-Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"/>
@@ -22,15 +22,13 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link type="image/png" rel="icon" sizes="32x32" href="img/logo.jpg">
+    <link type="image/png" rel="icon" sizes="32x32" href="img/huella">
 
-    <!-- DATA TABLE -->
-    <link href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css" rel="stylesheet">
+
 
 </head>
 
-<body id="page-top">
+<body >
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -50,7 +48,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="main.php">
+                <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-archive"></i>
                     <span>Menú Principal</span></a>
             </li>
@@ -69,13 +67,13 @@
             <!-- Nav Item -->
             
             <li class="nav-item">
-                <a class="nav-link" href="main.php?view=filtro-mascotas">
+                <a class="nav-link" href="index.php?view=filtro-mascotas">
                 <i class="fa-solid fa-filter"></i>
                     <span>Filtro de Mascotas</span></a>
             </li>
             
             <li class="nav-item">
-                <a class="nav-link" href="main.php?view=mascotas-adoptadas">
+                <a class="nav-link" href="index.php?view=mascotas-adoptadas">
                 <i class="fa-solid fa-house-chimney"></i>
                     <span>Mascotas Adoptadas</span></a>
             </li>
@@ -90,7 +88,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="main.php?view=comentarios">
+                <a class="nav-link" href="index.php?view=comentarios">
                     <i class="fa-solid fa-comments"></i>
                     <span>Comentarios</span></a>
             </li>
@@ -99,7 +97,7 @@
             <hr class="sidebar-divider d-none d-md-block">
 
             <li class="nav-item">
-                <a class="nav-link" href="main.php?view=info-albergue">
+                <a class="nav-link" href="index.php?view=info-albergue">
                     <i class="fa-solid fa-circle-info"></i>
                     <span>Acerca del albergue</span></a>
             </li>
@@ -136,7 +134,7 @@
                 <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Main Content -->
+            <!-- End of index Content -->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
@@ -154,17 +152,14 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="libs/jquery/jquery.min.js"></script>
-    <script src="libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="libs/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
@@ -174,18 +169,7 @@
 
     <!-- Page level custom scripts -->
     <script src="js/loadweb.js"></script>
-    <script src="libs/jquery-mask/jquery.mask.min.js"></script>
-    <!-- data table-->
-    <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js" integrity="sha512-R/QOHLpV1Ggq22vfDAWYOaMd5RopHrJNMxi8/lJu8Oihwi4Ho4BRFeiMiCefn9rasajKjnx9/fTQ/xkWnkDACg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
     <script>
         $(document).ready(function(){
