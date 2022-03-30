@@ -37,10 +37,6 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #14b3dd;">
-<<<<<<< HEAD
-
-=======
->>>>>>> 2ee7989180d9df15c9f063fb2a747252415f42bc
             <!-- Sidebar - Brand -->
             <a style="color: white;" class="sidebar-brand d-flex align-items-center justify-content-center">
                 <div class="sidebar-brand-icon rotate-n-15">
@@ -158,18 +154,11 @@
     </div>
     <!-- End of Page Wrapper -->
 
-<<<<<<< HEAD
-=======
     <!-- Scroll to Top Button-->
->>>>>>> 2ee7989180d9df15c9f063fb2a747252415f42bc
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 2ee7989180d9df15c9f063fb2a747252415f42bc
     <!-- Bootstrap core JavaScript-->
     <script src="libs/jquery/jquery.min.js"></script>
     <script src="libs/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -185,11 +174,7 @@
 
     <!-- Page level custom scripts -->
     <script src="js/loadweb.js"></script>
-<<<<<<< HEAD
-    <!-- <script src="libs/jquery-mask/jquery.mask.min.js"></script> -->
-=======
     <script src="libs/jquery-mask/jquery.mask.min.js"></script>
->>>>>>> 2ee7989180d9df15c9f063fb2a747252415f42bc
     <!-- data table-->
     <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
@@ -202,10 +187,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js" integrity="sha512-R/QOHLpV1Ggq22vfDAWYOaMd5RopHrJNMxi8/lJu8Oihwi4Ho4BRFeiMiCefn9rasajKjnx9/fTQ/xkWnkDACg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
-<<<<<<< HEAD
-
-=======
->>>>>>> 2ee7989180d9df15c9f063fb2a747252415f42bc
     <script>
         $(document).ready(function(){
             var view = getParam("view");
