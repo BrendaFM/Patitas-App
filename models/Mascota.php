@@ -23,6 +23,36 @@ class Mascota extends ModelMaster{
             die($error->getMessage());
         }
     }
+
+    public function MascotaTipo(array $data){
+        try{
+        //Si el metodo retorna datos (true), NO OLVIDAR agregar el RETURN
+        return parent::execProcedure($data, "spu_mascotas_tipo", true);
+        }
+        catch(Exception $error){
+        die($error->getMessage());
+        }
+    }
+
+    public function MascotaGenero(array $data){
+        try{
+        //Si el metodo retorna datos (true), NO OLVIDAR agregar el RETURN
+        return parent::execProcedure($data, "spu_mascotas_genero", true);
+        }
+        catch(Exception $error){
+        die($error->getMessage());
+        }
+    }
+
+    public function MascotaEsterilizado(array $data){
+        try{
+        //Si el metodo retorna datos (true), NO OLVIDAR agregar el RETURN
+        return parent::execProcedure($data, "spu_mascotas_esterilizacion", true);
+        }
+        catch(Exception $error){
+        die($error->getMessage());
+        }
+    }
 }
 
 ?>

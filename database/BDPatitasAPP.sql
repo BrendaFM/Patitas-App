@@ -102,7 +102,14 @@ VALUES (3, 1, "Nacho2", "M", '2020-04-12', 'descripcion muchotexto', 'S', 'A', '
 INSERT INTO mascotas (idusuario, idraza, nombremascota, genero, fechanacimiento, observaciones, esterilizacion, estado, vive) 
 VALUES (3, 1, "Luis", "M", '2020-04-12', 'descripcion muchotexto', 'S', 'R', 'S'), -- refugiado
 		(3, 1, "Anderson", "M", '2020-04-12', 'descripcion muchotexto', 'S', 'R', 'S'); -- refugiado
+		
+INSERT INTO mascotas (idusuario, idraza, nombremascota, genero, fechanacimiento, observaciones, esterilizacion, estado, vive) 
+VALUES (3, 1, "Mascota1", "H", '2020-04-12', 'descripcion muchotexto', 'N', 'R', 'S'), -- refugiado
+		(3, 1, "Mascota2", "H", '2020-04-12', 'descripcion muchotexto', 'S', 'R', 'S'); -- refugiado
 
+INSERT INTO mascotas (idusuario, idraza, nombremascota, genero, fechanacimiento, observaciones, esterilizacion, estado, vive) 
+VALUES (3, 1, "Mascota3", "H", '2020-04-12', 'descripcion muchotexto', 'N', 'R', 'S'), -- refugiado
+		(3, 1, "Rodolfo", "H", '2020-04-12', 'descripcion muchotexto', 'S', 'A', 'S'); -- adoptado
 
 SELECT * FROM mascotas;
 

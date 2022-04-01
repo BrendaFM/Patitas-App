@@ -75,7 +75,7 @@
                 <h5 class="card-text" style="text-align:center">¿Quieres ser colaborador?</h5>
                     <p class='card-text mt-3'>Requisitos: </p>
                     <p class='card-text mt-3'>
-                        - Ser mayor de edad (18 años). <br>
+                        - Ser mayor de edad (+18 años). <br>
                         - Tener disponibilidad para apoyar al refugio. <br>
                         - Tener compromiso. <br>
                         - Mostrar un buen trato con los animales. <br> 
@@ -91,7 +91,7 @@
                     <h5 class="card-text" style="text-align:center">¿Quieres ser Padrino?</h5>
                     <p class='card-text mt-3'>Requisitos: </p>
                     <p class='card-text mt-3'>
-                        - Ser mayor de edad (18 años). <br>
+                        - Ser mayor de edad (+18 años). <br>
                         - Estar pendiente de la salud y estado de la mascota. <br>
                         - Mostrar compromiso de apoyo a la mascota. <br>
                         - Tener trato amable y cariñoso con la animales. <br> 

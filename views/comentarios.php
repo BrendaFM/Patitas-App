@@ -1,6 +1,7 @@
-<p class="h1 m-3" style="text-align:center">¡Aquí puedes dejar tus comentarios!</p>
-
+<p class="h1 m-2" style="text-align:center">¡Aquí puedes dejar tus comentarios!</p>
 <br>
+
+
 <div id="disqus_thread"></div>
 <script>
 

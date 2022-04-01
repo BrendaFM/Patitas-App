@@ -1,5 +1,5 @@
-<p class="h1 m-3" style="text-align:center">Todas las mascotas del albergue</p>
-
+<p class="h1 m-2" style="text-align:center">Todas las mascotas del albergue</p>
+<br>
 <div class="row m-2" id='card-mascota'>
 
 </div>

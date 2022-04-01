@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mi proyecto SENATI</title>
+  <title>Patitas App</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -15,14 +15,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link type="image/png" rel="icon" sizes="32x32" href="img/huella">
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css"> -->
   <!-- en esta sona poner el css -->
 </head>
 
 <body class="hold-transition sidebar-mini">
-
+<style>
+  hr{
+    border-color: #797878;
+  }
+</style>
 <div class="wrapper">
-
+  
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -152,8 +157,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
     <div class="p-3">
-      <h5>Title</h5>
-      <p>Sidebar content</p>
+      <h5>Desarrolladores</h5>
+      <hr>
+      <p><strong>Apellidos y Nombres:</strong></p>
+      <p>Belleza Torres, Anderson David.</p>
+      <p><strong>Edad:</strong> 18</p>
+      <hr>
+      <p><strong>Apellidos y Nombres:</strong></p>
+      <p>Boada Ramos, Luis Anderson.</p>
+      <p><strong>Edad:</strong> 18</p>
+      <hr>
+      <p><strong>Apellidos y Nombres:</strong></p>
+      <p>Francia Minaya, Brenda Andrea.</p>
+      <p><strong>Edad:</strong> 19</p>
+      
+      <div style="margin-top: 11em; text-align:right;">
+        <p><strong>Carrera:</strong></p>
+        <p>Ing. de Software con I.A. V</p>
+        <p><strong>Instructor:</strong></p>
+        <p>Francia Minaya, Jhon Edward.</p>
+        <h4 style="text-align:right;">SENATI 2022</h4>
+      </div>
+      
+
     </div>
   </aside>
   <!-- /.control-sidebar -->
