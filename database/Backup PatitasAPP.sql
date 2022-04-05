@@ -24,19 +24,25 @@ CREATE TABLE `adopciones` (
   `idadopcion` int(11) NOT NULL AUTO_INCREMENT,
   `idpersona` int(11) NOT NULL,
   `idmascota` int(11) NOT NULL,
-  `fechahoraadopcion` datetime NOT NULL,
-  `fechahoraretorno` datetime DEFAULT NULL,
+  `fechaadopcion` date NOT NULL,
+  `fecharetorno` date DEFAULT NULL,
   PRIMARY KEY (`idadopcion`),
   KEY `fk_idpersona_adop` (`idpersona`),
   KEY `fk_idmascota_adop` (`idmascota`),
   CONSTRAINT `fk_idmascota_adop` FOREIGN KEY (`idmascota`) REFERENCES `mascotas` (`idmascota`),
   CONSTRAINT `fk_idpersona_adop` FOREIGN KEY (`idpersona`) REFERENCES `personas` (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `adopciones` */
 
-insert  into `adopciones`(`idadopcion`,`idpersona`,`idmascota`,`fechahoraadopcion`,`fechahoraretorno`) values 
-(1,1,4,'2022-01-10 00:00:00',NULL);
+insert  into `adopciones`(`idadopcion`,`idpersona`,`idmascota`,`fechaadopcion`,`fecharetorno`) values 
+(1,3,1,'2016-05-10',NULL),
+(2,5,4,'2018-04-01',NULL),
+(3,5,5,'2019-08-15',NULL),
+(4,1,11,'2021-07-10',NULL),
+(5,10,15,'2021-05-15',NULL),
+(6,8,20,'2022-03-01',NULL),
+(7,6,22,'2022-03-27',NULL);
 
 /*Table structure for table `animales` */
 
@@ -46,7 +52,7 @@ CREATE TABLE `animales` (
   `idanimal` int(11) NOT NULL AUTO_INCREMENT,
   `animal` varchar(30) NOT NULL,
   PRIMARY KEY (`idanimal`),
-  UNIQUE KEY `uk_animal_ani` (`animal`)
+  UNIQUE KEY `uk_animal_anim` (`animal`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `animales` */
@@ -63,20 +69,31 @@ CREATE TABLE `apoyo` (
   `idapoyo` int(11) NOT NULL AUTO_INCREMENT,
   `idpersona` int(11) NOT NULL,
   `idtipoapoyo` int(11) NOT NULL,
-  `fechaapoyo` datetime NOT NULL,
-  `cantidad` int(11) NOT NULL,
+  `fechaapoyo` date NOT NULL,
+  `cantidad` decimal(5,2) DEFAULT NULL,
   `descripcion` text NOT NULL,
   PRIMARY KEY (`idapoyo`),
   KEY `fk_tipoapoyo_ap` (`idtipoapoyo`),
   KEY `fk_idpersona_ap` (`idpersona`),
   CONSTRAINT `fk_idpersona_ap` FOREIGN KEY (`idpersona`) REFERENCES `personas` (`idpersona`),
   CONSTRAINT `fk_tipoapoyo_ap` FOREIGN KEY (`idtipoapoyo`) REFERENCES `tipoapoyo` (`idtipoapoyo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `apoyo` */
 
 insert  into `apoyo`(`idapoyo`,`idpersona`,`idtipoapoyo`,`fechaapoyo`,`cantidad`,`descripcion`) values 
-(1,4,2,'2022-02-25 00:00:00',100,'descripcion apoyo');
+(1,10,1,'2017-09-12',250.00,'Comida para perros del albergue / ONGVIDA'),
+(2,5,2,'2017-09-29',100.00,'apoyo de dinero'),
+(3,5,3,'2018-01-12',NULL,'Medicamentos para perros'),
+(4,3,2,'2018-06-01',300.00,'Apoyo económico'),
+(5,7,3,'2018-11-11',NULL,'medicinas para las mascotas'),
+(6,13,1,'2019-06-12',30.00,'apoyo de comida'),
+(7,11,3,'2019-10-30',NULL,'abrigos para las mascotas'),
+(8,13,1,'2020-08-30',100.00,'Comida para gatos - Niurka Castilla'),
+(9,5,3,'2020-10-18',NULL,'Ayudar en campaña para Esterilizar perros - Veterinario'),
+(10,7,2,'2020-04-26',150.00,'apoyo de dinero'),
+(11,5,2,'2021-12-12',500.00,'Apoyo Económico'),
+(12,9,3,'2022-01-05',NULL,'colaboracion de veterinario para tratamiendo de las macotas');
 
 /*Table structure for table `eventos` */
 
@@ -86,20 +103,26 @@ CREATE TABLE `eventos` (
   `idevento` int(11) NOT NULL AUTO_INCREMENT,
   `idmascota` int(11) NOT NULL,
   `idtipoevento` int(11) NOT NULL,
-  `fechahora` datetime NOT NULL,
+  `fechahora` date NOT NULL,
   `informacion` text DEFAULT NULL,
   PRIMARY KEY (`idevento`),
-  KEY `fk_idmascota_det` (`idmascota`),
-  KEY `fk_idtipoevento_det` (`idtipoevento`),
-  CONSTRAINT `fk_idmascota_det` FOREIGN KEY (`idmascota`) REFERENCES `mascotas` (`idmascota`),
-  CONSTRAINT `fk_idtipoevento_det` FOREIGN KEY (`idtipoevento`) REFERENCES `tipoeventos` (`idtipoevento`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  KEY `fk_idmascota_event` (`idmascota`),
+  KEY `fk_idtipoevento_event` (`idtipoevento`),
+  CONSTRAINT `fk_idmascota_event` FOREIGN KEY (`idmascota`) REFERENCES `mascotas` (`idmascota`),
+  CONSTRAINT `fk_idtipoevento_event` FOREIGN KEY (`idtipoevento`) REFERENCES `tipoeventos` (`idtipoevento`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `eventos` */
 
 insert  into `eventos`(`idevento`,`idmascota`,`idtipoevento`,`fechahora`,`informacion`) values 
-(1,1,1,'2021-01-15 00:00:00','Contra la Rabia'),
-(2,1,1,'2022-01-15 00:00:00','Contra la Rabia');
+(1,1,4,'2016-01-15','Operación'),
+(2,2,1,'2017-01-15','Contra la Rabia'),
+(3,2,2,'2018-01-15','Visita al veterinario'),
+(4,5,1,'2017-01-15','Vacuna por resfrío'),
+(5,9,4,'2019-01-15','Operación'),
+(6,9,3,'2020-01-15','Medicacion para la desparasitacion'),
+(7,11,4,'2020-01-15','Operación'),
+(8,12,1,'2020-01-15','Vacuna Polivalente');
 
 /*Table structure for table `fotos` */
 
@@ -111,15 +134,11 @@ CREATE TABLE `fotos` (
   `ruta` varchar(100) NOT NULL,
   `comentariofoto` varchar(100) NOT NULL,
   PRIMARY KEY (`idfoto`),
-  KEY `fk_idmascota_fo` (`idmascota`),
-  CONSTRAINT `fk_idmascota_fo` FOREIGN KEY (`idmascota`) REFERENCES `mascotas` (`idmascota`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  KEY `fk_idmascota_ft` (`idmascota`),
+  CONSTRAINT `fk_idmascota_ft` FOREIGN KEY (`idmascota`) REFERENCES `mascotas` (`idmascota`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `fotos` */
-
-insert  into `fotos`(`idfoto`,`idmascota`,`ruta`,`comentariofoto`) values 
-(1,1,'ruta123456','Comentariofotos1'),
-(2,2,'ruta112233445566','Comentariofotos2');
 
 /*Table structure for table `mascotas` */
 
@@ -137,22 +156,37 @@ CREATE TABLE `mascotas` (
   `estado` char(1) NOT NULL,
   `vive` char(1) NOT NULL,
   PRIMARY KEY (`idmascota`),
-  KEY `fk_idusuario_mas` (`idusuario`),
-  KEY `fk_idraza_mas` (`idraza`),
-  CONSTRAINT `fk_idraza_mas` FOREIGN KEY (`idraza`) REFERENCES `razas` (`idraza`),
-  CONSTRAINT `fk_idusuario_mas` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+  KEY `fk_idusuario_masc` (`idusuario`),
+  KEY `fk_idraza_masc` (`idraza`),
+  CONSTRAINT `fk_idraza_masc` FOREIGN KEY (`idraza`) REFERENCES `razas` (`idraza`),
+  CONSTRAINT `fk_idusuario_masc` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `mascotas` */
 
 insert  into `mascotas`(`idmascota`,`idusuario`,`idraza`,`nombremascota`,`genero`,`fechanacimiento`,`observaciones`,`esterilizacion`,`estado`,`vive`) values 
-(1,3,3,'Nacho','M','2020-04-12','descripcion muchotexto','S','A','S'),
-(2,1,2,'Paco Rex','M','2021-08-17','descripcion2','N','A','S'),
-(3,2,1,'Danna','H','2021-12-21','descripcion3','N','R','N'),
-(4,1,2,'Mishifu','H','2021-07-03','descripcion4','N','A','S'),
-(5,3,1,'Nacho2','M','2020-04-12','descripcion muchotexto','S','A','S'),
-(6,3,1,'Luis','M','2020-04-12','descripcion muchotexto','S','R','S'),
-(7,3,1,'Anderson','M','2020-04-12','descripcion muchotexto','S','R','S');
+(1,1,1,'Nacho','M','2016-04-12','descripcion','S','A','S'),
+(2,1,31,'Alex','M','2016-08-17','descripcion','N','R','S'),
+(3,2,31,'Danna','H','2017-12-21','descripcion','N','R','S'),
+(4,1,6,'Copita','H','2017-07-03','descripcion','N','A','S'),
+(5,2,8,'Bronko','M','2017-04-12','descripcion','S','A','S'),
+(6,3,31,'Charlie','M','2018-04-12','descripcion','S','R','S'),
+(7,2,1,'Rocky','M','2018-04-12','descripcion','S','R','S'),
+(8,3,34,'Bella','H','2019-04-12','descripcion','N','R','S'),
+(9,3,1,'Lola','H','2019-04-12','descripcion','S','R','S'),
+(10,2,1,'Blanca','H','2020-04-12','descripcion','N','R','S'),
+(11,1,31,'Mia','H','2020-04-12','descripcion','S','A','S'),
+(12,3,1,'Balto','M','2020-04-12','descripcion','S','R','S'),
+(13,1,1,'Peluchin','M','2020-08-17','descripcion','N','R','S'),
+(14,2,31,'Lisa','H','2020-12-21','descripcion','N','R','S'),
+(15,1,1,'Any','H','2020-07-03','descripcion','N','A','S'),
+(16,3,60,'Cosmo','M','2021-04-12','descripcion','S','R','S'),
+(17,3,1,'Mané','M','2021-04-12','descripcion','S','R','S'),
+(18,2,60,'Max','M','2021-04-12','descripcion','S','R','S'),
+(19,3,31,'Misha','H','2022-01-10','descripcion','N','R','S'),
+(20,1,8,'Polita','H','2022-01-11','descripcion','S','A','S'),
+(21,2,31,'Frida','H','2022-02-02','descripcion','N','R','S'),
+(22,2,1,'Nina','H','2022-02-10','descripcion','S','A','S');
 
 /*Table structure for table `padrinos` */
 
@@ -162,19 +196,27 @@ CREATE TABLE `padrinos` (
   `idpadrino` int(11) NOT NULL AUTO_INCREMENT,
   `idpersona` int(11) NOT NULL,
   `idmascota` int(11) NOT NULL,
-  `fechaalta` datetime NOT NULL,
-  `fechabaja` datetime DEFAULT NULL,
+  `fechaalta` date NOT NULL,
+  `fechabaja` date DEFAULT NULL,
   PRIMARY KEY (`idpadrino`),
+  UNIQUE KEY `uk_idmascota_pad` (`idmascota`),
   KEY `fk_idpersona_pad` (`idpersona`),
-  KEY `fk_idmascota_pad` (`idmascota`),
   CONSTRAINT `fk_idmascota_pad` FOREIGN KEY (`idmascota`) REFERENCES `mascotas` (`idmascota`),
   CONSTRAINT `fk_idpersona_pad` FOREIGN KEY (`idpersona`) REFERENCES `personas` (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `padrinos` */
 
 insert  into `padrinos`(`idpadrino`,`idpersona`,`idmascota`,`fechaalta`,`fechabaja`) values 
-(1,4,4,'2022-02-10 00:00:00',NULL);
+(1,5,5,'2022-03-12',NULL),
+(2,5,6,'2017-02-02','2018-04-02'),
+(3,6,12,'2019-01-11',NULL),
+(4,8,3,'2018-01-19',NULL),
+(5,8,20,'2020-03-17',NULL),
+(6,10,10,'2021-02-14',NULL),
+(7,11,15,'2021-03-14',NULL),
+(8,14,13,'2018-02-12','2020-01-02'),
+(9,14,8,'2019-01-10',NULL);
 
 /*Table structure for table `personas` */
 
@@ -188,16 +230,27 @@ CREATE TABLE `personas` (
   `numdoc` char(8) NOT NULL,
   `direccion` varchar(40) NOT NULL,
   `telefono` char(9) DEFAULT NULL,
-  PRIMARY KEY (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`idpersona`),
+  UNIQUE KEY `uk_numdoc_per` (`numdoc`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `personas` */
 
 insert  into `personas`(`idpersona`,`apellidos`,`nombres`,`tipodoc`,`numdoc`,`direccion`,`telefono`) values 
 (1,'Boada Ramos','Luis Anderson','D','12345678','Av España 123','987654321'),
 (2,'Belleza Torres','Anderson David','D','37194023','Jr 28 De Julio 123','972648117'),
-(3,'Francia Minaya','Brenda Andrea','D','23950696','AV La Molina 160','964918123'),
-(4,'De Luque','Jesus Samuel','D','28493919','AV Esperanza 23 ','962716321');
+(3,'Francia Minaya','Brenda Andrea','D','74720939','Av Artemio Molina 454','964918123'),
+(4,'Francia Minaya','Jhon Edward','D','22244400','Chincha Alta','999000333'),
+(5,'Roberto Carlos','Rey Sanches','D','39581934','Jr 28 De Julio 18','978195723'),
+(6,'Juan Fernando','Quispe Guerra','C','81571482','Los Cedros 134','961841923'),
+(7,'Adriana Carolina','De la Cruz','D','28195012','Leoncio Prado 186','946172931'),
+(8,'Efraín Marcelo','Gonzales Perez','C','12481593','Av. Salaverry 359','989548933'),
+(9,'Jesus Antonio','Navarro Hernandez','D','61306814','Jr Bolivar 115','917246237'),
+(10,'Flavio','Torres Boada','C','12121233','San Antonio de Salas - Chincha Baja','975542123'),
+(11,'Junior','Roque Montes','D','33212121','San Antonio de Salas - Chincha Baja','945454578'),
+(12,'Nestor','Tasayco Torres','C','44221133','Chincha Alta','955575321'),
+(13,'Niurka','Castilla','C','55778899','Santa Luisa - Chincha Baja','964522145'),
+(14,'Maryory','Mendoza Matias','D','22145533','Lomo Largo - Sunampe','957575753');
 
 /*Table structure for table `razas` */
 
@@ -208,19 +261,74 @@ CREATE TABLE `razas` (
   `raza` varchar(30) NOT NULL,
   `idanimal` int(11) NOT NULL,
   PRIMARY KEY (`idraza`),
-  UNIQUE KEY `uk_raza_ra` (`raza`),
-  KEY `fk_idanimal_ra` (`idanimal`),
-  CONSTRAINT `fk_idanimal_ra` FOREIGN KEY (`idanimal`) REFERENCES `animales` (`idanimal`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+  UNIQUE KEY `uk_raza_rz` (`raza`),
+  KEY `fk_idanimal_rz` (`idanimal`),
+  CONSTRAINT `fk_idanimal_rz` FOREIGN KEY (`idanimal`) REFERENCES `animales` (`idanimal`)
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `razas` */
 
 insert  into `razas`(`idraza`,`raza`,`idanimal`) values 
-(1,'Pastor alemán',1),
-(2,'Común europeo',2),
-(3,'Mestizo',1),
-(4,'Ragdoll',2),
-(5,'Labrador retrieve',1);
+(1,'Perro mestizo',1),
+(2,'Bull terrier',1),
+(3,'Bulldog americano',1),
+(4,'Bulldog frances',1),
+(5,'Bulldog inglés',1),
+(6,'Chihuahua',1),
+(7,'Cocker',1),
+(8,'Dalmata',1),
+(9,'Dóberman',1),
+(10,'Dogo argentino',1),
+(11,'Dogo de burdeos',1),
+(12,'Fox terrier',1),
+(13,'French poodle',1),
+(14,'Gran dánes',1),
+(15,'Husky siberiano',1),
+(16,'Labrador retriever',1),
+(17,'Mastín español',1),
+(18,'Mastín inglés',1),
+(19,'Mastín tibetano',1),
+(20,'Paston alemán',1),
+(21,'Pekinés',1),
+(22,'Perro salchicha',1),
+(23,'Pinscher',1),
+(24,'Rottweiler',1),
+(25,'Schipperke',1),
+(26,'Schnauzer',1),
+(27,'Shar pei',1),
+(28,'Terrier alemán',1),
+(29,'Shiba inu',1),
+(30,'Shih tzu',1),
+(31,'Gato Mestizo',2),
+(32,'Americano de pelo corto',2),
+(33,'Angora turco',2),
+(34,'Azul ruso',2),
+(35,'Balinés',2),
+(36,'Bengala',2),
+(37,'Birmano',2),
+(38,'Bombay',2),
+(39,'Bosque de Noruega',2),
+(40,'Británico de pelo largo',2),
+(41,'British Shorthair',2),
+(42,'Burmés',2),
+(43,'Chartreux',2),
+(44,'Curl americano',2),
+(45,'Don Sphynx',2),
+(46,'Esfinge',2),
+(47,'Europeo de pelo corto',2),
+(48,'Exótico',2),
+(49,'Fold escocés',2),
+(50,'Habana brown',2),
+(51,'Himalayoo',2),
+(52,'Kinkalow',2),
+(53,'Maine Coon',2),
+(54,'Manx',2),
+(55,'Munchkin',2),
+(56,'Oriental',2),
+(57,'Persa',2),
+(58,'Ragamuffin',2),
+(59,'Savannah',2),
+(60,'Siames',2);
 
 /*Table structure for table `tipoapoyo` */
 
@@ -229,14 +337,16 @@ DROP TABLE IF EXISTS `tipoapoyo`;
 CREATE TABLE `tipoapoyo` (
   `idtipoapoyo` int(11) NOT NULL AUTO_INCREMENT,
   `tipoapoyo` varchar(20) NOT NULL,
-  PRIMARY KEY (`idtipoapoyo`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`idtipoapoyo`),
+  UNIQUE KEY `uk_tipoapoyo_tapoyo` (`tipoapoyo`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tipoapoyo` */
 
 insert  into `tipoapoyo`(`idtipoapoyo`,`tipoapoyo`) values 
 (1,'Comida'),
-(2,'Monetario');
+(2,'Monetario'),
+(3,'Otros');
 
 /*Table structure for table `tipoeventos` */
 
@@ -246,13 +356,15 @@ CREATE TABLE `tipoeventos` (
   `idtipoevento` int(11) NOT NULL AUTO_INCREMENT,
   `tipoevento` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`idtipoevento`),
-  UNIQUE KEY `uk_evento_tip` (`tipoevento`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  UNIQUE KEY `uk_evento_tipo` (`tipoevento`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tipoeventos` */
 
 insert  into `tipoeventos`(`idtipoevento`,`tipoevento`) values 
-(2,'Intervencion'),
+(2,'Chequeo de rutina'),
+(3,'Desparasitación'),
+(4,'Intervencion'),
 (1,'Vacunacion');
 
 /*Table structure for table `usuarios` */
@@ -268,18 +380,20 @@ CREATE TABLE `usuarios` (
   `fechabaja` date DEFAULT NULL,
   `estado` char(1) NOT NULL,
   `fotografia` varchar(70) DEFAULT NULL,
+  `nivelacceso` char(1) NOT NULL,
   PRIMARY KEY (`idusuario`),
-  UNIQUE KEY `uk_nombreusuario` (`nombreusuario`),
-  KEY `fk_idpersona_per` (`idpersona`),
-  CONSTRAINT `fk_idpersona_per` FOREIGN KEY (`idpersona`) REFERENCES `personas` (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+  UNIQUE KEY `uk_idpersona_user` (`idpersona`),
+  UNIQUE KEY `uk_nombreusuario_user` (`nombreusuario`),
+  CONSTRAINT `fk_idpersona_user` FOREIGN KEY (`idpersona`) REFERENCES `personas` (`idpersona`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `usuarios` */
 
-insert  into `usuarios`(`idusuario`,`idpersona`,`nombreusuario`,`clave`,`fechaalta`,`fechabaja`,`estado`,`fotografia`) values 
-(1,1,'Luis7','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-03-18',NULL,'A',NULL),
-(2,2,'Anderson','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-03-18',NULL,'I',NULL),
-(3,3,'Brenda','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-03-18',NULL,'A',NULL);
+insert  into `usuarios`(`idusuario`,`idpersona`,`nombreusuario`,`clave`,`fechaalta`,`fechabaja`,`estado`,`fotografia`,`nivelacceso`) values 
+(1,1,'Luis','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-05',NULL,'A',NULL,'A'),
+(2,2,'Anderson','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-05',NULL,'I',NULL,'A'),
+(3,3,'Brenda','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-05',NULL,'A',NULL,'A'),
+(4,4,'Jhon','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-05',NULL,'A',NULL,'U');
 
 /*Table structure for table `voluntarios` */
 
@@ -288,17 +402,26 @@ DROP TABLE IF EXISTS `voluntarios`;
 CREATE TABLE `voluntarios` (
   `idvoluntario` int(11) NOT NULL AUTO_INCREMENT,
   `idpersona` int(11) NOT NULL,
-  `fechahora` datetime NOT NULL,
+  `fechahora` date NOT NULL,
   `descripcionvol` text NOT NULL,
   PRIMARY KEY (`idvoluntario`),
-  KEY `fk_idpersona_vo` (`idpersona`),
-  CONSTRAINT `fk_idpersona_vo` FOREIGN KEY (`idpersona`) REFERENCES `personas` (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+  KEY `fk_idpersona_vol` (`idpersona`),
+  CONSTRAINT `fk_idpersona_vol` FOREIGN KEY (`idpersona`) REFERENCES `personas` (`idpersona`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `voluntarios` */
 
 insert  into `voluntarios`(`idvoluntario`,`idpersona`,`fechahora`,`descripcionvol`) values 
-(1,4,'2022-02-20 00:00:00','Apoyo con la limpieza');
+(1,6,'2017-11-23','Ayudo con la limpieza'),
+(2,9,'2018-04-17','Cambio de cama de mascotas'),
+(3,12,'2018-09-12','Construir casa para las mascotas'),
+(4,6,'2019-05-09','Baños a las mascotas'),
+(5,7,'2020-03-15','Cambio de cama de mascotas'),
+(6,11,'2020-08-19','Ayudo con la limpieza'),
+(7,13,'2011-04-05','Construir casa para las mascotas'),
+(8,6,'2021-12-16','Baños a las mascotas'),
+(9,13,'2022-08-29','Ayudo con la limpieza'),
+(10,9,'2022-10-30','Construir casa para las mascotas');
 
 /* Procedure structure for procedure `spu_mascotas_adoptadas_listar` */
 
@@ -308,15 +431,82 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotas_adoptadas_listar`()
 BEGIN
-	SELECT mascotas.nombremascota, razas.raza, 
+	SELECT mascotas.nombremascota, razas.raza, animales.animal,
 		CASE
 			WHEN genero = 'H' THEN 'Hembra'
 			WHEN genero = "M" THEN 'Macho'           
 		END 'genero'
-	, mascotas.fechanacimiento, mascotas.estado, mascotas.vive, mascotas.esterilizacion 
+	, mascotas.fechanacimiento, mascotas.estado, mascotas.vive, 
+	CASE
+			WHEN esterilizacion = 'S' THEN 'Esterilizado'
+			WHEN esterilizacion = "N" THEN 'No esterilizado'           
+	END 'esterilizacion' 
 	FROM mascotas
 	INNER JOIN razas ON razas.idraza = mascotas.idraza
+	INNER JOIN animales ON animales.idanimal = razas.idanimal
 	WHERE estado = "A" AND vive = "S";
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_mascotas_esterilizacion` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_mascotas_esterilizacion` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotas_esterilizacion`(
+    IN _esterilizacion         CHAR(1)
+)
+BEGIN
+    SELECT mascotas.nombremascota, razas.raza, 
+    CASE
+			WHEN idanimal = 1 THEN 'Perro'
+			WHEN idanimal = 2 THEN 'Gato'           
+		END 'idanimal'
+    ,
+		CASE
+			WHEN genero = 'H' THEN 'Hembra'
+			WHEN genero = "M" THEN 'Macho'           
+		END 'genero'
+	, mascotas.fechanacimiento, mascotas.estado, mascotas.vive, 
+	CASE
+			WHEN esterilizacion = 'S' THEN 'Esterilizado'
+			WHEN esterilizacion = "N" THEN 'No esterilizado'           
+	END 'esterilizacion' 
+	FROM mascotas
+    INNER JOIN razas ON razas.idraza = mascotas.idraza
+    WHERE esterilizacion = _esterilizacion; 
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_mascotas_genero` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_mascotas_genero` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotas_genero`(
+    IN _genero         CHAR(1)
+)
+BEGIN
+    SELECT mascotas.nombremascota, razas.raza, 
+    CASE
+			WHEN idanimal = 1 THEN 'Perro'
+			WHEN idanimal = 2 THEN 'Gato'           
+		END 'idanimal'
+    ,
+		CASE
+			WHEN genero = 'H' THEN 'Hembra'
+			WHEN genero = "M" THEN 'Macho'           
+		END 'genero'
+	, mascotas.fechanacimiento, mascotas.estado, mascotas.vive, 
+	CASE
+			WHEN esterilizacion = 'S' THEN 'Esterilizado'
+			WHEN esterilizacion = "N" THEN 'No esterilizado'           
+	END 'esterilizacion' 
+	FROM mascotas
+    INNER JOIN razas ON razas.idraza = mascotas.idraza
+    WHERE genero = _genero; 
 END */$$
 DELIMITER ;
 
@@ -328,15 +518,51 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotas_listar`()
 BEGIN
-	SELECT mascotas.nombremascota, razas.raza, 
+	SELECT mascotas.nombremascota, razas.raza, animales.animal,
 		CASE
 			WHEN genero = 'H' THEN 'Hembra'
 			WHEN genero = "M" THEN 'Macho'           
 		END 'genero'
-	, mascotas.fechanacimiento, mascotas.estado, mascotas.vive, mascotas.esterilizacion 
+	, mascotas.fechanacimiento, mascotas.estado, mascotas.vive, 
+	CASE
+			WHEN esterilizacion = 'S' THEN 'Esterilizado'
+			WHEN esterilizacion = "N" THEN 'No esterilizado'           
+	END 'esterilizacion' 
 	FROM mascotas
 	INNER JOIN razas ON razas.idraza = mascotas.idraza
-	where estado = "R" AND vive = "S";
+	INNER JOIN animales ON animales.idanimal = razas.idanimal
+	WHERE estado = "R" AND vive = "S";
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_mascotas_tipo` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_mascotas_tipo` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotas_tipo`(
+    IN _idanimal         INT
+)
+BEGIN
+    SELECT mascotas.nombremascota, razas.raza, 
+    CASE
+			WHEN idanimal = 1 THEN 'Perro'
+			WHEN idanimal = 2 THEN 'Gato'           
+		END 'idanimal'
+    ,
+		CASE
+			WHEN genero = 'H' THEN 'Hembra'
+			WHEN genero = "M" THEN 'Macho'           
+		END 'genero'
+	, mascotas.fechanacimiento, mascotas.estado, mascotas.vive, 
+	CASE
+			WHEN esterilizacion = 'S' THEN 'Esterilizado'
+			WHEN esterilizacion = "N" THEN 'No esterilizado'           
+	END 'esterilizacion' 
+	FROM mascotas
+    INNER JOIN razas ON razas.idraza = mascotas.idraza
+    WHERE idanimal = _idanimal; 
 END */$$
 DELIMITER ;
 
