@@ -1,3 +1,4 @@
+
 <div style="margin: 0px 90px 0px 90px">
 
 <p class="display-4" style="text-align:center;">Información del Albergue</p>
@@ -17,7 +18,7 @@
             <p style="font-size:20px">Este proyecto nace con la esperanza de poder ayudar a nuestros hermanos pequeños de la calle, dándoles una SEGUNDA OPORTUNIDAD DE VIVIR Y DE CONOCER EL AMOR, ya que el espacio donde están es pequeño, reducido y cada día se suman más, que necesitan un ambiente más grande y calido, necesitamos del apoyo incondicional tuyo o de los que deseen sumarse a este sueño, sigamos con esta labor en favor de ellos. "Los que hablan solo con una mirada"</p>
             <p style="font-size:20px" class="text-right font-italic font-weight-bold">~ Patitas App</p>
             <div>
-                <a class="btn bg-gradient-secondary" href="index.php?view=mascotas">Nuestros Refugiados</a>
+                <a class="btn bg-gradient-secondary" href="main.php?view=mascotas">Nuestros Refugiados</a>
             </div>
         </div>
     </div>

@@ -53,6 +53,40 @@ class Mascota extends ModelMaster{
         die($error->getMessage());
         }
     }
+
+    public function registrarMascota(array $data){
+        try{
+            parent::execProcedure($data, "spu_mascotas_registro", false);
+        }catch(Exception $error){
+            die($error->getMessage());
+        }
+    }
+
+    public function reporteAdoptados(){
+        try{
+          return parent::getRows("spu_grafico_adoptados");
+        }
+        catch(Exception $error){
+          die($error->getMessage());
+        }
+    }
+
+    public function cargarMascotaPadrino(){
+        try{
+            return parent::getRows("spu_mascotas_cargar_padrinos");
+        }catch(Exception $error){
+            die($error->getMessage());
+        }
+    }
+    
+    public function cargarMascotaEvento(){
+        try{
+            return parent::getRows("spu_mascotas_cargar_eventos");
+        }catch(Exception $error){
+            die($error->getMessage());
+        }
+    }
+    
 }
 
 ?>

@@ -1,221 +1,152 @@
-<!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Patitas App</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  <link type="image/png" rel="icon" sizes="32x32" href="img/huella">
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css"> -->
-  <!-- en esta sona poner el css -->
-</head>
-
-<body class="hold-transition sidebar-mini">
-<style>
-  hr{
-    border-color: #797878;
-  }
-</style>
-<div class="wrapper">
-  
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="index.php?view=home" class="nav-link">Acerca del albergue</a>
-      </li>
-    </ul>
-
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-          <i class="fas fa-th-large"></i>
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <!-- /.navbar -->
-
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#062A47">
-    <!-- Brand Logo -->
-    
-    <a class="brand-link mt-1">
-      <img src="img/huella2.png" class="brand-image img-circle" style="opacity: 0.8;">
-      <span class="brand-text font-weight-light">Patitas App</span>
-    </a>
-
-
-    <!-- Sidebar -->
-    <div class="sidebar mt-4">
-
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        
-          <!-- opciones -->
-          <li class="nav-header">Nuestros Refugiados</li>
-          <li class="nav-item">
-            <a href="index.php?view=mascotas" class="nav-link">
-              <i class="fas fa-list nav-icon"></i>
-              <p>Todas las mascotas</p>
-            </a>
-          </li>
-          
-          <li class="nav-header">Mascotas</li>
-
-          <li class="nav-item">
-            <a href="index.php?view=filtro-mascotas" class="nav-link">
-              <i class="fas fa-filter nav-icon"></i>
-              <p>Filtro de mascotas</p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="index.php?view=mascotas-adoptadas" class="nav-link">
-              <i class="fas fa-home nav-icon"></i>
-              <p>Mascotas Adoptadas</p>
-            </a>
-          </li>
-          
-          <li class="nav-header">Comunidad</li>
-          
-          <li class="nav-item">
-            <a href="index.php?view=comentarios" class="nav-link ">
-              <i class="fas fa-comments nav-icon"></i>
-              <p>Comentarios</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="index.php?view=home" class="nav-link ">
-              <i class="fas fa-info-circle nav-icon"></i>
-              <p>Acerca del albergue</p>
-            </a>
-          </li>
-          
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid" id="contenido">
-        <!-- Esta seccion se carga de forma dinamica -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-    <div class="p-3">
-      <h5>Desarrolladores</h5>
-      <hr>
-      <p><strong>Apellidos y Nombres:</strong></p>
-      <p>Belleza Torres, Anderson David.</p>
-      <p><strong>Edad:</strong> 18</p>
-      <hr>
-      <p><strong>Apellidos y Nombres:</strong></p>
-      <p>Boada Ramos, Luis Anderson.</p>
-      <p><strong>Edad:</strong> 18</p>
-      <hr>
-      <p><strong>Apellidos y Nombres:</strong></p>
-      <p>Francia Minaya, Brenda Andrea.</p>
-      <p><strong>Edad:</strong> 19</p>
-      
-      <div style="margin-top: 11em; text-align:right;">
-        <p><strong>Carrera:</strong></p>
-        <p>Ing. de Software con I.A. V</p>
-        <p><strong>Instructor:</strong></p>
-        <p>Francia Minaya, Jhon Edward.</p>
-        <h4 style="text-align:right;">SENATI 2022</h4>
-      </div>
-      
-
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-      Anything you want
-    </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="views/css/diseño.css">
+<div class="login-reg-panel">
+	<div class="login-info-box">
+		<h2>Ya tiene una cuenta?</h2>
+		<p>Navega con nosotros</p>
+		<label id="label-register" for="log-reg-show">Iniciar Sesión</label>
+		<input type="radio" name="active-log-panel" id="log-reg-show"  checked="checked">
+	</div>
+						
+	<div class="register-info-box">
+		<h2>No tiene una cuenta?</h2>
+		<p>Es rápido y fácil</p>
+		<label id="label-login" for="log-login-show">Registrarse</label>
+		<input type="radio" name="active-log-panel" id="log-login-show">
+	</div>
+						
+	<div class="white-panel">
+		<div class="login-show">
+			<h2>Inicio de Sesión</h2>
+			<input type="text" placeholder="Usuario" id="usuariologin">
+			<input type="password" placeholder="Contraseña" id="clavelogin">
+			<input type="button" value="Login" id="login">
+		</div>
+		<div class="register-show">
+			<h2>Registro</h2>
+			<select id="idpersona">
+			</select>
+			<input id="nombreusuario" type="text" placeholder="Nombre de usuario">
+			<input id="clave" type="text" placeholder="Contraseña">
+			<input id="registro-usuario" type="button" value="Registar Usuario" class="m-1">
+			<a href="views/personas-registro.php" type="button" class="m-1">Registrar Persona</a>
+		</div>
+	</div>
 </div>
-<!-- ./wrapper -->
-
-<!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
-<script src="dist/js/loadweb.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script> -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-  $(document).ready(function(){
-    let content = getParam("view");
-    // console.log(test);
-    if(content == false){
-      $("#contenido").load('views/home.php');
-    }else{
-      $("#contenido").load('views/' + content + '.php');
-    }
-  });
+	$(document).ready(function(){
+		$('.login-info-box').fadeOut();
+		$('.login-show').addClass('show-log-panel');
+
+		function cargarPersonas(){
+			$.ajax({
+				url: 'controllers/Persona.controller.php',
+				type: 'GET',
+				data: 'op=cargarPersonas',
+				success: function(e){
+					$("#idpersona").html(e)
+				}
+			});
+		}
+		cargarPersonas();
+
+		function iniciarSesion(){
+            var usuario = $("#usuariologin").val();
+            var clave = $("#clavelogin").val();
+
+            if (usuario == "" || clave == ""){
+               Swal.fire({
+                     icon: 'warning',
+                     title: '¡Complete la información para iniciar sesión!'
+               });
+            }else{
+               var datos = {
+                  'op'              : 'login',
+                  'nombreusuario'   : usuario,
+                  'clave'           : clave
+               }; 
+
+               $.ajax({
+                  url: 'controllers/Usuario.controller.php',
+                  type: 'GET',
+                  data: datos,
+                  success: function(e){
+                     if (e != ""){
+                        Swal.fire({
+                           icon: 'error',
+                           title: e
+                        });
+                     }else{
+                        window.location.href = "main.php";
+                     }
+                  }
+               });
+            }
+        }
+
+
+		function registrarUsuario(){
+          let idpersona = $("#idpersona").val();
+          let nombreusuario = $("#nombreusuario").val();
+          var clave = $("#clave").val();
+
+          if (idpersona == "" || nombreusuario == "" || clave == ""){
+            Swal.fire({
+                icon: 'warning',
+                title: '¡Complete la información para poder registrarse!'
+            });
+          }else{
+                Swal.fire({
+                  icon: 'question',
+                  title: 'RECORSEN',
+                  text: '¿Está seguro de registrar un nuevo Administrador?',
+                  showCancelButton: true,
+                  cancelButtonText: 'Cancelar',
+                  confirmButtonText: 'Aceptar'
+                }).then((result) => {
+					if (result.isConfirmed){
+						var datos = {
+							'op'            : 'registrar-Usuario',
+							'idpersona'     : idpersona,
+							'nombreusuario' : nombreusuario,
+							'clave'       	: clave
+						};
+
+						$.ajax({
+							url: 'controllers/Usuario.controller.php',
+							type: 'GET',
+							data: datos,
+							success: function(e){
+								Swal.fire("El proceso finalizó correctamente");
+							}
+						});
+					} 
+                });
+          }
+        }
+
+		$("#login").click(iniciarSesion);
+		$("#registro-usuario").click(registrarUsuario);
+
+	});
+
+	$('.login-reg-panel input[type="radio"]').on('change', function() {
+		if($('#log-login-show').is(':checked')) {
+			$('.register-info-box').fadeOut(); 
+			$('.login-info-box').fadeIn();
+			$('.white-panel').addClass('right-log');
+			$('.register-show').addClass('show-log-panel');
+			$('.login-show').removeClass('show-log-panel');
+			
+		}
+		else if($('#log-reg-show').is(':checked')) {
+			$('.register-info-box').fadeIn();
+			$('.login-info-box').fadeOut();
+			$('.white-panel').removeClass('right-log');
+			$('.login-show').addClass('show-log-panel');
+			$('.register-show').removeClass('show-log-panel');
+		}
+	});
 </script>
-</body>
-</html>

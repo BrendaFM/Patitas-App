@@ -10,6 +10,7 @@ CREATE TABLE personas
 	numdoc		CHAR(8)		NOT NULL,
 	direccion	VARCHAR(40)	NOT NULL,
 	telefono	CHAR(9)		NULL,
+	logeado		CHAR(1)		NOT NULL,
 	CONSTRAINT uk_numdoc_per UNIQUE (numdoc)
 )ENGINE = INNODB;
 
@@ -22,8 +23,7 @@ CREATE TABLE usuarios
 	fechaalta 		DATE   			NOT NULL,	
 	fechabaja 		DATE			NULL,		
 	estado 			CHAR(1)			NOT NULL,	
-	fotografia		VARCHAR(70) 	NULL,
-	nivelacceso		CHAR(1)		    NOT NULL,	
+	nivelacceso		CHAR(1)		    NOT NULL, -- C: colaborador / U: usuario	
 	CONSTRAINT fk_idpersona_user FOREIGN KEY (idpersona) REFERENCES personas(idpersona),
 	CONSTRAINT uk_idpersona_user UNIQUE (idpersona), 
 	CONSTRAINT uk_nombreusuario_user UNIQUE (nombreusuario)
@@ -57,6 +57,7 @@ CREATE TABLE mascotas
 	esterilizacion		CHAR(1)		NOT NULL,
 	estado				CHAR(1)		NOT NULL,
 	vive				CHAR(1)		NOT NULL,
+	apadrinado			CHAR(1)		NOT NULL,
 	CONSTRAINT fk_idusuario_masc FOREIGN KEY (idusuario) REFERENCES usuarios(idusuario),
 	CONSTRAINT fk_idraza_masc FOREIGN KEY (idraza) REFERENCES razas(idraza)
 ) ENGINE = INNODB;
@@ -104,8 +105,7 @@ CREATE TABLE padrinos
 	idpadrino 		INT 		AUTO_INCREMENT PRIMARY KEY,
 	idpersona 		INT 		NOT NULL,
 	idmascota		INT 		NOT NULL,
-	fechaalta		DATE		NOT NULL,
-	fechabaja		DATE		NULL,
+	fecha			DATE		NOT NULL,
 	CONSTRAINT fk_idpersona_pad FOREIGN KEY (idpersona) REFERENCES  personas(idpersona),
 	CONSTRAINT fk_idmascota_pad FOREIGN KEY (idmascota) REFERENCES mascotas(idmascota),
 	CONSTRAINT uk_idmascota_pad UNIQUE (idmascota)
@@ -120,7 +120,7 @@ CREATE TABLE voluntarios
 	CONSTRAINT fk_idpersona_vol FOREIGN KEY (idpersona) REFERENCES personas(idpersona)
 )ENGINE = INNODB;
 
-CREATE TABLE tipoapoyo
+CREATE TABLE tipoapoyos
 (
 	idtipoapoyo 		INT 			AUTO_INCREMENT PRIMARY KEY,
 	tipoapoyo			VARCHAR(20)		NOT NULL,
@@ -135,6 +135,7 @@ CREATE TABLE apoyo
 	fechaapoyo			DATE 			NOT NULL,
 	cantidad			DECIMAL(5,2) 	NULL,
 	descripcion 		TEXT			NOT NULL,
-	CONSTRAINT fk_tipoapoyo_ap FOREIGN KEY (idtipoapoyo) REFERENCES tipoapoyo(idtipoapoyo),
+	CONSTRAINT fk_tipoapoyo_ap FOREIGN KEY (idtipoapoyo) REFERENCES tipoapoyos(idtipoapoyo),
 	CONSTRAINT fk_idpersona_ap FOREIGN KEY (idpersona) REFERENCES personas(idpersona)
 )ENGINE = INNODB;
+  
