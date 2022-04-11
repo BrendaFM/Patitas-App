@@ -32,7 +32,7 @@
                         </div>
                         <div class="row">
                             <!-- select evento -->
-                            <div class="col-md-12">
+                            <div class="col-md-12 mt-3">
                                 <label for="idtipoevento">Selecciona un Evento</label>
                                 <select id="idtipoevento" class="form-control form-control-border">
                                     <option value="">Seleccione</option>

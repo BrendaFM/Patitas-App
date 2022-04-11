@@ -31,7 +31,7 @@ CREATE TABLE `adopciones` (
   KEY `fk_idmascota_adop` (`idmascota`),
   CONSTRAINT `fk_idmascota_adop` FOREIGN KEY (`idmascota`) REFERENCES `mascotas` (`idmascota`),
   CONSTRAINT `fk_idpersona_adop` FOREIGN KEY (`idpersona`) REFERENCES `personas` (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `adopciones` */
 
@@ -42,7 +42,9 @@ insert  into `adopciones`(`idadopcion`,`idpersona`,`idmascota`,`fechaadopcion`,`
 (4,1,11,'2021-07-10',NULL),
 (5,10,15,'2021-05-15',NULL),
 (6,8,20,'2022-03-01',NULL),
-(7,6,22,'2022-03-27',NULL);
+(7,6,22,'2022-03-27',NULL),
+(8,1,3,'2022-04-11',NULL),
+(10,8,23,'2022-04-11',NULL);
 
 /*Table structure for table `animales` */
 
@@ -172,7 +174,7 @@ CREATE TABLE `mascotas` (
 insert  into `mascotas`(`idmascota`,`idusuario`,`idraza`,`nombremascota`,`genero`,`fechanacimiento`,`observaciones`,`esterilizacion`,`estado`,`vive`,`apadrinado`) values 
 (1,1,1,'Nacho','M','2016-04-12','descripcion','S','A','S','S'),
 (2,1,31,'Alex','M','2016-08-17','descripcion','N','R','S','N'),
-(3,2,31,'Danna','H','2017-12-21','descripcion','N','R','S','S'),
+(3,2,31,'Danna','H','2017-12-21','descripcion','N','A','S','S'),
 (4,1,6,'Copita','H','2017-07-03','descripcion','N','A','S','N'),
 (5,2,8,'Bronko','M','2017-04-12','descripcion','S','A','S','S'),
 (6,3,31,'Charlie','M','2018-04-12','descripcion','S','R','S','S'),
@@ -192,7 +194,7 @@ insert  into `mascotas`(`idmascota`,`idusuario`,`idraza`,`nombremascota`,`genero
 (20,1,8,'Polita','H','2022-01-11','descripcion','S','A','S','S'),
 (21,2,31,'Frida','H','2022-02-02','descripcion','N','R','S','S'),
 (22,2,1,'Nina','H','2022-02-10','descripcion','S','A','S','N'),
-(23,2,1,'Paco','M','2020-09-01','lo encontramos en el mercado.','N','R','S','N');
+(23,2,1,'Paco','M','2020-09-01','lo encontramos en el mercado.','N','A','S','N');
 
 /*Table structure for table `padrinos` */
 
@@ -414,7 +416,7 @@ CREATE TABLE `voluntarios` (
   PRIMARY KEY (`idvoluntario`),
   KEY `fk_idpersona_vol` (`idpersona`),
   CONSTRAINT `fk_idpersona_vol` FOREIGN KEY (`idpersona`) REFERENCES `personas` (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `voluntarios` */
 
@@ -429,7 +431,8 @@ insert  into `voluntarios`(`idvoluntario`,`idpersona`,`fechahora`,`descripcionvo
 (8,6,'2021-12-16','Baños a las mascotas'),
 (9,13,'2022-08-29','Ayudo con la limpieza'),
 (10,9,'2022-10-30','Construir casa para las mascotas'),
-(11,10,'2022-04-09','Limpieza.');
+(11,10,'2022-04-09','Limpieza.'),
+(12,14,'2022-04-11','Paseo a los perros');
 
 /* Procedure structure for procedure `spu_adopciones_eliminar` */
 
@@ -438,16 +441,15 @@ insert  into `voluntarios`(`idvoluntario`,`idpersona`,`fechahora`,`descripcionvo
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_adopciones_eliminar`(
-	IN _idmascota			INT
+    IN _idmascota            INT
 )
 BEGIN
-		UPDATE adopciones SET
-		fecharetorno = CURDATE()
-		WHERE idmascota = _idmascota;
-		
-		UPDATE mascotas SET
-		estado = 'R'
-		WHERE idmascota = _idmascota;		
+        DELETE FROM adopciones
+        WHERE idmascota = _idmascota;
+
+        UPDATE mascotas SET
+        estado = 'R'
+        WHERE idmascota = _idmascota;
 END */$$
 DELIMITER ;
 
@@ -468,6 +470,21 @@ BEGIN
 		UPDATE mascotas SET
 		estado = 'A'
 		WHERE idmascota = _idmascota;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_adopcion_listar_tabla` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_adopcion_listar_tabla` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_adopcion_listar_tabla`()
+BEGIN
+    SELECT mascotas.idmascota , mascotas.nombremascota, personas.apellidos, personas.nombres, fechaadopcion, fecharetorno, mascotas.estado FROM adopciones
+    INNER JOIN personas ON personas.idpersona = adopciones.idpersona
+    INNER JOIN mascotas ON mascotas.idmascota = adopciones.idmascota
+    WHERE estado = 'A';
 END */$$
 DELIMITER ;
 
@@ -629,6 +646,22 @@ BEGIN
 END */$$
 DELIMITER ;
 
+/* Procedure structure for procedure `spu_mascotas_cargar_adopciones` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_mascotas_cargar_adopciones` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotas_cargar_adopciones`()
+BEGIN
+    SELECT * 
+        FROM mascotas 
+        INNER JOIN razas ON razas.idraza = mascotas.idraza
+        INNER JOIN animales ON animales.idanimal = razas.idanimal
+        WHERE estado = "R" ORDER BY animales.animal;
+END */$$
+DELIMITER ;
+
 /* Procedure structure for procedure `spu_mascotas_cargar_eventos` */
 
 /*!50003 DROP PROCEDURE IF EXISTS  `spu_mascotas_cargar_eventos` */;
@@ -747,7 +780,7 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotas_listar`()
 BEGIN
-	SELECT mascotas.nombremascota, razas.raza, animales.animal,
+	SELECT idmascota, mascotas.nombremascota, razas.raza, animales.animal,
 		CASE
 			WHEN genero = 'H' THEN 'Hembra'
 			WHEN genero = "M" THEN 'Macho'           
@@ -760,7 +793,7 @@ BEGIN
 	FROM mascotas
 	INNER JOIN razas ON razas.idraza = mascotas.idraza
 	INNER JOIN animales ON animales.idanimal = razas.idanimal
-	WHERE estado = "R" AND vive = "S";
+	WHERE estado = "R" AND vive = "S" ORDER BY nombremascota;
 END */$$
 DELIMITER ;
 
