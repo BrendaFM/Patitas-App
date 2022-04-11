@@ -1,3 +1,6 @@
+<?php
+    require_once 'datatable.php';
+?>
 <!-- Registro de Padrinos -->
 <div class="row">
     <div class="col-md-4">
@@ -63,7 +66,7 @@
                             <th class="text-center">Operaciones</th>
                         </tr>
                     </thead>
-                    <tbody class="table-info" id="datosPadrino">
+                    <tbody class="table" id="datosPadrino">
                         <!-- Se carga de manera dinamica -->
                     </tbody>
                 </table>
@@ -72,10 +75,6 @@
     </div>
 </div>
 <br>
-<script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
 
 <script>
     $(document).ready(function(){
@@ -115,7 +114,7 @@
                     }
                     ],
                     dom: 'Bfrtip',
-                    buttons: ['copy', 'print']
+                    buttons: ['copy', 'print', 'pdf', 'excel']
                 });
             }
         });

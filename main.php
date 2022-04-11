@@ -13,8 +13,7 @@
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <link type="image/png" rel="icon" sizes="32x32" href="img/huella">
   <!-- datatable -->
-  <link rel="stylesheet" href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-  <link href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css" rel="stylesheet">
+
 
 </head>
 
@@ -134,6 +133,13 @@
           </li>
 
           <li class="nav-item">
+            <a href="main.php?view=adopciones-registro" class="nav-link ">
+              <i class="fas fa-save nav-icon"></i>
+              <p>Registro Adopción</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="main.php?view=eventos-registro" class="nav-link ">
               <i class="fas fa-save nav-icon"></i>
               <p>Registro Eventos</p>
@@ -215,7 +221,7 @@
       <hr>
       <p><strong>Apellidos y Nombres:</strong></p>
       <p>Boada Ramos, Luis Anderson.</p>
-      <p><strong>Edad:</strong> 18</p>
+      <p><strong>Edad:</strong> 19</p>
       <hr>
       <p><strong>Apellidos y Nombres:</strong></p>
       <p>Francia Minaya, Brenda Andrea.</p>
@@ -248,11 +254,6 @@
 
 <!-- REQUIRED SCRIPTS -->
 
-<!-- DataTable -->
-<script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
 <!-- sweet alert -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 

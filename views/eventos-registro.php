@@ -1,3 +1,6 @@
+<?php
+    require_once 'datatable.php';
+?>
 <div class="row">
     <div class="col-md-4">
         <div class="small-box bg-info">
@@ -76,7 +79,7 @@
                             <th class="text-center">Informacion</th>
                         </tr>
                     </thead>
-                    <tbody class="table-info" id="datosEventos">
+                    <tbody class="table" id="datosEventos">
                         <!-- Se carga de manera dinamica -->
                     </tbody>
                 </table>
@@ -85,11 +88,6 @@
     </div>
 </div>
 <br>
-
-<script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
 
 <script>
     $(document).ready(function(){
@@ -129,7 +127,7 @@
                     }
                     ],
                     dom: 'Bfrtip',
-                    buttons: ['copy', 'print']
+                    buttons: ['copy', 'print', 'pdf', 'excel']
                 });
             }
         });

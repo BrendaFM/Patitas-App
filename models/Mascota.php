@@ -87,6 +87,14 @@ class Mascota extends ModelMaster{
         }
     }
     
+    public function cargarMascotaAdopcion(){
+        try{
+            return parent::getRows("spu_mascotas_cargar_adopciones");
+        }catch(Exception $error){
+            die($error->getMessage());
+        }
+    }
+    
 }
 
 ?>

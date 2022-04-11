@@ -46,6 +46,39 @@ if (isset($_GET['op'])){
         
     }
 
+    if ($_GET['op'] == 'listarMascotasTabla') {
+        $datosObtenidos = $mascota->listarMascotas();
+
+        if(count($datosObtenidos) == 0){
+            echo "
+            <tr>
+                <td class='text-center' colspan='7'>No se encuentran datos</td>             
+            </tr>";
+        }else{
+            $i = 1;
+            foreach($datosObtenidos as $tabla){
+                echo "
+                    <tr>
+                        <td class='text-center'> $i </td>
+                        <td class='text-center'> $tabla->nombremascota</td>
+                        <td class='text-center'> $tabla->animal</td>
+                        <td class='text-center'> $tabla->genero</td>
+                        <td class='text-center'> $tabla->fechanacimiento</td>
+                        <td class='text-center'> $tabla->esterilizacion</td>
+                        <td class='text-center'>
+                            <a href='#' data-idmascota='$tabla->idmascota' class='btn btn-sm btn-outline-info modificar'>
+                            <i class='fas fa-clinic-medical'></i>
+                            <a href='#' data-idmascota='$tabla->idmascota' class='btn btn-sm btn-outline-secondary eliminar'>
+                                <i class='fas fa-trash-alt'></i>
+                            </a>
+                        </td>
+                    </tr>
+                ";
+                $i++;
+            }
+        }
+    }
+
     if ($_GET['op'] == 'listarMascotasAdoptadas') {
         $datosObtenidos = $mascota->listarMascotasAdoptadas();
 
@@ -251,5 +284,20 @@ if (isset($_GET['op'])){
         }
     }
 
+    if($_GET['op'] == 'cargarMascotaAdopcion'){
+        $datosObtenidos = $mascota->cargarMascotaAdopcion();
+
+        if(count($datosObtenidos) == 0){
+            echo "<option>No hay ninguna mascota registrada</option>";
+        }else{
+            echo "<option value=''>Seleccione</option>";
+            foreach($datosObtenidos as $fila){
+                echo "
+                    <option value='$fila->idmascota'>$fila->animal - $fila->nombremascota</option>
+                ";
+            }
+        }
+    }
+    
 }
 ?>

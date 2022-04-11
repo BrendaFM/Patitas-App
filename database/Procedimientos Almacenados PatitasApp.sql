@@ -113,7 +113,7 @@ END $$
 DELIMITER $$
 CREATE PROCEDURE spu_mascotas_listar()
 BEGIN
-	SELECT mascotas.nombremascota, razas.raza, animales.animal,
+	SELECT idmascota, mascotas.nombremascota, razas.raza, animales.animal,
 		CASE
 			WHEN genero = 'H' THEN 'Hembra'
 			WHEN genero = "M" THEN 'Macho'           
@@ -126,7 +126,7 @@ BEGIN
 	FROM mascotas
 	INNER JOIN razas ON razas.idraza = mascotas.idraza
 	INNER JOIN animales ON animales.idanimal = razas.idanimal
-	WHERE estado = "R" AND vive = "S";
+	WHERE estado = "R" AND vive = "S" ORDER BY nombremascota;
 END $$
 
 DELIMITER $$
@@ -293,6 +293,16 @@ BEGIN
 		UPDATE mascotas SET
 		estado = 'R'
 		WHERE idmascota = _idmascota;		
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE spu_mascotas_cargar_adopciones()
+BEGIN
+    SELECT * 
+        FROM mascotas 
+        INNER JOIN razas ON razas.idraza = mascotas.idraza
+        INNER JOIN animales ON animales.idanimal = razas.idanimal
+        WHERE estado = "R" ORDER BY animales.animal;
 END $$
 
 -- ------------------------------------------------------------
