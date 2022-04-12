@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div  class=" card card-outline card-info">
                 <div class="card-header">
-                    <p class="card-title" style="font-size: 22px">Lista de Mascotas</p>
+                    <p class="card-title mt-2" style="font-size: 22px">Lista de Mascotas</p>
                     <a href="main.php?view=mascotas-registro">
                         <button style="background-color: white;" type="button" class="btn btn-lg float-right"><i class="fas fa-arrow-circle-left"></i> &nbsp;Volver</button>
                     </a>
@@ -63,6 +63,79 @@
                 }
             });
         }
+
+        $("#datosMascotas").on("click", ".modificar", function(){
+            let idmascota = $(this).attr('data-idmascota');
+
+            Swal.fire({
+                icon: 'question',
+                title: 'PATITAS APP',
+                text: 'Esta seguro de esterilizar?',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Confirmar',
+            }).then((result)=>{
+                if(result.isConfirmed){
+                    var datos = {
+                        'op' : 'esterilizarMascota',
+                        'idmascota' : idmascota
+                    };
+
+                    $.ajax({
+                        url: 'controllers/Mascota.controller.php',
+                        type: 'GET',
+                        data: datos,
+                        success: function(e){
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Modificado correctamente'
+                            });
+                            listarMascotas();
+                        }
+                    });
+                }
+            });
+        });
+
+        $("#datosMascotas").on("click", ".eliminar", function(){
+            let idmascota = $(this).attr('data-idmascota');
+
+            Swal.fire({
+                icon: 'question',
+                title: 'PATITAS APP',
+                text: 'Esta seguro de eliminar?',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Confirmar',
+            }).then((result)=>{
+                if(result.isConfirmed){
+                    var datos = {
+                        'op' : 'eliminarMascota',
+                        'idmascota' : idmascota
+                    };
+
+                    $.ajax({
+                        url: 'controllers/Mascota.controller.php',
+                        type: 'GET',
+                        data: datos,
+                        success: function(e){
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Eliminado correctamente'
+                            });
+                            listarMascotas();
+                        }
+                    });
+                }
+            });
+        });
+
+        $("#datosMascotas").on("click", ".esterilizado", function(){
+            Swal.fire({
+                icon: 'info',
+                title: 'Esta mascota ya ha sido esterilizada'
+            });
+        });
 
         listarMascotas();
     });

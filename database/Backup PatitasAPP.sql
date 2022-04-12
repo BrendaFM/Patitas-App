@@ -180,7 +180,7 @@ insert  into `mascotas`(`idmascota`,`idusuario`,`idraza`,`nombremascota`,`genero
 (6,3,31,'Charlie','M','2018-04-12','descripcion','S','R','S','S'),
 (7,2,1,'Rocky','M','2018-04-12','descripcion','S','R','S','N'),
 (8,3,34,'Bella','H','2019-04-12','descripcion','N','R','S','S'),
-(9,3,1,'Lola','H','2019-04-12','descripcion','S','R','S','N'),
+(9,3,1,'Lola','H','2019-04-12','descripcion','S','R','N','N'),
 (10,2,1,'Blanca','H','2020-04-12','descripcion','N','R','S','S'),
 (11,1,31,'Mia','H','2020-04-12','descripcion','S','A','S','N'),
 (12,3,1,'Balto','M','2020-04-12','descripcion','S','R','S','S'),
@@ -189,8 +189,8 @@ insert  into `mascotas`(`idmascota`,`idusuario`,`idraza`,`nombremascota`,`genero
 (15,1,1,'Any','H','2020-07-03','descripcion','N','A','S','S'),
 (16,3,60,'Cosmo','M','2021-04-12','descripcion','S','R','S','N'),
 (17,3,1,'Mané','M','2021-04-12','descripcion','S','R','S','N'),
-(18,2,60,'Max','M','2021-04-12','descripcion','S','R','S','S'),
-(19,3,31,'Misha','H','2022-01-10','descripcion','N','R','S','N'),
+(18,2,60,'Max','M','2021-04-12','descripcion','S','R','N','S'),
+(19,3,31,'Misha','H','2022-01-10','descripcion','S','R','S','N'),
 (20,1,8,'Polita','H','2022-01-11','descripcion','S','A','S','S'),
 (21,2,31,'Frida','H','2022-02-02','descripcion','N','R','S','S'),
 (22,2,1,'Nina','H','2022-02-10','descripcion','S','A','S','N'),
@@ -241,7 +241,7 @@ CREATE TABLE `personas` (
   `logeado` char(1) NOT NULL,
   PRIMARY KEY (`idpersona`),
   UNIQUE KEY `uk_numdoc_per` (`numdoc`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `personas` */
 
@@ -259,7 +259,8 @@ insert  into `personas`(`idpersona`,`apellidos`,`nombres`,`tipodoc`,`numdoc`,`di
 (11,'Junior','Roque Montes','D','33212121','San Antonio de Salas - Chincha Baja','945454578','N'),
 (12,'Nestor','Tasayco Torres','C','44221133','Chincha Alta','955575321','N'),
 (13,'Niurka','Castilla','C','55778899','Santa Luisa - Chincha Baja','964522145','N'),
-(14,'Maryory','Mendoza Matias','D','22145533','Lomo Largo - Sunampe','957575753','N');
+(14,'Maryory','Mendoza Matias','D','22145533','Lomo Largo - Sunampe','957575753','N'),
+(15,'Boada Belleza','Anderson Luis','D','75464554','Plaza de Armas de Chincha Alta','989685641','N');
 
 /*Table structure for table `razas` */
 
@@ -538,6 +539,22 @@ BEGIN
 	UPDATE personas SET
 		logeado = 'S'
 	WHERE idpersona = _idpersona;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_esterilizar_mascota` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_esterilizar_mascota` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_esterilizar_mascota`(
+    IN _idmascota INT
+)
+BEGIN
+    UPDATE mascotas SET
+        esterilizacion = 'S'
+    WHERE idmascota = _idmascota;
 END */$$
 DELIMITER ;
 

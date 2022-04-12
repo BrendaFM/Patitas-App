@@ -160,6 +160,17 @@ BEGIN
 		ORDER BY animales.animal; 
 END $$
 
+DELIMITER $$
+CREATE PROCEDURE spu_esterilizar_mascota
+(
+    IN _idmascota INT
+)
+BEGIN
+    UPDATE mascotas SET
+        esterilizacion = 'S'
+    WHERE idmascota = _idmascota;
+END $$
+
 -- ------------------------------------------------------------
 -- FILTROS DE MASCOTAS
 -- ------------------------------------------------------------

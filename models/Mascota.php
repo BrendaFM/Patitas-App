@@ -94,6 +94,22 @@ class Mascota extends ModelMaster{
             die($error->getMessage());
         }
     }
+
+    public function eliminarMascota(array $data){
+        try{
+            parent::execProcedure($data, "spu_mascotas_eliminar", false);
+        }catch(Exception $error){
+            die($error->getMessage());
+        }
+    }
+
+    public function esterilizarMascota(array $data){
+        try{
+            parent::execProcedure($data, "spu_esterilizar_mascota", false);
+        }catch(Exception $error){
+            die($error->getMessage());
+        }
+    }
     
 }
 

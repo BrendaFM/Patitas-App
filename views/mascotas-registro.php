@@ -10,7 +10,7 @@
 <div class="container">
 <div class=" card card-outline card-info">
     <div class="card-header">
-      <p class="card-title" style="font-size: 22px">Registro de Mascotas</p>
+      <p class="card-title mt-2" style="font-size: 22px">Registro de Mascotas</p>
       <a href="main.php?view=mascotas-lista">
         <button style="background-color: white;" type="button" class="btn btn-lg float-right"><i class="fas fa-clipboard-list"></i> &nbsp;Listar en tabla</button>
       </a>

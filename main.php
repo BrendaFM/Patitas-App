@@ -154,9 +154,9 @@
           </li>
           
           <li class="nav-item">
-            <a href="main.php?view=apoyos-registro" class="nav-link ">
+            <a href="main.php?view=donaciones-registro" class="nav-link ">
               <i class="fas fa-save nav-icon"></i>
-              <p>Registro Apoyo</p>
+              <p>Registro Donaciones</p>
             </a>
           </li>
                   
@@ -164,21 +164,6 @@
             <a href="main.php?view=padrinos-registro" class="nav-link ">
               <i class="fas fa-save nav-icon"></i>
               <p>Registro Padrinos</p>
-            </a>
-          </li>
-          <li class="nav-header">Gráficos</li>
-          
-          <li class="nav-item">
-            <a href="main.php?view=grafico-donaciones" class="nav-link ">
-            <i class="far fa-chart-bar nav-icon"></i>
-              <p>Grafico donaciones</p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="main.php?view=grafico-adoptados" class="nav-link ">
-            <i class="far fa-chart-bar nav-icon"></i>
-              <p>Grafico de adopciones</p>
             </a>
           </li>
 
@@ -221,7 +206,7 @@
       <hr>
       <p><strong>Apellidos y Nombres:</strong></p>
       <p>Boada Ramos, Luis Anderson.</p>
-      <p><strong>Edad:</strong> 19</p>
+      <p><strong>Edad:</strong> 18</p>
       <hr>
       <p><strong>Apellidos y Nombres:</strong></p>
       <p>Francia Minaya, Brenda Andrea.</p>
@@ -242,12 +227,19 @@
 
   <!-- Main Footer -->
   <footer class="main-footer">
-    <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-      Anything you want
-    </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>Contáctenos en: </strong> 
+    
+    <a href="https://www.facebook.com/refugiopatitasdelsur/" type="btn">
+      <button  type="button" class="btn" style="font-family:Source Sans Pro"><i class="fab fa-facebook-square"></i> &nbsp;Refugio Patitas del Sur</button>
+    </a>
+    <a href="https://instagram.com/refugio.patitasds?igshid=YmMyMTA2M2Y=" type="btn">
+      <button  type="button" class="btn" style="font-family:Source Sans Pro"><i class="fab fa-instagram"></i> &nbsp;@refugio.patitasds</button>
+    </a>
+    <a href="tel:941110100" type="btn">
+      <button  type="button" class="btn" style="font-family:Source Sans Pro"><i class="fas fa-phone-square-alt"></i> &nbsp;941110100</button>
+    </a>
+
   </footer>
 </div>
 <!-- ./wrapper -->

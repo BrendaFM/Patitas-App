@@ -30,7 +30,7 @@
 			<input id="nombreusuario" type="text" placeholder="Nombre de usuario">
 			<input id="clave" type="text" placeholder="Contraseña">
 			<input id="registro-usuario" type="button" value="Registar Usuario" class="m-1">
-			<a href="views/personas-registro.php" type="button" class="m-1">Registrar Persona</a>
+			<a href="views/personas-registro-index.php" type="button" class="m-1">Registrar Persona</a>
 		</div>
 	</div>
 </div>

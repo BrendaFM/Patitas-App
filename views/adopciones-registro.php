@@ -49,12 +49,24 @@
             </div>
             <!-- /.card-footer -->
         </div>
+
+        <div class="card card-outline card-info">
+            <div class="card-body text-center">
+                <p>Si la persona no se encuentra registrada de clic al siguiente botón.</p>
+                <a href="main.php?view=persona-registro" >
+                    <button style=" font-size: 18px;" type="button" class="btn btn-sm bg-gradient-info float-center"><i class="fas fa-user-check"></i> &nbsp;Registra una persona</button>
+                </a>
+            </div>
+        </div>
     </div>
 
     <div class="col-md-8">
         <div  class=" card card-outline card-info">
             <div class="card-header">
-                <p class="card-title" style="font-size: 22px">Lista de Adopción</p>
+                <p class="card-title mt-2" style="font-size: 22px">Lista de Adopción</p>
+                <a href="main.php?view=grafico-adoptados">
+                    <button style="background-color: white;" type="button" class="btn btn-lg float-right"><i class="far fa-chart-bar"></i> &nbsp;Ver Gráfico</button>
+                </a>
             </div>
             <div class="card-body">
                 <table class="table" id="tablaAdopcion">
@@ -100,7 +112,7 @@
                         }
                         ],
                         dom: 'Bfrtip',
-                        buttons: ['copy', 'print', 'pdf']
+                        buttons: ['copy', 'print', 'pdf', 'excel']
                     });
                 }
             });

@@ -52,11 +52,27 @@ if (isset($_GET['op'])){
         if(count($datosObtenidos) == 0){
             echo "
             <tr>
-                <td class='text-center' colspan='7'>No se encuentran datos</td>             
+                <td class='text-center' colspan='7'>No se encuentran datos</td>
             </tr>";
         }else{
             $i = 1;
             foreach($datosObtenidos as $tabla){
+                $esterilizado = "";
+
+                if($tabla->esterilizacion == "No"){
+                    $esterilizado = "
+                        <a href='#' data-idmascota='$tabla->idmascota' class='btn btn-sm btn-outline-info modificar'>
+                            <i class='fas fa-clinic-medical'></i>
+                        </a>
+                    ";
+                }else{
+                    $esterilizado = "
+                        <a  class='btn btn-sm btn-outline-info esterilizado'>
+                            <i class='fas fa-check'></i>
+                        </a> 
+                    ";
+                }
+
                 echo "
                     <tr>
                         <td class='text-center'> $i </td>
@@ -66,9 +82,8 @@ if (isset($_GET['op'])){
                         <td class='text-center'> $tabla->fechanacimiento</td>
                         <td class='text-center'> $tabla->esterilizacion</td>
                         <td class='text-center'>
-                            <a href='#' data-idmascota='$tabla->idmascota' class='btn btn-sm btn-outline-info modificar'>
-                            <i class='fas fa-clinic-medical'></i>
-                            <a href='#' data-idmascota='$tabla->idmascota' class='btn btn-sm btn-outline-secondary eliminar'>
+                            {$esterilizado}
+                            <a href='#' data-idmascota='$tabla->idmascota'  class='btn btn-sm btn-outline-secondary eliminar'>
                                 <i class='fas fa-trash-alt'></i>
                             </a>
                         </td>
@@ -299,5 +314,12 @@ if (isset($_GET['op'])){
         }
     }
     
+    if($_GET['op'] == 'eliminarMascota'){
+        $mascota->eliminarMascota(["idmascota" => $_GET['idmascota']]);
+    }
+
+    if($_GET['op'] == 'esterilizarMascota'){
+        $mascota->esterilizarMascota(["idmascota" => $_GET['idmascota']]);
+    }
 }
 ?>

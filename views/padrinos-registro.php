@@ -34,7 +34,7 @@
                             <!-- select personas -->
                         <div class="row">
                             <div class="col-md-12 mt-3">
-                                <label for="idpersona">Seleccione un padrino</label>
+                                <label for="idpersona">Seleccione una persona</label>
                                 <select id="idpersona" class="form-control form-control-border">
                                 </select>
                             </div>
@@ -48,6 +48,15 @@
                 <button type="button" class="btn bg-gradient-info" id="registrarPadrino">Guardar</button>
             </div>
             <!-- /.card-footer -->
+        </div>
+
+        <div class="card card-outline card-info">
+            <div class="card-body text-center">
+                <p>Si la persona no se encuentra registrada de clic al siguiente botón.</p>
+                <a href="main.php?view=persona-registro" >
+                    <button style=" font-size: 18px;" type="button" class="btn btn-sm bg-gradient-info float-center"><i class="fas fa-user-check"></i> &nbsp;Registra una persona</button>
+                </a>
+            </div>
         </div>
     </div>
 
