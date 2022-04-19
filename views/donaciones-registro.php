@@ -56,6 +56,22 @@
             </a>
         </div>
     </div>
+    <br>
+    <div class="card card-outline card-info">
+        <div class="card-body text-center">
+            <h5>Reportes:</h5>
+            <a href="main.php?view=tabla-soles">
+                <button style=" font-size: 18px;" type="button" class="btn bg-gradient-info">Soles donados</button>
+            </a>
+            <a href="main.php?view=tabla-comida">
+                <button style=" font-size: 18px;" type="button" class="btn bg-gradient-info">Kilogramos donados</button>
+            </a>
+            <a href="main.php?view=otras-donaciones-tabla">
+                <button style=" font-size: 18px;" type="button" class="btn bg-gradient-info">Otras donaciones</button>
+            </a>
+        </div>
+    </div>
+    <br>
 </div>
 
 <script>

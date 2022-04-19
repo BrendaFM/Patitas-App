@@ -73,8 +73,9 @@
                     <thead>
                         <tr>
                             <th class="text-center">N°</th>
-                            <th class="text-center">Mascota</th>
                             <th class="text-center">Adoptante</th>
+                            <th class="text-center">Tipo de Mascota</th>
+                            <th class="text-center">Mascota</th>
                             <th class="text-center">Fecha</th>
                             <th class="text-center">Operación</th>
                         </tr>
@@ -93,6 +94,10 @@
 <script>
 
     $(document).ready(function(){
+
+        $("#cancelar").click(function(){
+            $("#formularioAdopciones")[0].reset();
+        });
 
         function listarAdopcion(){
             $.ajax({

@@ -21,8 +21,9 @@ if(isset($_GET['op'])){
                 echo "
                     <tr>
                         <td class='text-center'> $i </td>
-                        <td class='text-center'>$tabla->nombremascota</td>
                         <td class='text-center'> $tabla->apellidos , $tabla->nombres</td>
+                        <td class='text-center'>$tabla->animal</td>
+                        <td class='text-center'>$tabla->nombremascota</td>
                         <td class='text-center'> $tabla->fechaadopcion</td>
                         <td class='text-center'>
                             <a href='#' data-idmascota='$tabla->idmascota' class='btn btn-sm btn-outline-secondary devolvermascota'>

@@ -482,9 +482,12 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_adopcion_listar_tabla`()
 BEGIN
-    SELECT mascotas.idmascota , mascotas.nombremascota, personas.apellidos, personas.nombres, fechaadopcion, fecharetorno, mascotas.estado FROM adopciones
+    SELECT animales.animal, mascotas.idmascota , mascotas.nombremascota, personas.apellidos, personas.nombres, fechaadopcion, fecharetorno, mascotas.estado 
+		FROM adopciones
     INNER JOIN personas ON personas.idpersona = adopciones.idpersona
     INNER JOIN mascotas ON mascotas.idmascota = adopciones.idmascota
+    inner join razas on razas.idraza = mascotas.idraza
+    inner join animales on animales.idanimal = razas.idanimal
     WHERE estado = 'A';
 END */$$
 DELIMITER ;

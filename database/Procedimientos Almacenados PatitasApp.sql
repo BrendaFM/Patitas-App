@@ -278,9 +278,12 @@ END $$
 DELIMITER $$
 CREATE PROCEDURE spu_adopcion_listar_tabla()
 BEGIN
-    SELECT mascotas.idmascota , mascotas.nombremascota, personas.apellidos, personas.nombres, fechaadopcion, fecharetorno, mascotas.estado FROM adopciones
+    SELECT animales.animal, mascotas.idmascota , mascotas.nombremascota, personas.apellidos, personas.nombres, fechaadopcion, fecharetorno, mascotas.estado 
+		FROM adopciones
     INNER JOIN personas ON personas.idpersona = adopciones.idpersona
     INNER JOIN mascotas ON mascotas.idmascota = adopciones.idmascota
+    INNER JOIN razas ON razas.idraza = mascotas.idraza
+    INNER JOIN animales ON animales.idanimal = razas.idanimal
     WHERE estado = 'A';
 END $$
 
