@@ -2,19 +2,11 @@
 
 require_once '../core/model.master.php';
 
-class Apoyo extends ModelMaster{
+class Donacion extends ModelMaster{
 
-    public function registrarApoyo(array $datos){
+    public function registrarDonacion(array $datos){
         try{
-            return parent::execProcedure($datos, "spu_apoyo_registrar" , false);
-        }catch(Exception $error){
-            die($error->getMessage());
-        }
-    }
-
-    public function listarApoyo(){
-        try{
-            return parent::getRows("spu_apoyo_listar");
+            return parent::execProcedure($datos, "spu_donaciones_registrar" , false);
         }catch(Exception $error){
             die($error->getMessage());
         }
@@ -37,6 +29,14 @@ class Apoyo extends ModelMaster{
           die($error->getMessage());
         }
     }
+
+    public function otrasDonaciones(){
+      try{
+          return parent::getRows('spu_donaciones_otrasdonaciones');
+      }catch(Exception $error){
+          die($error->getMessage());
+      }
+  }
 
 }
 

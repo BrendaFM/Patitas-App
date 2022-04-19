@@ -7,7 +7,7 @@
             </a>
         </div>
         <div class="card-body">
-            <form action="" id="formulario-apoyo">
+            <form action="" id="formulario-donacion">
             <div class="form-group">
                         <div class="row">
                             <div class="col-md-12">
@@ -80,7 +80,7 @@
     $("#cantidad").mask('99999,99', {reverse: false});
 
     $("#cancelar").click(function(){
-        $("#formulario-apoyo")[0].reset();
+        $("#formulario-donacion")[0].reset();
     });
 
     function cargarPersonasTotal(){
@@ -100,7 +100,7 @@
         let cantidad = $("#cantidad").val();
         let descripcion = $("#descripcion").val();
 
-        if (idpersona == "" || idtipoapoyo == "" || cantidad == "" || descripcion == ""){
+        if (idpersona == "" || idtipoapoyo == "" || descripcion == ""){
             Swal.fire({
                 icon: 'warning',
                 title: '¡Por favor complete los campos solicitados!'
@@ -117,7 +117,7 @@
                 if (result.isConfirmed){
                 
                     var datos = {
-                        'op'             : 'registrarApoyo',
+                        'op'             : 'registrarDonacion',
                         'idpersona'      : idpersona,
                         'idtipoapoyo'    : idtipoapoyo,
                         'cantidad'       : cantidad,
@@ -125,12 +125,12 @@
                     };
 
                     $.ajax({
-                        url: 'controllers/Apoyo.controller.php',
+                        url: 'controllers/Donacion.controller.php',
                         type: 'GET',
                         data: datos,
                         success: function(e){
                             Swal.fire("El proceso finalizó correctamente");
-                            $("#formulario-apoyo")[0].reset();
+                            $("#formulario-donacion")[0].reset();
                         }
                     });
                 } 

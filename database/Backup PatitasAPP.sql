@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.4.22-MariaDB : Database - patitasapp
+MySQL - 10.4.21-MariaDB : Database - patitasapp
 *********************************************************************
 */
 
@@ -63,27 +63,27 @@ insert  into `animales`(`idanimal`,`animal`) values
 (2,'Gato'),
 (1,'Perro');
 
-/*Table structure for table `apoyo` */
+/*Table structure for table `donaciones` */
 
-DROP TABLE IF EXISTS `apoyo`;
+DROP TABLE IF EXISTS `donaciones`;
 
-CREATE TABLE `apoyo` (
-  `idapoyo` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `donaciones` (
+  `iddonacion` int(11) NOT NULL AUTO_INCREMENT,
   `idpersona` int(11) NOT NULL,
   `idtipoapoyo` int(11) NOT NULL,
   `fechaapoyo` date NOT NULL,
   `cantidad` decimal(5,2) DEFAULT NULL,
   `descripcion` text NOT NULL,
-  PRIMARY KEY (`idapoyo`),
-  KEY `fk_tipoapoyo_ap` (`idtipoapoyo`),
-  KEY `fk_idpersona_ap` (`idpersona`),
+  PRIMARY KEY (`iddonacion`),
+  KEY `fk_tipoapoyo_do` (`idtipoapoyo`),
+  KEY `fk_idpersona_do` (`idpersona`),
   CONSTRAINT `fk_idpersona_ap` FOREIGN KEY (`idpersona`) REFERENCES `personas` (`idpersona`),
   CONSTRAINT `fk_tipoapoyo_ap` FOREIGN KEY (`idtipoapoyo`) REFERENCES `tipoapoyos` (`idtipoapoyo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
-/*Data for the table `apoyo` */
+/*Data for the table `donaciones` */
 
-insert  into `apoyo`(`idapoyo`,`idpersona`,`idtipoapoyo`,`fechaapoyo`,`cantidad`,`descripcion`) values 
+insert  into `donaciones`(`iddonacion`,`idpersona`,`idtipoapoyo`,`fechaapoyo`,`cantidad`,`descripcion`) values 
 (1,10,1,'2017-09-12',250.00,'Comida para perros del albergue / ONGVIDA'),
 (2,5,2,'2017-09-29',100.00,'apoyo de dinero'),
 (3,5,3,'2018-01-12',NULL,'Medicamentos para perros'),
@@ -447,7 +447,6 @@ DELIMITER $$
 BEGIN
         DELETE FROM adopciones
         WHERE idmascota = _idmascota;
-
         UPDATE mascotas SET
         estado = 'R'
         WHERE idmascota = _idmascota;
@@ -492,38 +491,6 @@ BEGIN
 END */$$
 DELIMITER ;
 
-/* Procedure structure for procedure `spu_apoyo_listar` */
-
-/*!50003 DROP PROCEDURE IF EXISTS  `spu_apoyo_listar` */;
-
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_apoyo_listar`()
-BEGIN
-	SELECT personas.idpersona, personas.apellidos, personas.nombres, apoyo.fechaapoyo, apoyo.cantidad, apoyo.descripcion
-	FROM apoyo
-		INNER JOIN personas ON personas.idpersona = apoyo.idpersona;
-END */$$
-DELIMITER ;
-
-/* Procedure structure for procedure `spu_apoyo_registrar` */
-
-/*!50003 DROP PROCEDURE IF EXISTS  `spu_apoyo_registrar` */;
-
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_apoyo_registrar`(
-	IN _idpersona		INT,
-	IN _idtipoapoyo 	INT,
-	IN _cantidad 		INT,
-	IN _descripcion		TEXT
-)
-BEGIN
-	INSERT INTO apoyo (idpersona, idtipoapoyo, fechaapoyo, cantidad, descripcion)
-		VALUES (_idpersona, _idtipoapoyo, CURDATE(), _cantidad, _descripcion);
-END */$$
-DELIMITER ;
-
 /* Procedure structure for procedure `spu_colaborador_registro` */
 
 /*!50003 DROP PROCEDURE IF EXISTS  `spu_colaborador_registro` */;
@@ -542,6 +509,87 @@ BEGIN
 	UPDATE personas SET
 		logeado = 'S'
 	WHERE idpersona = _idpersona;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_donaciones_comida` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_donaciones_comida` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_donaciones_comida`()
+BEGIN
+SELECT  personas.apellidos, personas.nombres, tipoapoyos.tipoapoyo, fechaapoyo, cantidad, descripcion
+		FROM donaciones
+    INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo
+    INNER JOIN personas ON personas.idpersona = donaciones.idpersona 
+    WHERE tipoapoyo = "Comida";
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_donaciones_comida_mayor` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_donaciones_comida_mayor` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_donaciones_comida_mayor`()
+BEGIN
+SELECT CONCAT(personas.apellidos, ' ', personas.nombres) AS "Menor Donante", tipoapoyos.tipoapoyo, cantidad
+	FROM donaciones
+	INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo
+	INNER JOIN personas ON personas.idpersona = donaciones.idpersona 
+	WHERE cantidad = (SELECT max(cantidad) FROM donaciones INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo WHERE tipoapoyo = "Comida");
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_donaciones_comida_menor` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_donaciones_comida_menor` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_donaciones_comida_menor`()
+BEGIN
+SELECT CONCAT(personas.apellidos, ' ', personas.nombres) AS "Menor Donante", tipoapoyos.tipoapoyo, cantidad
+	FROM donaciones
+	INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo
+	INNER JOIN personas ON personas.idpersona = donaciones.idpersona 
+	WHERE tipoapoyo = "Comida" AND cantidad = (SELECT MIN(cantidad) FROM donaciones);
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_donaciones_comida_total` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_donaciones_comida_total` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_donaciones_comida_total`()
+BEGIN
+SELECT SUM(cantidad) AS preciototal 
+	FROM donaciones
+	INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo
+	WHERE tipoapoyo = "Comida";
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_donaciones_registrar` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_donaciones_registrar` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_donaciones_registrar`(
+	IN _idpersona		INT,
+	IN _idtipoapoyo 	INT,
+	IN _cantidad 		INT,
+	IN _descripcion		TEXT
+)
+BEGIN
+	INSERT INTO donaciones (idpersona, idtipoapoyo, fechaapoyo, cantidad, descripcion)
+		VALUES (_idpersona, _idtipoapoyo, CURDATE(), _cantidad, _descripcion);
 END */$$
 DELIMITER ;
 
@@ -652,8 +700,8 @@ DELIMITER $$
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_grafico_kilogramos`()
 BEGIN
 SELECT  tipoapoyos.tipoapoyo, SUM(cantidad) AS "Total Kg." , YEAR(fechaapoyo) AS "AÑO"
-        FROM apoyo
-    INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = apoyo.idtipoapoyo
+        FROM donaciones
+    INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo
     WHERE tipoapoyo = "Comida"
     GROUP BY YEAR(fechaapoyo);
 END */$$
@@ -668,8 +716,8 @@ DELIMITER $$
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_grafico_soles`()
 BEGIN
 SELECT  tipoapoyos.tipoapoyo, SUM(cantidad) AS "Total Soles" , YEAR(fechaapoyo) AS "AÑO"
-        FROM apoyo
-    INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = apoyo.idtipoapoyo
+        FROM donaciones
+    INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo
     WHERE tipoapoyo = "Monetario"
     GROUP BY YEAR(fechaapoyo);
 END */$$

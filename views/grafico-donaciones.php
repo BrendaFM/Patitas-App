@@ -58,7 +58,7 @@
 
   function getData(){
     $.ajax({
-      url: 'controllers/Apoyo.controller.php',
+      url: 'controllers/Donacion.controller.php',
       type: 'GET',
       data: 'op=reportesoles',
       success: function (result){
@@ -108,7 +108,7 @@
 
   function getData(){
     $.ajax({
-      url: 'controllers/Apoyo.controller.php',
+      url: 'controllers/Donacion.controller.php',
       type: 'GET',
       data: 'op=reportekilos',
       success: function (result){

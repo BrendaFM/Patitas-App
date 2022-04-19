@@ -127,15 +127,16 @@ CREATE TABLE tipoapoyos
 	CONSTRAINT uk_tipoapoyo_tapoyo UNIQUE (tipoapoyo)
 )ENGINE = INNODB;
 
-CREATE TABLE apoyo 
+CREATE TABLE donaciones
 (
-	idapoyo				INT 			AUTO_INCREMENT PRIMARY KEY,
+	iddonacion			INT 			AUTO_INCREMENT PRIMARY KEY,
 	idpersona			INT 			NOT NULL,
 	idtipoapoyo			INT 			NOT NULL,
 	fechaapoyo			DATE 			NOT NULL,
 	cantidad			DECIMAL(5,2) 	NULL,
 	descripcion 		TEXT			NOT NULL,
-	CONSTRAINT fk_tipoapoyo_ap FOREIGN KEY (idtipoapoyo) REFERENCES tipoapoyos(idtipoapoyo),
-	CONSTRAINT fk_idpersona_ap FOREIGN KEY (idpersona) REFERENCES personas(idpersona)
+	CONSTRAINT fk_tipoapoyo_do FOREIGN KEY (idtipoapoyo) REFERENCES tipoapoyos(idtipoapoyo),
+	CONSTRAINT fk_idpersona_do FOREIGN KEY (idpersona) REFERENCES personas(idpersona)
 )ENGINE = INNODB;
+
   
