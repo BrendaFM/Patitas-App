@@ -26,9 +26,12 @@ if (isset($_GET['op'])){
             foreach($datosObtenidos as $tabla){
                 echo "
                     <tr>
-                        <td class='text-center'  width='20%'> $i </td>
-                        <td class='text-center'  width='30%'>$tabla->apellidos,  $tabla->nombres</td>
-                        <td class='text-center'  width='30%'> $tabla->nombremascota</td>
+                        <td class='text-center'> $i </td>
+                        <td class='text-center'>$tabla->apellidos,  $tabla->nombres</td>
+                        <td class='text-center'> $tabla->animal</td>
+                        <td class='text-center'> $tabla->nombremascota</td>
+                        <td class='text-center'> $tabla->fecha</td>
+                        <td class='text-center'> $tabla->vive</td>
                         <td class='text-center'>
                             <a href='#' data-idpadrino='$tabla->idpadrino' class='btn btn-sm btn-outline-secondary eliminar'>
                             <i class='fas fa-trash-alt'></i>

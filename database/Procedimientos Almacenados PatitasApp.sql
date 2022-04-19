@@ -369,10 +369,18 @@ END $$
 DELIMITER $$
 CREATE PROCEDURE spu_padrinos_listar()
 BEGIN
-	SELECT  idpadrino, personas.idpersona,personas.apellidos, personas.nombres, personas.telefono, mascotas.nombremascota
+	SELECT  idpadrino, fecha, 
+	CASE
+		WHEN mascotas.vive = "S" THEN 'Sí'
+		WHEN  mascotas.vive= "N" THEN 'No'           
+	END 'vive',
+	 personas.idpersona,personas.apellidos, animales.animal, personas.nombres, personas.telefono, mascotas.nombremascota
 	FROM padrinos
 		INNER JOIN personas ON personas.idpersona = padrinos.idpersona
-		INNER JOIN mascotas ON mascotas.idmascota = padrinos.idmascota;
+		INNER JOIN mascotas ON mascotas.idmascota = padrinos.idmascota
+		INNER JOIN razas ON razas.idraza = mascotas.idraza
+		INNER JOIN animales ON animales.idanimal = razas.idanimal
+	ORDER BY personas.apellidos;
 END $$
 
 DELIMITER $$

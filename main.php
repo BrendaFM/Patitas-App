@@ -12,7 +12,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <link type="image/png" rel="icon" sizes="32x32" href="img/huella">
-  <!-- datatable -->
+  <link rel="stylesheet" href="views/css/card.css">
 
 
 </head>
@@ -104,6 +104,13 @@
             <a href="main.php?view=mascotas-adoptadas" class="nav-link">
               <i class="fas fa-home nav-icon"></i>
               <p>Mascotas Adoptadas</p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="main.php?view=videos" class="nav-link">
+                <i class="fas fa-video nav-icon"></i>
+              <p>Videos del albergue</p>
             </a>
           </li>
           

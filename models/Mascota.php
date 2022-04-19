@@ -110,6 +110,15 @@ class Mascota extends ModelMaster{
             die($error->getMessage());
         }
     }
+
+    public function reporteAdoptadosMeses(){
+        try{
+          return parent::getRows("spu_grafico_adoptados_meses");
+        }
+        catch(Exception $error){
+          die($error->getMessage());
+        }
+    }
     
 }
 

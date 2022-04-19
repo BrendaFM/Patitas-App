@@ -71,7 +71,10 @@
                         <tr>
                             <th class="text-center">id</th>
                             <th class="text-center">Padrino</th>
+                            <th class="text-center">Tipo de Mascota</th>
                             <th class="text-center">Mascota</th>
+                            <th class="text-center">Fecha</th>
+                            <th class="text-center">Vive</th>
                             <th class="text-center">Operaciones</th>
                         </tr>
                     </thead>

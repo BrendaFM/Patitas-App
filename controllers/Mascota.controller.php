@@ -22,18 +22,19 @@ if (isset($_GET['op'])){
             foreach($datosObtenidos as $fila){
     
                 echo "
-                    <div class='col-md-3' style='border-radius:60px;'>
-                        <div class='card'>
-                            <img src='./img/gato.jpg' class='card-img-top' alt='...'>
-                            <div class='card-body'>
-                                <p class='h5'> $fila->nombremascota </p>
-                                <p class='card-text' style='text-align:justify'><b>Tipo de animal:</b> $fila->animal</p>
-                                <p class='card-text' style='text-align:justify'><b>Raza:</b> $fila->raza</p>
-                                <p class='card-text' style='text-align:justify'><b>Género:</b> $fila->genero</p>
-                                <p class='card-text' style='text-align:justify'><b>Esterilizado:</b> $fila->esterilizacion</p>
-                                <p class='card-text' style='text-align:justify'><b>Fecha de Nacimiento:</b> $fila->fechanacimiento</p>
+                    <div class='col-md-3 col-lg-3 pb-3'>
+                        <div class='card card-custom bg-white border-white border-0'>
+                            <div class='card-custom-img' style='background-image: url(./img/gato.jpg);'></div>
+                            <div class='card-custom-avatar'>
+                                <img class='img-fluid' src='./img/avatar.jpg' alt='Avatar' />
                             </div>
-                            <div class='card-footer card-outline card-secondary bg-light' >
+                            <div class='card-body' style='overflow-y: auto'>
+                                <h1 class='card-title display-3'>$fila->nombremascota</h1>
+                                <p class='card-text' style='text-align:justify'><b>Tipo de animal:</b> $fila->animal</p>
+                                    <p class='card-text' style='text-align:justify'><b>Raza:</b> $fila->raza</p>
+                                    <p class='card-text' style='text-align:justify'><b>Género:</b> $fila->genero</p>
+                                    <p class='card-text' style='text-align:justify'><b>Esterilizado:</b> $fila->esterilizacion</p>
+                                    <p class='card-text' style='text-align:justify'><b>Fecha de Nacimiento:</b> $fila->fechanacimiento</p>
                             </div>
                         </div>
                     </div>
@@ -108,22 +109,22 @@ if (isset($_GET['op'])){
             foreach($datosObtenidos as $fila){
 
                 echo "
-                <div class='col-md-3' style='border-radius:60px;'>
-                    <div class='card'>
-                        <img src='./img/gato.jpg' class='card-img-top' alt='...'>
-                        <div class='card-body'>
-                            <p class='h5'> $fila->nombremascota </p>
-                            <p class='card-text' style='text-align:justify'><b>Tipo de animal:</b> $fila->animal</p>
-                            <p class='card-text' style='text-align:justify'><b>Raza:</b> $fila->raza</p>
-                            <p class='card-text' style='text-align:justify'><b>Género:</b> $fila->genero</p>
-                            <p class='card-text' style='text-align:justify'><b>Esterilizado:</b> $fila->esterilizacion</p>
-                            <p class='card-text' style='text-align:justify'><b>Fecha de Nacimiento:</b> $fila->fechanacimiento</p>
-                        </div>
-                        <div class='card-footer card-outline card-secondary bg-light' >
+                    <div class='col-md-3 col-lg-3 pb-3'>
+                        <div class='card card-custom bg-white border-white border-0'>
+                            <div class='card-custom-img' style='background-image: url(./img/gato.jpg);'></div>
+                            <div class='card-custom-avatar'>
+                                <img class='img-fluid' src='./img/avatar.jpg' alt='Avatar' />
+                            </div>
+                            <div class='card-body' style='overflow-y: auto'>
+                                <h1 class='card-title display-3'>$fila->nombremascota</h1>
+                                <p class='card-text' style='text-align:justify'><b>Tipo de animal:</b> $fila->animal</p>
+                                    <p class='card-text' style='text-align:justify'><b>Raza:</b> $fila->raza</p>
+                                    <p class='card-text' style='text-align:justify'><b>Género:</b> $fila->genero</p>
+                                    <p class='card-text' style='text-align:justify'><b>Esterilizado:</b> $fila->esterilizacion</p>
+                                    <p class='card-text' style='text-align:justify'><b>Fecha de Nacimiento:</b> $fila->fechanacimiento</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
                     ";
                         
             }
@@ -147,22 +148,22 @@ if (isset($_GET['op'])){
             foreach($datosObtenidos as $fila){
 
                 echo "
-                    <div class='col-md-3' style='border-radius:60px;'>
-                        <div class='card'>
-                            <img src='./img/gato.jpg' class='card-img-top' alt='...'>
-                            <div class='card-body'>
-                                <p class='h5'> $fila->nombremascota </p>
-                                <p class='card-text' style='text-align:justify'><b>Tipo de animal:</b> $fila->idanimal</p>
-                                <p class='card-text' style='text-align:justify'><b>Raza:</b> $fila->raza</p>
-                                <p class='card-text' style='text-align:justify'><b>Género:</b> $fila->genero</p>
-                                <p class='card-text' style='text-align:justify'><b>Esterilizado:</b> $fila->esterilizacion</p>
-                                <p class='card-text' style='text-align:justify'><b>Fecha de Nacimiento:</b> $fila->fechanacimiento</p>
+                    <div class='col-md-3 col-lg-3 pb-3'>
+                        <div class='card card-custom bg-white border-white border-0'>
+                            <div class='card-custom-img' style='background-image: url(./img/gato.jpg);'></div>
+                            <div class='card-custom-avatar'>
+                                <img class='img-fluid' src='./img/avatar.jpg' alt='Avatar' />
                             </div>
-                            <div class='card-footer card-outline card-secondary bg-light' >
+                            <div class='card-body' style='overflow-y: auto'>
+                                <h1 class='card-title display-3'>$fila->nombremascota</h1>
+                                <p class='card-text' style='text-align:justify'><b>Tipo de animal:</b> $fila->idanimal</p>
+                                    <p class='card-text' style='text-align:justify'><b>Raza:</b> $fila->raza</p>
+                                    <p class='card-text' style='text-align:justify'><b>Género:</b> $fila->genero</p>
+                                    <p class='card-text' style='text-align:justify'><b>Esterilizado:</b> $fila->esterilizacion</p>
+                                    <p class='card-text' style='text-align:justify'><b>Fecha de Nacimiento:</b> $fila->fechanacimiento</p>
                             </div>
                         </div>
                     </div>
-                
                     ";
                         
             }
@@ -185,22 +186,22 @@ if (isset($_GET['op'])){
             foreach($datosObtenidos as $fila){
 
                 echo "
-                    <div class='col-md-3' style='border-radius:60px;'>
-                        <div class='card'>
-                            <img src='./img/gato.jpg' class='card-img-top' alt='...'>
-                            <div class='card-body'>
-                                <p class='h5'> $fila->nombremascota </p>
-                                <p class='card-text' style='text-align:justify'><b>Tipo de animal:</b> $fila->idanimal</p>
-                                <p class='card-text' style='text-align:justify'><b>Raza:</b> $fila->raza</p>
-                                <p class='card-text' style='text-align:justify'><b>Género:</b> $fila->genero</p>
-                                <p class='card-text' style='text-align:justify'><b>Esterilizado:</b> $fila->esterilizacion</p>
-                                <p class='card-text' style='text-align:justify'><b>Fecha de Nacimiento:</b> $fila->fechanacimiento</p>
+                    <div class='col-md-3 col-lg-3 pb-3'>
+                        <div class='card card-custom bg-white border-white border-0'>
+                            <div class='card-custom-img' style='background-image: url(./img/gato.jpg);'></div>
+                            <div class='card-custom-avatar'>
+                                <img class='img-fluid' src='./img/avatar.jpg' alt='Avatar' />
                             </div>
-                            <div class='card-footer card-outline card-secondary bg-light' >
+                            <div class='card-body' style='overflow-y: auto'>
+                                <h1 class='card-title display-3'>$fila->nombremascota</h1>
+                                <p class='card-text' style='text-align:justify'><b>Tipo de animal:</b> $fila->idanimal</p>
+                                    <p class='card-text' style='text-align:justify'><b>Raza:</b> $fila->raza</p>
+                                    <p class='card-text' style='text-align:justify'><b>Género:</b> $fila->genero</p>
+                                    <p class='card-text' style='text-align:justify'><b>Esterilizado:</b> $fila->esterilizacion</p>
+                                    <p class='card-text' style='text-align:justify'><b>Fecha de Nacimiento:</b> $fila->fechanacimiento</p>
                             </div>
                         </div>
                     </div>
-                
                     ";
                         
             }
@@ -223,22 +224,22 @@ if (isset($_GET['op'])){
             foreach($datosObtenidos as $fila){
 
                 echo "
-                    <div class='col-md-3' style='border-radius:60px;'>
-                        <div class='card'>
-                            <img src='./img/gato.jpg' class='card-img-top' alt='...'>
-                            <div class='card-body'>
-                                <p class='h5'> $fila->nombremascota </p>
-                                <p class='card-text' style='text-align:justify'><b>Tipo de animal:</b> $fila->idanimal</p>
-                                <p class='card-text' style='text-align:justify'><b>Raza:</b> $fila->raza</p>
-                                <p class='card-text' style='text-align:justify'><b>Género:</b> $fila->genero</p>
-                                <p class='card-text' style='text-align:justify'><b>Esterilizado:</b> $fila->esterilizacion</p>
-                                <p class='card-text' style='text-align:justify'><b>Fecha de Nacimiento:</b> $fila->fechanacimiento</p>
+                    <div class='col-md-3 col-lg-3 pb-3'>
+                        <div class='card card-custom bg-white border-white border-0'>
+                            <div class='card-custom-img' style='background-image: url(./img/gato.jpg);'></div>
+                            <div class='card-custom-avatar'>
+                                <img class='img-fluid' src='./img/avatar.jpg' alt='Avatar' />
                             </div>
-                            <div class='card-footer card-outline card-secondary bg-light' >
+                            <div class='card-body' style='overflow-y: auto'>
+                                <h1 class='card-title display-3'>$fila->nombremascota</h1>
+                                <p class='card-text' style='text-align:justify'><b>Tipo de animal:</b> $fila->idanimal</p>
+                                    <p class='card-text' style='text-align:justify'><b>Raza:</b> $fila->raza</p>
+                                    <p class='card-text' style='text-align:justify'><b>Género:</b> $fila->genero</p>
+                                    <p class='card-text' style='text-align:justify'><b>Esterilizado:</b> $fila->esterilizacion</p>
+                                    <p class='card-text' style='text-align:justify'><b>Fecha de Nacimiento:</b> $fila->fechanacimiento</p>
                             </div>
                         </div>
                     </div>
-                
                     ";
                         
             }
@@ -320,6 +321,17 @@ if (isset($_GET['op'])){
 
     if($_GET['op'] == 'esterilizarMascota'){
         $mascota->esterilizarMascota(["idmascota" => $_GET['idmascota']]);
+    }
+
+    if ($_GET['op'] == 'reporteAdoptadosMeses') {
+
+        $data = $mascota->reporteAdoptadosMeses();
+    
+        if($data){
+          echo json_encode($data);
+        }else{
+          echo "No existen datos";
+        }
     }
 }
 ?>

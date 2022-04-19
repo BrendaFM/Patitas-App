@@ -127,6 +127,7 @@
         $("#machos").click(Machos);
         $("#esterilizado").click(Esterilizados);
         $("#noesterilizado").click(NoEsterilizados);
+        Perros();
         
     });
 </script>
