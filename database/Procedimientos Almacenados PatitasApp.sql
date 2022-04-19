@@ -474,3 +474,33 @@ SELECT COUNT(animales.animal) AS "Total Adoptados", YEAR(fechaadopcion) AS "Año
     INNER JOIN animales ON animales.idanimal = razas.idanimal
     GROUP BY YEAR(fechaadopcion);
 END $$
+
+DELIMITER $$
+CREATE PROCEDURE spu_grafico_adoptados_meses()
+BEGIN
+SELECT
+    CASE
+        WHEN MONTH(fechaadopcion) = '1' THEN 'Enero'
+        WHEN MONTH(fechaadopcion) = '2' THEN 'Febrero'
+        WHEN MONTH(fechaadopcion) = '3' THEN 'Marzo'
+        WHEN MONTH(fechaadopcion) = '4' THEN 'Abril'
+        WHEN MONTH(fechaadopcion) = '5' THEN 'Mayo'
+        WHEN MONTH(fechaadopcion) = '6' THEN 'Junio'
+        WHEN MONTH(fechaadopcion) = '7' THEN 'Julio'
+        WHEN MONTH(fechaadopcion) = '8' THEN 'Agosto'
+        WHEN MONTH(fechaadopcion) = '9' THEN 'Septiembre'
+        WHEN MONTH(fechaadopcion) = '10' THEN 'Octubre'
+        WHEN MONTH(fechaadopcion) = '11' THEN 'Noviembre'
+        WHEN MONTH(fechaadopcion) = '12' THEN 'Diciembre'
+        END 'Mes'
+    ,COUNT(animales.animal) AS "Total Adoptados"
+        FROM adopciones 
+    INNER JOIN mascotas ON mascotas.idmascota = adopciones.idmascota
+    INNER JOIN razas ON razas.idraza = mascotas.idraza
+    INNER JOIN animales ON animales.idanimal = razas.idanimal
+    WHERE YEAR(fechaadopcion) = YEAR(CURRENT_DATE())
+    GROUP BY MONTH(fechaadopcion)
+    ORDER BY fechaadopcion;
+END $$
+
+SELECT * FROM adopciones;
