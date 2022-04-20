@@ -2,7 +2,10 @@
 <div class="container">
     <div class=" card card-outline card-info">
         <div class="card-header">
-            <p class="card-title" style="font-size: 22px">Registro de Voluntarios</p>
+            <p class="card-title mt-2" style="font-size: 22px">Registro de Voluntarios</p>
+            <a href="main.php?view=voluntarios-lista">
+                <button style="background-color: white;" type="button" class="btn btn-lg float-right"><i class="fas fa-clipboard-list"></i> &nbsp;Listar en tabla</button>
+            </a>
         </div>
         <!-- /.card-header -->
         
@@ -50,11 +53,11 @@
         $("#formularioVoluntario")[0].reset();
     });
 
-    function cargarPersonasTotal(){
+    function cargarVoluntario(){
         $.ajax({
-            url: 'controllers/Persona.controller.php',
+            url: 'controllers/Voluntario.controller.php',
             type: 'GET',
-            data: 'op=cargarPersonasTotal',
+            data: 'op=cargarVoluntario',
             success: function(e){
                 $("#idpersona").html(e)
             }
@@ -93,6 +96,7 @@
                         success: function(e){
                             Swal.fire("El proceso finalizó correctamente");
                             $("#formularioVoluntario")[0].reset();
+                            cargarVoluntario(); 
                         }
                     });
                 }
@@ -102,7 +106,7 @@
         
     }
     
-    cargarPersonasTotal(); 
+    cargarVoluntario(); 
 
     $("#registrarVoluntario").click(registrarVoluntario);
 

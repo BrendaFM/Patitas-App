@@ -13,8 +13,8 @@ CREATE PROCEDURE spu_personas_registro
 	IN _telefono	CHAR(9)
 )
 BEGIN
-	INSERT INTO personas(apellidos, nombres, tipodoc, numdoc, direccion, telefono, logeado)VALUES
-			(_apellidos, _nombres, _tipodoc, _numdoc, _direccion, _telefono, "N");
+	INSERT INTO personas(apellidos, nombres, tipodoc, numdoc, direccion, telefono, logeado, voluntario)VALUES
+			(_apellidos, _nombres, _tipodoc, _numdoc, _direccion, _telefono, "N", "N");
 END $$
 
 DELIMITER $$
@@ -406,17 +406,48 @@ CREATE PROCEDURE spu_voluntarios_registrar
 	IN _descripcionvol 		TEXT
 )
 BEGIN
-	INSERT INTO voluntarios (idpersona, fechahora, descripcionvol)
-		VALUES (_idpersona, CURDATE(), _descripcionvol);
+	INSERT INTO voluntarios (idpersona, fechainicio, fechafin, descripcionvol)
+		VALUES (_idpersona, CURDATE(), NULL , _descripcionvol);
+	
+	UPDATE personas SET
+		voluntario = "S"
+	WHERE idpersona = _idpersona;
 END $$
 
 DELIMITER $$
 CREATE PROCEDURE spu_voluntarios_listar()
 BEGIN
-	SELECT personas.idpersona, personas.apellidos, personas.nombres, voluntarios.descripcionvol, voluntarios.fechahora
+	SELECT idvoluntario, personas.idpersona, personas.apellidos, personas.nombres, voluntarios.fechainicio, voluntarios.fechafin, voluntarios.descripcionvol, personas.voluntario
 	FROM voluntarios
-		INNER JOIN personas ON personas.idpersona = voluntarios.idpersona;
+		INNER JOIN personas ON personas.idpersona = voluntarios.idpersona
+	ORDER BY fechafin;
 END $$
+
+DELIMITER $$
+CREATE PROCEDURE spu_voluntarios_terminar
+(
+	IN _idvoluntario INT,
+	IN _idpersona INT
+	
+)
+BEGIN
+	UPDATE voluntarios SET 
+		fechafin = CURDATE()
+	WHERE idvoluntario = _idvoluntario;
+	
+	UPDATE personas SET
+		voluntario = "N"
+	WHERE idpersona = _idpersona;
+END $$
+
+CALL spu_voluntarios_terminar(13, 7);
+
+DELIMITER $$
+CREATE PROCEDURE spu_voluntarios_cargar()
+BEGIN
+	SELECT * FROM personas WHERE voluntario = "N";
+END $$
+
 
 -- ------------------------------------------------------------
 -- DONACIONES

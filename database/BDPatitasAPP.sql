@@ -11,6 +11,7 @@ CREATE TABLE personas
 	direccion	VARCHAR(40)	NOT NULL,
 	telefono	CHAR(9)		NULL,
 	logeado		CHAR(1)		NOT NULL,
+	voluntario 	CHAR(1)		NOT NULL,
 	CONSTRAINT uk_numdoc_per UNIQUE (numdoc)
 )ENGINE = INNODB;
 
@@ -114,8 +115,9 @@ CREATE TABLE padrinos
 CREATE TABLE voluntarios
 (
 	idvoluntario 		INT 			AUTO_INCREMENT PRIMARY KEY,
-	idpersona			INT 			NOT NULL,
-	fechahora 			DATE 	 		NOT NULL,
+	idpersona		INT 			NOT NULL,
+	fechainicio 		DATE 	 		NOT NULL,
+	fechafin 		DATE 	 		NOT NULL,
 	descripcionvol		TEXT			NOT NULL,
 	CONSTRAINT fk_idpersona_vol FOREIGN KEY (idpersona) REFERENCES personas(idpersona)
 )ENGINE = INNODB;

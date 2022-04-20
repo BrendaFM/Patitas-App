@@ -19,8 +19,6 @@ if (isset($_GET['op'])){
                         
             }
         }
-            
-        
     }
 
     if ($_GET['op'] == 'registrarPersona'){
