@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <link type="image/png" rel="icon" sizes="32x32" href="img/huella">
   <link rel="stylesheet" href="views/css/card.css">
+  <link rel="stylesheet" href="views/css/top3.css">
 
 
 </head>

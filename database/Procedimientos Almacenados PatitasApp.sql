@@ -523,8 +523,6 @@ SELECT  personas.apellidos, personas.nombres, tipoapoyos.tipoapoyo, fechaapoyo, 
     INNER JOIN personas ON personas.idpersona = donaciones.idpersona 
     WHERE tipoapoyo = "Comida";
 END $$
-CALL spu_donaciones_comida();
-
  
 DELIMITER $$
 CREATE PROCEDURE spu_donaciones_comida_total()
@@ -534,37 +532,52 @@ SELECT SUM(cantidad) AS preciototal
     INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo
     WHERE tipoapoyo = "Comida";
 END $$
-CALL spu_donaciones_comida_total();
 
 DELIMITER $$
 CREATE PROCEDURE spu_donaciones_comida_mayor()
 BEGIN
-SELECT CONCAT(personas.apellidos, ' ', personas.nombres) AS "Mayor Donante", tipoapoyos.tipoapoyo, cantidad
+SELECT personas.apellidos, personas.nombres, tipoapoyos.tipoapoyo, SUM(cantidad) AS cantidad
     FROM donaciones
     INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo
     INNER JOIN personas ON personas.idpersona = donaciones.idpersona 
-    WHERE tipoapoyo = "Comida" AND cantidad = (SELECT MAX(cantidad) FROM donaciones INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo WHERE tipoapoyo = "Comida")
-    GROUP BY "Mayor Donante"
+    WHERE tipoapoyo = "Comida"
+    GROUP BY personas.apellidos
+    ORDER BY cantidad DESC
+    LIMIT 3;
 END $$
-CALL spu_donaciones_comida_mayor();
 
-DELIMITER $$
-CREATE PROCEDURE spu_donaciones_comida_menor()
-BEGIN
-SELECT CONCAT(personas.apellidos, ' ', personas.nombres) AS "Menor Donante", tipoapoyos.tipoapoyo, cantidad
-    FROM donaciones
-    INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo
-    INNER JOIN personas ON personas.idpersona = donaciones.idpersona 
-    WHERE tipoapoyo = "Comida" AND cantidad = (SELECT MIN(cantidad) FROM donaciones INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo WHERE tipoapoyo = "Comida");
-END $$
-CALL spu_donaciones_comida_menor();
- 
 -- ---------- ---------------
 --  DONACIONES DINERO   --
 -- ---------- ---------------
 
+DELIMITER $$
+CREATE PROCEDURE spu_donaciones_dinero()
+BEGIN
+SELECT  personas.apellidos, personas.nombres, tipoapoyos.tipoapoyo, fechaapoyo, cantidad, descripcion
+        FROM donaciones
+    INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo
+    INNER JOIN personas ON personas.idpersona = donaciones.idpersona 
+    WHERE tipoapoyo = "Monetario";
+END $$
 
+DELIMITER $$
+CREATE PROCEDURE spu_donaciones_dinero_total()
+BEGIN
+SELECT SUM(cantidad) AS preciototal 
+    FROM donaciones
+    INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo
+    WHERE tipoapoyo = "Monetario";
+END $$
 
-
-
-
+DELIMITER $$
+CREATE PROCEDURE spu_donaciones_dinero_mayor()
+BEGIN
+SELECT personas.apellidos, personas.nombres, tipoapoyos.tipoapoyo, SUM(cantidad) AS cantidad
+    FROM donaciones
+    INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo
+    INNER JOIN personas ON personas.idpersona = donaciones.idpersona 
+    WHERE tipoapoyo = "Monetario"
+    GROUP BY personas.apellidos
+    ORDER BY cantidad DESC
+    LIMIT 3;
+END $$

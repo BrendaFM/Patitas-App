@@ -36,7 +36,55 @@ class Donacion extends ModelMaster{
       }catch(Exception $error){
           die($error->getMessage());
       }
-  }
+    }
+
+    public function DonacionesComida(){
+      try{
+          return parent::getRows('spu_donaciones_comida');
+      }catch(Exception $error){
+          die($error->getMessage());
+      }
+    }
+    
+    public function DonacionesComidaTotal(){
+      try{
+          return parent::getRows('spu_donaciones_comida_total');
+      }catch(Exception $error){
+          die($error->getMessage());
+      }
+    }
+
+    public function DonacionesComidaMayor(){
+      try{
+          return parent::getRows('spu_donaciones_comida_mayor');
+      }catch(Exception $error){
+          die($error->getMessage());
+      }
+    }
+    
+    public function DonacionesDinero(){
+      try{
+          return parent::getRows('spu_donaciones_dinero');
+      }catch(Exception $error){
+          die($error->getMessage());
+      }
+    }
+    
+    public function DonacionesDineroTotal(){
+      try{
+          return parent::getRows('spu_donaciones_dinero_total');
+      }catch(Exception $error){
+          die($error->getMessage());
+      }
+    }
+
+    public function DonacionesDineroMayor(){
+      try{
+          return parent::getRows('spu_donaciones_dinero_mayor');
+      }catch(Exception $error){
+          die($error->getMessage());
+      }
+    }
 
 }
 
