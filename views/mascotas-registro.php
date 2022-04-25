@@ -1,4 +1,3 @@
-
 <style>
   .container{
     min-height: 90vh; 
@@ -7,6 +6,7 @@
     margin: auto;
   }
 </style>
+
 <div class="container">
 <div class=" card card-outline card-info">
     <div class="card-header">
@@ -18,7 +18,7 @@
     <!-- /.card-header -->
     
     <div class="card-body">
-        <form action="" id="formularioRegistroMascota">
+        <form id="formularioRegistroMascota" enctype="multipart/form-data">
           <div class="form-group">
             <label for="">PERSONA</label>
             <input class="form-control" id="idusuario" type="text">
@@ -72,6 +72,11 @@
               <option value="N"> NO </option>
             </select>
           </div>
+
+          <div class="form-group">
+            <label for="fotografia">Fotografia</label>
+            <input class="input-field form-control select2"  type="file" id="fotografia" accept=".jpg">
+          </div>
         </form>
     </div>
     <!-- /.card-body -->
@@ -103,6 +108,7 @@
       let fechanacimiento = $("#fechanacimiento").val();
       let observaciones = $("#observaciones").val();
       let esterilizacion = $("#esterilizacion").val();
+      let fotografia = $("#fotografia")[0].files[0]
 
       // Validacion
       if(idusuario == "" ||  idraza == "" || nombremascota == "" || genero == "" || fechanacimiento == "" || observaciones == "" || esterilizacion== "" ){
@@ -120,21 +126,26 @@
           confirmButtonText:  'Confirmar'
         }).then((result)=> {
           if(result.isConfirmed){
-            var datos = {
-              'op'       : 'registrarMascota',
-              'idusuario'       : idusuario,
-              'idraza'          : idraza,
-              'nombremascota'   : nombremascota,
-              'genero'          : genero,
-              'fechanacimiento' : fechanacimiento,
-              'observaciones'     : observaciones,
-              'esterilizacion'    : esterilizacion
-            };
+            var formData = new FormData();
+
+            formData.append('op', 'registrarMascota');
+            formData.append('idusuario', idusuario);
+            formData.append('idraza', idraza);
+            formData.append('nombremascota', nombremascota);
+            formData.append('genero', genero);
+            formData.append('fechanacimiento', fechanacimiento);
+            formData.append('observaciones', observaciones);
+            formData.append('esterilizacion',esterilizacion);
+            formData.append('fotografia', fotografia);
+            
 
             $.ajax({
               url:'controllers/Mascota.controller.php',
-              type: 'GET',
-              data: datos,
+              type: 'POST',
+              data: formData,
+              contentType: false,
+              processData: false,
+              cache: false,
               success: function(e){
                 Swal.fire({
                   icon: 'success',

@@ -61,14 +61,14 @@
     </div>
 
     <div class="col-md-8">
-        <div  class=" card card-outline card-info">
+        <div  class=" card card-outline card-info ">
             <div class="card-header">
                 <p class="card-title mt-2" style="font-size: 22px">Lista de Adopción</p>
                 <a href="main.php?view=grafico-adoptados">
                     <button style="background-color: white;" type="button" class="btn btn-lg float-right"><i class="far fa-chart-bar"></i> &nbsp;Ver Gráfico</button>
                 </a>
             </div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table class="table" id="tablaAdopcion">
                     <thead>
                         <tr>

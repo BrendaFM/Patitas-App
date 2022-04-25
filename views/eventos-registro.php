@@ -68,7 +68,7 @@
             <div class="card-header">
                 <p class="card-title" style="font-size: 22px">Lista de Eventos</p>
             </div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table class="table" id="tablaEventos">
                     <thead>
                         <tr>

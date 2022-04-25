@@ -17,6 +17,7 @@ BEGIN
 			(_apellidos, _nombres, _tipodoc, _numdoc, _direccion, _telefono, "N", "N");
 END $$
 
+
 DELIMITER $$
 CREATE PROCEDURE spu_personas_listar()
 BEGIN
@@ -93,27 +94,29 @@ END $$
 -- ------------------------------------------------------------
 -- MASCOTAS
 -- ------------------------------------------------------------
+SELECT * FROM mascotas;
 
 DELIMITER $$
 CREATE PROCEDURE spu_mascotas_registro
 (
 	IN _idusuario 			INT,
-	IN _idraza 				INT,
+	IN _idraza 			INT,
 	IN _nombremascota		VARCHAR(30),
-	IN _genero				CHAR(1),
+	IN _genero			CHAR(1),
 	IN _fechanacimiento		DATE,
 	IN _observaciones		TEXT,
-	IN _esterilizacion 		CHAR(1)
+	IN _esterilizacion 		CHAR(1),
+	IN _fotografia			VARCHAR(100)
 )
 BEGIN
-	INSERT INTO mascotas (idusuario, idraza, nombremascota, genero, fechanacimiento, observaciones, esterilizacion, estado, vive, apadrinado)
-		VALUES (_idusuario, _idraza, _nombremascota, _genero, _fechanacimiento, _observaciones, _esterilizacion, "R", "S", "N");
+	INSERT INTO mascotas (idusuario, idraza, nombremascota, genero, fechanacimiento, observaciones, esterilizacion, estado, vive, apadrinado, fotografia)
+		VALUES (_idusuario, _idraza, _nombremascota, _genero, _fechanacimiento, _observaciones, _esterilizacion, "R", "S", "N", _fotografia);
 END $$
 
 DELIMITER $$
 CREATE PROCEDURE spu_mascotas_listar()
 BEGIN
-	SELECT idmascota, mascotas.nombremascota, razas.raza, animales.animal,
+	SELECT idmascota, mascotas.nombremascota, razas.raza, animales.animal, fotografia,
 		CASE
 			WHEN genero = 'H' THEN 'Hembra'
 			WHEN genero = "M" THEN 'Macho'           
@@ -128,7 +131,7 @@ BEGIN
 	INNER JOIN animales ON animales.idanimal = razas.idanimal
 	WHERE estado = "R" AND vive = "S" ORDER BY nombremascota;
 END $$
-
+	
 DELIMITER $$
 CREATE PROCEDURE spu_mascotas_eliminar
 (
@@ -181,7 +184,7 @@ CREATE PROCEDURE spu_mascotas_tipo
     IN _idanimal         INT
 )
 BEGIN
-    SELECT mascotas.nombremascota, razas.raza, 
+    SELECT mascotas.nombremascota, razas.raza, fotografia,
     CASE
 			WHEN idanimal = 1 THEN 'Perro'
 			WHEN idanimal = 2 THEN 'Gato'           
@@ -207,7 +210,7 @@ CREATE PROCEDURE spu_mascotas_genero
     IN _genero         CHAR(1)
 )
 BEGIN
-    SELECT mascotas.nombremascota, razas.raza, 
+    SELECT mascotas.nombremascota, razas.raza, fotografia,
     CASE
 			WHEN idanimal = 1 THEN 'Perro'
 			WHEN idanimal = 2 THEN 'Gato'           
@@ -233,7 +236,7 @@ CREATE PROCEDURE spu_mascotas_esterilizacion
     IN _esterilizacion         CHAR(1)
 )
 BEGIN
-    SELECT mascotas.nombremascota, razas.raza, 
+    SELECT mascotas.nombremascota, razas.raza,  fotografia,
     CASE
 			WHEN idanimal = 1 THEN 'Perro'
 			WHEN idanimal = 2 THEN 'Gato'           
@@ -256,7 +259,7 @@ END $$
 DELIMITER $$
 CREATE PROCEDURE spu_mascotas_adoptadas_listar()
 BEGIN
-	SELECT mascotas.nombremascota, razas.raza, animales.animal,
+	SELECT mascotas.nombremascota, razas.raza, animales.animal, fotografia,
 		CASE
 			WHEN genero = 'H' THEN 'Hembra'
 			WHEN genero = "M" THEN 'Macho'           
@@ -440,7 +443,6 @@ BEGIN
 	WHERE idpersona = _idpersona;
 END $$
 
-CALL spu_voluntarios_terminar(13, 7);
 
 DELIMITER $$
 CREATE PROCEDURE spu_voluntarios_cargar()

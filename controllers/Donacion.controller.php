@@ -162,7 +162,7 @@ if(isset($_GET['op'])){
               <div d-flex justify-content-center '>
                 <div class='card card-just-text' data-background='color' data-color='blue' data-radius='none'>
                     <div class='content'>
-                        <h4 class='title'>¡Graias por tu apoyo!</h4>
+                        <h4 class='title'>¡Gracias por tu apoyo!</h4>
                         <h6 class='category'> $tabla->apellidos , $tabla->nombres </h6>
                         <H6 class='category'> Cantidad: S/. $tabla->cantidad </H6>
                     </div>

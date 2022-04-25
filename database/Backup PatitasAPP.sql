@@ -163,39 +163,42 @@ CREATE TABLE `mascotas` (
   `estado` char(1) NOT NULL,
   `vive` char(1) NOT NULL,
   `apadrinado` char(1) NOT NULL,
+  `fotografia` varchar(100) NOT NULL,
   PRIMARY KEY (`idmascota`),
   KEY `fk_idusuario_masc` (`idusuario`),
   KEY `fk_idraza_masc` (`idraza`),
   CONSTRAINT `fk_idraza_masc` FOREIGN KEY (`idraza`) REFERENCES `razas` (`idraza`),
   CONSTRAINT `fk_idusuario_masc` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `mascotas` */
 
-insert  into `mascotas`(`idmascota`,`idusuario`,`idraza`,`nombremascota`,`genero`,`fechanacimiento`,`observaciones`,`esterilizacion`,`estado`,`vive`,`apadrinado`) values 
-(1,1,1,'Nacho','M','2016-04-12','descripcion','S','A','S','S'),
-(2,1,31,'Alex','M','2016-08-17','descripcion','N','R','S','N'),
-(3,2,31,'Danna','H','2017-12-21','descripcion','N','A','S','S'),
-(4,1,6,'Copita','H','2017-07-03','descripcion','N','A','S','N'),
-(5,2,8,'Bronko','M','2017-04-12','descripcion','S','A','S','S'),
-(6,3,31,'Charlie','M','2018-04-12','descripcion','S','R','S','S'),
-(7,2,1,'Rocky','M','2018-04-12','descripcion','S','R','S','N'),
-(8,3,34,'Bella','H','2019-04-12','descripcion','N','R','S','S'),
-(9,3,1,'Lola','H','2019-04-12','descripcion','S','R','N','N'),
-(10,2,1,'Blanca','H','2020-04-12','descripcion','N','R','S','S'),
-(11,1,31,'Mia','H','2020-04-12','descripcion','S','A','S','N'),
-(12,3,1,'Balto','M','2020-04-12','descripcion','S','R','S','S'),
-(13,1,1,'Peluchin','M','2020-08-17','descripcion','N','R','S','S'),
-(14,2,31,'Lisa','H','2020-12-21','descripcion','N','R','S','N'),
-(15,1,1,'Any','H','2020-07-03','descripcion','N','A','S','S'),
-(16,3,60,'Cosmo','M','2021-04-12','descripcion','S','R','S','N'),
-(17,3,1,'Mané','M','2021-04-12','descripcion','S','R','S','N'),
-(18,2,60,'Max','M','2021-04-12','descripcion','S','R','N','S'),
-(19,3,31,'Misha','H','2022-01-10','descripcion','S','R','S','N'),
-(20,1,8,'Polita','H','2022-01-11','descripcion','S','A','S','S'),
-(21,2,31,'Frida','H','2022-02-02','descripcion','N','R','S','S'),
-(22,2,1,'Nina','H','2022-02-10','descripcion','S','A','S','N'),
-(23,2,1,'Paco','M','2020-09-01','lo encontramos en el mercado.','N','A','S','N');
+insert  into `mascotas`(`idmascota`,`idusuario`,`idraza`,`nombremascota`,`genero`,`fechanacimiento`,`observaciones`,`esterilizacion`,`estado`,`vive`,`apadrinado`,`fotografia`) values 
+(1,1,1,'Nacho','M','2016-04-12','descripcion','S','A','S','S','01.jpg'),
+(2,1,31,'Alex','M','2016-08-17','descripcion','N','R','S','N','02.jpg'),
+(3,2,31,'Danna','H','2017-12-21','descripcion','N','A','S','S','03.jpg'),
+(4,1,6,'Copita','H','2017-07-03','descripcion','N','A','S','N','04.jpg'),
+(5,2,8,'Bronko','M','2017-04-12','descripcion','S','A','S','S','05.jpg'),
+(6,3,31,'Charlie','M','2018-04-12','descripcion','S','R','S','S','06.jpg'),
+(7,2,1,'Rocky','M','2022-03-12','descripcion','S','R','S','N','07.jpg'),
+(8,3,34,'Bella','H','2019-04-12','descripcion','N','R','S','S','08.jpg'),
+(9,3,1,'Lola','H','2019-04-12','descripcion','S','R','N','N','09.jpg'),
+(10,2,1,'Blanca','H','2020-04-12','descripcion','N','R','S','S','10.jpg'),
+(11,1,31,'Mia','H','2020-04-12','descripcion','S','A','S','N','11.jpg'),
+(12,3,1,'Balto','M','2020-04-12','descripcion','S','R','S','S','12.jpg'),
+(13,1,1,'Peluchin','M','2020-08-17','descripcion','N','R','S','S','13.jpg'),
+(14,2,31,'Lisa','H','2020-12-21','descripcion','N','R','S','N','14.jpg'),
+(15,1,1,'Any','H','2020-07-03','descripcion','N','A','S','S','15.jpg'),
+(16,3,60,'Cosmo','M','2021-04-12','descripcion','S','R','S','N','16.jpg'),
+(17,3,1,'Mané','M','2021-04-12','descripcion','S','R','S','N','17.jpg'),
+(18,2,60,'Max','M','2021-04-12','descripcion','S','R','N','S','18.jpg'),
+(19,3,31,'Misha','H','2022-01-10','descripcion','S','R','S','N','19.jpg'),
+(20,1,8,'Polita','H','2022-01-11','descripcion','S','A','S','S','20.jpg'),
+(21,2,31,'Frida','H','2022-02-02','descripcion','N','R','S','S','21.jpg'),
+(22,2,1,'Nina','H','2022-02-10','descripcion','S','A','S','N','22.jpg'),
+(23,2,1,'Paco','M','2020-09-01','lo encontramos en el mercado.','N','A','S','N','23.jpg'),
+(24,1,4,'Iron-man','M','2022-01-05','Jugueton','N','R','S','N','24.jpg'),
+(25,2,1,'Peluche','M','2022-01-06','Prueba','N','R','S','N','20220425031540.jpg');
 
 /*Table structure for table `padrinos` */
 
@@ -248,7 +251,7 @@ CREATE TABLE `personas` (
 /*Data for the table `personas` */
 
 insert  into `personas`(`idpersona`,`apellidos`,`nombres`,`tipodoc`,`numdoc`,`direccion`,`telefono`,`logeado`,`voluntario`) values 
-(1,'Boada Ramos','Luis Anderson','D','12345678','Av España 123','987654321','S','S'),
+(1,'Boada Ramos','Luis Anderson','D','12345678','Av España 123','987654321','S','N'),
 (2,'Belleza Torres','Anderson David','D','37194023','Jr 28 De Julio 123','972648117','S','N'),
 (3,'Francia Minaya','Brenda Andrea','D','74720939','Av Artemio Molina 454','964918123','S','N'),
 (4,'Francia Minaya','Jhon Edward','D','22244400','Chincha Alta','999000333','S','N'),
@@ -439,7 +442,7 @@ insert  into `voluntarios`(`idvoluntario`,`idpersona`,`fechainicio`,`fechafin`,`
 (12,14,'2022-04-11',NULL,'Paseo a los perros'),
 (13,1,'2022-04-20','2022-04-20','Limpieza en el albergue.'),
 (14,14,'2022-04-20',NULL,'Bañado de perros'),
-(15,1,'2022-04-20',NULL,'Paseo a los perros.'),
+(15,1,'2022-04-20','2022-04-25','Paseo a los perros.'),
 (16,4,'2022-04-20','2022-04-20','Limpieza de interior del albergue.');
 
 /* Procedure structure for procedure `spu_adopciones_eliminar` */
@@ -791,7 +794,7 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotas_adoptadas_listar`()
 BEGIN
-	SELECT mascotas.nombremascota, razas.raza, animales.animal,
+	SELECT mascotas.nombremascota, razas.raza, animales.animal, fotografia,
 		CASE
 			WHEN genero = 'H' THEN 'Hembra'
 			WHEN genero = "M" THEN 'Macho'           
@@ -882,7 +885,7 @@ DELIMITER $$
     IN _esterilizacion         CHAR(1)
 )
 BEGIN
-    SELECT mascotas.nombremascota, razas.raza, 
+    SELECT mascotas.nombremascota, razas.raza,  fotografia,
     CASE
 			WHEN idanimal = 1 THEN 'Perro'
 			WHEN idanimal = 2 THEN 'Gato'           
@@ -913,7 +916,7 @@ DELIMITER $$
     IN _genero         CHAR(1)
 )
 BEGIN
-    SELECT mascotas.nombremascota, razas.raza, 
+    SELECT mascotas.nombremascota, razas.raza, fotografia,
     CASE
 			WHEN idanimal = 1 THEN 'Perro'
 			WHEN idanimal = 2 THEN 'Gato'           
@@ -942,7 +945,7 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotas_listar`()
 BEGIN
-	SELECT idmascota, mascotas.nombremascota, razas.raza, animales.animal,
+	SELECT idmascota, mascotas.nombremascota, razas.raza, animales.animal, fotografia,
 		CASE
 			WHEN genero = 'H' THEN 'Hembra'
 			WHEN genero = "M" THEN 'Macho'           
@@ -967,16 +970,17 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotas_registro`(
 	IN _idusuario 			INT,
-	IN _idraza 				INT,
+	IN _idraza 			INT,
 	IN _nombremascota		VARCHAR(30),
-	IN _genero				CHAR(1),
+	IN _genero			CHAR(1),
 	IN _fechanacimiento		DATE,
 	IN _observaciones		TEXT,
-	IN _esterilizacion 		CHAR(1)
+	IN _esterilizacion 		CHAR(1),
+	in _fotografia			VARCHAR(100)
 )
 BEGIN
-	INSERT INTO mascotas (idusuario, idraza, nombremascota, genero, fechanacimiento, observaciones, esterilizacion, estado, vive, apadrinado)
-		VALUES (_idusuario, _idraza, _nombremascota, _genero, _fechanacimiento, _observaciones, _esterilizacion, "R", "S", "N");
+	INSERT INTO mascotas (idusuario, idraza, nombremascota, genero, fechanacimiento, observaciones, esterilizacion, estado, vive, apadrinado, fotografia)
+		VALUES (_idusuario, _idraza, _nombremascota, _genero, _fechanacimiento, _observaciones, _esterilizacion, "R", "S", "N", _fotografia);
 END */$$
 DELIMITER ;
 
@@ -990,7 +994,7 @@ DELIMITER $$
     IN _idanimal         INT
 )
 BEGIN
-    SELECT mascotas.nombremascota, razas.raza, 
+    SELECT mascotas.nombremascota, razas.raza, fotografia,
     CASE
 			WHEN idanimal = 1 THEN 'Perro'
 			WHEN idanimal = 2 THEN 'Gato'           

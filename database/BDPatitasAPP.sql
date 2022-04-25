@@ -51,14 +51,15 @@ CREATE TABLE mascotas
 	idmascota			INT 		AUTO_INCREMENT PRIMARY KEY,
 	idusuario 			INT 		NOT NULL,
 	idraza				INT 		NOT NULL,	
-	nombremascota		VARCHAR(30)	NOT NULL,
+	nombremascota			VARCHAR(30)	NOT NULL,
 	genero				CHAR(1)		NOT NULL,
-	fechanacimiento 	DATE 		NOT NULL,
-	observaciones		TEXT		NOT NULL,
-	esterilizacion		CHAR(1)		NOT NULL,
+	fechanacimiento 		DATE 		NOT NULL,
+	observaciones			TEXT		NOT NULL,
+	esterilizacion			CHAR(1)		NOT NULL,
 	estado				CHAR(1)		NOT NULL,
 	vive				CHAR(1)		NOT NULL,
 	apadrinado			CHAR(1)		NOT NULL,
+	fotografia			VARCHAR(100)	NOT NULL,
 	CONSTRAINT fk_idusuario_masc FOREIGN KEY (idusuario) REFERENCES usuarios(idusuario),
 	CONSTRAINT fk_idraza_masc FOREIGN KEY (idraza) REFERENCES razas(idraza)
 ) ENGINE = INNODB;
@@ -96,7 +97,7 @@ CREATE TABLE fotos
 (
 	idfoto			INT 			AUTO_INCREMENT PRIMARY KEY,
 	idmascota 		INT 			NOT NULL,
-	ruta			VARCHAR(100)	NOT NULL,
+	ruta			VARCHAR(100)		NOT NULL,
 	comentariofoto	VARCHAR(100)	NOT NULL,
 	CONSTRAINT fk_idmascota_ft FOREIGN KEY (idmascota) REFERENCES mascotas(idmascota)
 )ENGINE = INNODB;

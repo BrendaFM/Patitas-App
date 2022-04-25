@@ -12,7 +12,7 @@
                     <button style="background-color: white;" type="button" class="btn btn-lg float-right"><i class="fas fa-arrow-circle-left"></i> &nbsp;Volver</button>
                 </a>
             </div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table class="table" id="tablaOtrasDonaciones">
                     <thead>
                         <tr>

@@ -9,14 +9,14 @@
         </div>
     </div>
     <div class="col-md-9">
-        <div  class="card card-outline card-info  ml-3 mr-3">
+        <div  class="card card-outline card-info  ml-3 mr-3 card-inverse">
             <div class="card-header">
                 <p class="card-title mt-2" style="font-size: 22px">Kilogramos Donados</p>
                 <a href="main.php?view=donaciones-registro">
                     <button style="background-color: white;" type="button" class="btn btn-lg float-right"><i class="fas fa-arrow-circle-left"></i> &nbsp;Volver</button>
                 </a>
             </div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table class="table" id="tablaDonacionesComidas">
                     <thead>
                         <tr>

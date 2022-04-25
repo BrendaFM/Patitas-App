@@ -1,8 +1,12 @@
 <?php
 require_once '../models/Mascota.php';
+
+date_default_timezone_set("America/Lima");
+$mascota = new Mascota();
+
 if (isset($_GET['op'])){
 
-    $mascota = new Mascota();
+  
 
     if ($_GET['op'] == 'listarMascotas') {
         $datosObtenidos = $mascota->listarMascotas();
@@ -24,7 +28,7 @@ if (isset($_GET['op'])){
                 echo "
                     <div class='col-md-3 col-lg-3 pb-3'>
                         <div class='card card-custom bg-white border-white border-0'>
-                            <div class='card-custom-img' style='background-image: url(./img/gato.jpg);'></div>
+                            <div class='card-custom-img' style='background-image: url(img/mascotas/$fila->fotografia);'></div>
                             <div class='card-custom-avatar'>
                                 <img class='img-fluid' src='./img/avatar.jpg' alt='Avatar' />
                             </div>
@@ -111,7 +115,7 @@ if (isset($_GET['op'])){
                 echo "
                     <div class='col-md-3 col-lg-3 pb-3'>
                         <div class='card card-custom bg-white border-white border-0'>
-                            <div class='card-custom-img' style='background-image: url(./img/gato.jpg);'></div>
+                            <div class='card-custom-img' style='background-image: url(img/mascotas/$fila->fotografia);'></div>
                             <div class='card-custom-avatar'>
                                 <img class='img-fluid' src='./img/avatar.jpg' alt='Avatar' />
                             </div>
@@ -150,7 +154,7 @@ if (isset($_GET['op'])){
                 echo "
                     <div class='col-md-3 col-lg-3 pb-3'>
                         <div class='card card-custom bg-white border-white border-0'>
-                            <div class='card-custom-img' style='background-image: url(./img/gato.jpg);'></div>
+                            <div class='card-custom-img' style='background-image: url(img/mascotas/$fila->fotografia);'></div>
                             <div class='card-custom-avatar'>
                                 <img class='img-fluid' src='./img/avatar.jpg' alt='Avatar' />
                             </div>
@@ -188,7 +192,7 @@ if (isset($_GET['op'])){
                 echo "
                     <div class='col-md-3 col-lg-3 pb-3'>
                         <div class='card card-custom bg-white border-white border-0'>
-                            <div class='card-custom-img' style='background-image: url(./img/gato.jpg);'></div>
+                            <div class='card-custom-img' style='background-image: url(img/mascotas/$fila->fotografia);'></div>
                             <div class='card-custom-avatar'>
                                 <img class='img-fluid' src='./img/avatar.jpg' alt='Avatar' />
                             </div>
@@ -226,7 +230,7 @@ if (isset($_GET['op'])){
                 echo "
                     <div class='col-md-3 col-lg-3 pb-3'>
                         <div class='card card-custom bg-white border-white border-0'>
-                            <div class='card-custom-img' style='background-image: url(./img/gato.jpg);'></div>
+                            <div class='card-custom-img' style='background-image: url(img/mascotas/$fila->fotografia);'></div>
                             <div class='card-custom-avatar'>
                                 <img class='img-fluid' src='./img/avatar.jpg' alt='Avatar' />
                             </div>
@@ -245,18 +249,6 @@ if (isset($_GET['op'])){
             }
         }
 
-    }
-
-    if($_GET['op'] == 'registrarMascota'){
-        $mascota->registrarMascota([
-            "idusuario"         => $_GET["idusuario"],
-            "idraza"            => $_GET["idraza"],
-            "nombremascota"     => $_GET["nombremascota"],
-            "genero"            => $_GET["genero"],
-            "fechanacimiento"   => $_GET["fechanacimiento"],
-            "observaciones"     => $_GET["observaciones"],
-            "esterilizacion"    => $_GET["esterilizacion"] 
-        ]);
     }
     
     if ($_GET['op'] == 'reporteAdoptados') {
@@ -332,6 +324,30 @@ if (isset($_GET['op'])){
         }else{
           echo "No existen datos";
         }
+    }
+}
+
+if(isset($_POST['op'])){
+
+    if($_POST['op'] == 'registrarMascota'){
+
+        $nombre = "";
+            
+        if ($_FILES['fotografia']['tmp_name'] != ''){
+            $nombre = date('YmdhGs') . ".jpg";
+            if (move_uploaded_file($_FILES['fotografia']['tmp_name'], "../img/mascotas/" . $nombre)){
+                $mascota->registrarMascota([
+                    "idusuario"         => $_POST["idusuario"],
+                    "idraza"            => $_POST["idraza"],
+                    "nombremascota"     => $_POST["nombremascota"],
+                    "genero"            => $_POST["genero"],
+                    "fechanacimiento"   => $_POST["fechanacimiento"],
+                    "observaciones"     => $_POST["observaciones"],
+                    "esterilizacion"    => $_POST["esterilizacion"],
+                    "fotografia"        => $nombre
+                ]);
+            }
+        } 
     }
 }
 ?>

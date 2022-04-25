@@ -65,7 +65,7 @@
             <div class="card-header">
                 <p class="card-title" style="font-size: 22px">Lista de Padrinos</p>
             </div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table class="table" id="tablaPadrino">
                     <thead>
                         <tr>

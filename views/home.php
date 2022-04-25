@@ -9,7 +9,7 @@
         <img src="./img/patitas.jpg" class="card-img-top" alt="..." style='opacity:0.9;'>
         </div> -->
         <div class="col-md-5">
-            <div class="card mr-5" style='border-radius:60px;'>
+            <div class="card mr-5 card-inverse" style='border-radius:60px;'>
                 <iframe width="560" height="305" src="https://www.youtube.com/embed/xJjWxNl_AFA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen alt="..." style='opacity:0.9; border-radius:40px;'></iframe>
             </div>
         </div>
