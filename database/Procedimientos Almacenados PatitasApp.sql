@@ -114,6 +114,21 @@ BEGIN
 END $$
 
 DELIMITER $$
+CREATE PROCEDURE spu_mascotas_registro_perdidos
+(
+	IN _idusuario 			INT,
+	IN _idraza 			INT,
+	IN _genero			CHAR(1),
+	IN _observaciones		TEXT,
+	IN _ubicacion		TEXT,
+	IN _fotografia			VARCHAR(100)
+)
+BEGIN
+	INSERT INTO mascotasperdidas (idusuario, idraza, genero, observaciones, ubicacion, fotografia, fecha)
+		VALUES (_idusuario, _idraza, _genero, _observaciones, _ubicacion, _fotografia, CURDATE());
+END $$
+
+DELIMITER $$
 CREATE PROCEDURE spu_mascotas_listar()
 BEGIN
 	SELECT idmascota, mascotas.nombremascota, razas.raza, animales.animal, fotografia,
@@ -172,6 +187,40 @@ BEGIN
     UPDATE mascotas SET
         esterilizacion = 'S'
     WHERE idmascota = _idmascota;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE spu_mascotasperdidas_listar()
+BEGIN
+	SELECT CASE
+			WHEN genero = 'H' THEN 'Hembra'
+			WHEN genero = "M" THEN 'Macho'           
+		END 'genero', animales.animal, idmascotaperdida, fecha, ubicacion, fotografia
+		FROM mascotasperdidas
+	INNER JOIN razas ON razas.idraza = mascotasperdidas.idraza
+		INNER JOIN animales ON animales.idanimal = razas.idanimal;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE spu_mascotasperdidas_eliminar
+(
+_idmascotaperdida INT
+)
+BEGIN
+	DELETE FROM mascotasperdidas WHERE idmascotaperdida = _idmascotaperdida;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE spu_mascotas_general()
+BEGIN
+	SELECT idmascota, mascotas.nombremascota, animales.animal, fotografia,
+		CASE
+			WHEN genero = 'H' THEN 'Hembra'
+			WHEN genero = "M" THEN 'Macho'           
+		END 'genero'
+	FROM mascotas
+	INNER JOIN razas ON razas.idraza = mascotas.idraza
+	INNER JOIN animales ON animales.idanimal = razas.idanimal;
 END $$
 
 -- ------------------------------------------------------------

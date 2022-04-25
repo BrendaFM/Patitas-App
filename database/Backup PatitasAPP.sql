@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.4.20-MariaDB : Database - patitasapp
+MySQL - 10.4.21-MariaDB : Database - patitasapp
 *********************************************************************
 */
 
@@ -199,6 +199,33 @@ insert  into `mascotas`(`idmascota`,`idusuario`,`idraza`,`nombremascota`,`genero
 (23,2,1,'Paco','M','2020-09-01','lo encontramos en el mercado.','N','A','S','N','23.jpg'),
 (24,1,4,'Iron-man','M','2022-01-05','Jugueton','N','R','S','N','24.jpg'),
 (25,2,1,'Peluche','M','2022-01-06','Prueba','N','R','S','N','20220425031540.jpg');
+
+/*Table structure for table `mascotasperdidas` */
+
+DROP TABLE IF EXISTS `mascotasperdidas`;
+
+CREATE TABLE `mascotasperdidas` (
+  `idmascotaperdida` int(11) NOT NULL AUTO_INCREMENT,
+  `idusuario` int(11) NOT NULL,
+  `idraza` int(11) NOT NULL,
+  `genero` char(1) NOT NULL,
+  `observaciones` text NOT NULL,
+  `ubicacion` text NOT NULL,
+  `fotografia` varchar(100) NOT NULL,
+  `fecha` date NOT NULL,
+  PRIMARY KEY (`idmascotaperdida`),
+  KEY `fk_idusuario_masp` (`idusuario`),
+  KEY `fk_idraza_masp` (`idraza`),
+  CONSTRAINT `fk_idraza_masp` FOREIGN KEY (`idraza`) REFERENCES `razas` (`idraza`),
+  CONSTRAINT `fk_idusuario_masp` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `mascotasperdidas` */
+
+insert  into `mascotasperdidas`(`idmascotaperdida`,`idusuario`,`idraza`,`genero`,`observaciones`,`ubicacion`,`fotografia`,`fecha`) values 
+(1,2,1,'M','Tenia una correa roja','https://goo.gl/maps/SES4KYjPoZPdqzSt5','20220425041651.jpg','2022-04-25'),
+(2,1,1,'M','Esta lastimado de la patita','https://goo.gl/maps/5X4egvfJTsT3bj4i7','20220425041631.jpg','2022-04-25'),
+(5,2,1,'M','El perro se ve desorientado','https://goo.gl/maps/wKY2Wo2KUsxC19ZTA','20220425061847.jpg','2022-04-25');
 
 /*Table structure for table `padrinos` */
 
@@ -786,6 +813,38 @@ SELECT  tipoapoyos.tipoapoyo, SUM(cantidad) AS "Total Soles" , YEAR(fechaapoyo) 
 END */$$
 DELIMITER ;
 
+/* Procedure structure for procedure `spu_mascotasperdidas_eliminar` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_mascotasperdidas_eliminar` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotasperdidas_eliminar`(
+_idmascotaperdida INT
+)
+BEGIN
+	DELETE FROM mascotasperdidas where idmascotaperdida = _idmascotaperdida;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_mascotasperdidas_listar` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_mascotasperdidas_listar` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotasperdidas_listar`()
+BEGIN
+	SELECT CASE
+			WHEN genero = 'H' THEN 'Hembra'
+			WHEN genero = "M" THEN 'Macho'           
+		END 'genero', animales.animal, idmascotaperdida, fecha, ubicacion, fotografia
+		FROM mascotasperdidas
+	INNER JOIN razas ON razas.idraza = mascotasperdidas.idraza
+		INNER JOIN animales ON animales.idanimal = razas.idanimal;
+END */$$
+DELIMITER ;
+
 /* Procedure structure for procedure `spu_mascotas_adoptadas_listar` */
 
 /*!50003 DROP PROCEDURE IF EXISTS  `spu_mascotas_adoptadas_listar` */;
@@ -906,6 +965,25 @@ BEGIN
 END */$$
 DELIMITER ;
 
+/* Procedure structure for procedure `spu_mascotas_general` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_mascotas_general` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotas_general`()
+BEGIN
+	SELECT idmascota, mascotas.nombremascota, animales.animal, fotografia,
+		CASE
+			WHEN genero = 'H' THEN 'Hembra'
+			WHEN genero = "M" THEN 'Macho'           
+		END 'genero'
+	FROM mascotas
+	INNER JOIN razas ON razas.idraza = mascotas.idraza
+	INNER JOIN animales ON animales.idanimal = razas.idanimal;
+END */$$
+DELIMITER ;
+
 /* Procedure structure for procedure `spu_mascotas_genero` */
 
 /*!50003 DROP PROCEDURE IF EXISTS  `spu_mascotas_genero` */;
@@ -981,6 +1059,26 @@ DELIMITER $$
 BEGIN
 	INSERT INTO mascotas (idusuario, idraza, nombremascota, genero, fechanacimiento, observaciones, esterilizacion, estado, vive, apadrinado, fotografia)
 		VALUES (_idusuario, _idraza, _nombremascota, _genero, _fechanacimiento, _observaciones, _esterilizacion, "R", "S", "N", _fotografia);
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_mascotas_registro_perdidos` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_mascotas_registro_perdidos` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotas_registro_perdidos`(
+	IN _idusuario 			INT,
+	IN _idraza 			INT,
+	IN _genero			CHAR(1),
+	IN _observaciones		TEXT,
+	IN _ubicacion		TEXT,
+	IN _fotografia			VARCHAR(100)
+)
+BEGIN
+	INSERT INTO mascotasperdidas (idusuario, idraza, genero, observaciones, ubicacion, fotografia, fecha)
+		VALUES (_idusuario, _idraza, _genero, _observaciones, _ubicacion, _fotografia, CURDATE());
 END */$$
 DELIMITER ;
 

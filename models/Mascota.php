@@ -14,6 +14,14 @@ class Mascota extends ModelMaster{
             die($error->getMessage());
         }
     }
+    public function listarMascotasGaleria(){
+        try{
+            return parent::getRows("spu_mascotas_general");
+        } 
+        catch (Exception $error){
+            die($error->getMessage());
+        }
+    }
     
     public function listarMascotasAdoptadas(){
         try{
@@ -57,6 +65,31 @@ class Mascota extends ModelMaster{
     public function registrarMascota(array $data){
         try{
             parent::execProcedure($data, "spu_mascotas_registro", false);
+        }catch(Exception $error){
+            die($error->getMessage());
+        }
+    }
+
+    public function registrarMascotaPerdidos(array $data){
+        try{
+            parent::execProcedure($data, "spu_mascotas_registro_perdidos", false);
+        }catch(Exception $error){
+            die($error->getMessage());
+        }
+    }
+
+    public function listarMascotasPerdidos(){
+        try{
+            return parent::getRows("spu_mascotasperdidas_listar");
+        } 
+        catch (Exception $error){
+            die($error->getMessage());
+        }
+    }
+
+    public function eliminarMascotaPerdido(array $data){
+        try{
+            parent::execProcedure($data, "spu_mascotasperdidas_eliminar", false);
         }catch(Exception $error){
             die($error->getMessage());
         }

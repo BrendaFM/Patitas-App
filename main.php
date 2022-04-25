@@ -95,6 +95,13 @@
           <li class="nav-header">Mascotas</li>
 
           <li class="nav-item">
+            <a href="main.php?view=mascotas-perdidos" class="nav-link">
+              <i class="fas fa-map-marker-alt nav-icon"></i>
+              <p>Mascotas Perdidas</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="main.php?view=filtro-mascotas" class="nav-link">
               <i class="fas fa-filter nav-icon"></i>
               <p>Filtro de mascotas</p>
@@ -112,6 +119,13 @@
             <a href="main.php?view=videos" class="nav-link">
                 <i class="fas fa-video nav-icon"></i>
               <p>Videos del albergue</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="main.php?view=mascotas-galeria" class="nav-link">
+              <i class="fas fa-image nav-icon"></i>
+              <p>Galeria</p>
             </a>
           </li>
           
@@ -175,6 +189,13 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="main.php?view=mascotas-perdidas-registro" class="nav-link ">
+              <i class="fas fa-save nav-icon"></i>
+              <p>Registro Perdidos</p>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -214,7 +235,7 @@
       <hr>
       <p><strong>Apellidos y Nombres:</strong></p>
       <p>Boada Ramos, Luis Anderson.</p>
-      <p><strong>Edad:</strong> 18</p>
+      <p><strong>Edad:</strong> 19</p>
       <hr>
       <p><strong>Apellidos y Nombres:</strong></p>
       <p>Francia Minaya, Brenda Andrea.</p>

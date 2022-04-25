@@ -19,6 +19,7 @@
             <p style="font-size:20px" class="text-right font-italic font-weight-bold">~ Patitas App</p>
             <div>
                 <a class="btn bg-gradient-secondary" href="main.php?view=mascotas">Nuestros Refugiados</a>
+                <a class="btn bg-gradient-secondary" href="main.php?view=mascotas-perdidos">Mascotas Perdidas</a>
             </div>
         </div>
     </div>

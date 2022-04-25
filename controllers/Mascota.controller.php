@@ -6,8 +6,6 @@ $mascota = new Mascota();
 
 if (isset($_GET['op'])){
 
-  
-
     if ($_GET['op'] == 'listarMascotas') {
         $datosObtenidos = $mascota->listarMascotas();
 
@@ -325,6 +323,79 @@ if (isset($_GET['op'])){
           echo "No existen datos";
         }
     }
+
+    if ($_GET['op'] == 'listarMascotasPerdidos') {
+        $datosObtenidos = $mascota->listarMascotasPerdidos();
+
+        // Enviar resultados a la vista
+        if(count($datosObtenidos) == 0){
+            echo "<h5>No encontramos registros disponibles</h5>";
+        }
+        else{
+            // Variable, utilizado para comprobar si contiene imagen o no
+            $imagen = "";
+
+            // Mostrar un registro, por cada iteración
+            foreach($datosObtenidos as $fila){
+    
+                echo "
+                    <div class='col-md-3 col-lg-3 pb-3'>
+                        <div class='card card-custom bg-white border-white border-0'>
+                            <div class='card-custom-img' style='background-image: url(img/mascotasperdidas/$fila->fotografia);'></div>
+                            <div class='card-custom-avatar'>
+                                <img class='img-fluid' src='./img/avatar.jpg' alt='Avatar' />
+                            </div>
+                            <d class='card-body' style='overflow-y: auto'>
+                                <p class='card-text' style='text-align:justify'><b>Tipo de animal:</b> $fila->animal</p>
+                                <p class='card-text' style='text-align:justify'><b>Género:</b> $fila->genero</p>
+                                <p class='card-text' style='text-align:justify'><b>Fecha encontrado:</b> $fila->fecha</p>
+                                <p class='card-text' style='text-align:justify'><b>Lugar encontrado:</b>
+                                    <a href='$fila->ubicacion'>Ubicacion Aqui</a>
+                                </p>
+                                <button class='btn bg-gradient-secondary eliminar' style='float: right;' data-idmascota='$fila->idmascotaperdida'>Encontrado</button>
+                            </div>
+                        </div>
+                    </div>
+                    ";  
+            }
+        }
+    }
+
+    if($_GET['op'] == 'eliminarMascotaPerdido'){
+        $mascota->eliminarMascotaPerdido(["idmascotaperdida" => $_GET['idmascotaperdida']]);
+    }
+
+    if ($_GET['op'] == 'listarMascotasGaleria') {
+        $datosObtenidos = $mascota->listarMascotasGaleria();
+
+        // Enviar resultados a la vista
+        if(count($datosObtenidos) == 0){
+            echo "<h5>No encontramos registros disponibles</h5>";
+        }
+        else{
+            // Variable, utilizado para comprobar si contiene imagen o no
+            $imagen = "";
+
+            // Mostrar un registro, por cada iteración
+            foreach($datosObtenidos as $fila){
+    
+                echo "
+                    <div class='col-md-2 col-lg-3 pb-3'>
+                        <div class='card card-custom2 bg-white border-white border-0'>
+                            <div class='card-custom-img' style='background-image: url(img/mascotas/$fila->fotografia);'></div>
+                            <div class='card-custom-avatar'>
+                                <img class='img-fluid' src='./img/avatar.jpg' alt='Avatar' />
+                            </div>
+                            <div class='card-body' style='overflow-y: auto'>
+                                <p class='card-title'><b>Nombre: </b>$fila->nombremascota</p>
+                                <p class='card-text' style='text-align:justify'><b>Información:</b> $fila->animal - $fila->genero</p>
+                            </div>
+                        </div>
+                    </div>
+                    ";  
+            }
+        }
+    }
 }
 
 if(isset($_POST['op'])){
@@ -348,6 +419,25 @@ if(isset($_POST['op'])){
                 ]);
             }
         } 
+    }
+
+    if($_POST['op'] == 'registrarMascotaPerdidos'){
+
+        $nombre = "";
+            
+        if ($_FILES['fotografia']['tmp_name'] != ''){
+            $nombre = date('YmdhGs') . ".jpg";
+            if (move_uploaded_file($_FILES['fotografia']['tmp_name'], "../img/mascotasperdidas/" . $nombre)){
+                $mascota->registrarMascotaPerdidos([
+                    "idusuario"         => $_POST["idusuario"],
+                    "idraza"            => $_POST["idraza"],
+                    "genero"            => $_POST["genero"],
+                    "observaciones"     => $_POST["observaciones"],
+                    "ubicacion"         => $_POST["ubicacion"],
+                    "fotografia"        => $nombre
+                ]);
+            }
+        }
     }
 }
 ?>

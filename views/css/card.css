@@ -42,3 +42,9 @@
     width: 100px;
     height: 100px;
   }
+
+  .card-custom2 {
+    overflow: hidden;
+    min-height: 150px;
+    box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+  }

@@ -142,4 +142,18 @@ CREATE TABLE donaciones
 	CONSTRAINT fk_idpersona_do FOREIGN KEY (idpersona) REFERENCES personas(idpersona)
 )ENGINE = INNODB;
 
+CREATE TABLE mascotasperdidas
+(
+	idmascotaperdida		INT 		AUTO_INCREMENT PRIMARY KEY,
+	idusuario 				INT 		NOT NULL,
+	idraza					INT 		NOT NULL,	
+	genero					CHAR(1)	NOT NULL,
+	observaciones			TEXT		NOT NULL,
+	ubicacion				TEXT		NOT NULL,
+	fotografia				VARCHAR(100)	NOT NULL,
+	fecha 					DATE 		NOT NULL,
+	CONSTRAINT fk_idusuario_masp FOREIGN KEY (idusuario) REFERENCES usuarios(idusuario),
+	CONSTRAINT fk_idraza_masp FOREIGN KEY (idraza) REFERENCES razas(idraza)
+) ENGINE = INNODB;
+
   
