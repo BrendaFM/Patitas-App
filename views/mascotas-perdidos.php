@@ -24,10 +24,10 @@
             Swal.fire({
                 icon: 'question',
                 title: 'PATITAS APP',
-                text: 'Esta seguro de eliminar?',
+                text: '¿Esta mascota fue encontrada?',
                 showCancelButton: true,
-                cancelButtonText: 'Cancelar',
-                confirmButtonText: 'Confirmar',
+                cancelButtonText: 'No',
+                confirmButtonText: 'Sí',
             }).then((result)=>{
                 if(result.isConfirmed){
                     var datos = {
@@ -42,7 +42,7 @@
                         success: function(e){
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Eliminado correctamente'
+                                title: 'Proceso terminado'
                             });
                             listarMascotasPerdidos();
                         }

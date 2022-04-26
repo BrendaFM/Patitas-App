@@ -235,7 +235,7 @@
       <hr>
       <p><strong>Apellidos y Nombres:</strong></p>
       <p>Boada Ramos, Luis Anderson.</p>
-      <p><strong>Edad:</strong> 19</p>
+      <p><strong>Edad:</strong> 18</p>
       <hr>
       <p><strong>Apellidos y Nombres:</strong></p>
       <p>Francia Minaya, Brenda Andrea.</p>
