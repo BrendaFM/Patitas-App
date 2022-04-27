@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.4.21-MariaDB : Database - patitasapp
+MySQL - 10.4.22-MariaDB : Database - patitasapp
 *********************************************************************
 */
 
@@ -174,31 +174,31 @@ CREATE TABLE `mascotas` (
 /*Data for the table `mascotas` */
 
 insert  into `mascotas`(`idmascota`,`idusuario`,`idraza`,`nombremascota`,`genero`,`fechanacimiento`,`observaciones`,`esterilizacion`,`estado`,`vive`,`apadrinado`,`fotografia`) values 
-(1,1,1,'Nacho','M','2016-04-12','descripcion','S','A','S','S','01.jpg'),
-(2,1,31,'Alex','M','2016-08-17','descripcion','N','R','S','N','02.jpg'),
-(3,2,31,'Danna','H','2017-12-21','descripcion','N','A','S','S','03.jpg'),
-(4,1,6,'Copita','H','2017-07-03','descripcion','N','A','S','N','04.jpg'),
-(5,2,8,'Bronko','M','2017-04-12','descripcion','S','A','S','S','05.jpg'),
-(6,3,31,'Charlie','M','2018-04-12','descripcion','S','R','S','S','06.jpg'),
-(7,2,1,'Rocky','M','2022-03-12','descripcion','S','R','S','N','07.jpg'),
-(8,3,34,'Bella','H','2019-04-12','descripcion','N','R','S','S','08.jpg'),
-(9,3,1,'Lola','H','2019-04-12','descripcion','S','R','N','N','09.jpg'),
-(10,2,1,'Blanca','H','2020-04-12','descripcion','N','R','S','S','10.jpg'),
-(11,1,31,'Mia','H','2020-04-12','descripcion','S','A','S','N','11.jpg'),
-(12,3,1,'Balto','M','2020-04-12','descripcion','S','R','S','S','12.jpg'),
-(13,1,1,'Peluchin','M','2020-08-17','descripcion','N','R','S','S','13.jpg'),
-(14,2,31,'Lisa','H','2020-12-21','descripcion','N','R','S','N','14.jpg'),
-(15,1,1,'Any','H','2020-07-03','descripcion','N','A','S','S','15.jpg'),
-(16,3,60,'Cosmo','M','2021-04-12','descripcion','S','R','S','N','16.jpg'),
-(17,3,1,'Mané','M','2021-04-12','descripcion','S','R','S','N','17.jpg'),
-(18,2,60,'Max','M','2021-04-12','descripcion','S','R','N','S','18.jpg'),
-(19,3,31,'Misha','H','2022-01-10','descripcion','S','R','S','N','19.jpg'),
-(20,1,8,'Polita','H','2022-01-11','descripcion','S','A','S','S','20.jpg'),
-(21,2,31,'Frida','H','2022-02-02','descripcion','N','R','S','S','21.jpg'),
-(22,2,1,'Nina','H','2022-02-10','descripcion','S','A','S','N','22.jpg'),
-(23,2,1,'Paco','M','2020-09-01','lo encontramos en el mercado.','N','A','S','N','23.jpg'),
-(24,1,4,'Iron-man','M','2022-01-05','Jugueton','N','R','S','N','24.jpg'),
-(25,2,1,'Peluche','M','2022-01-06','Prueba','N','R','S','N','20220425031540.jpg');
+(1,1,1,'Nacho','M','2016-04-12','descripcion','S','A','S','S','20220425072330.jpg'),
+(2,1,31,'Alex','M','2016-08-17','descripcion','N','R','S','N','20220425072331.jpg'),
+(3,2,31,'Danna','H','2017-12-21','descripcion','N','A','S','S','20220425072332.jpg'),
+(4,1,6,'Copita','H','2017-07-03','descripcion','N','A','S','N','20220425072333.jpg'),
+(5,2,8,'Bronko','M','2017-04-12','descripcion','S','A','S','S','20220425072334.jpg'),
+(6,3,31,'Charlie','M','2018-04-12','descripcion','S','R','S','S','20220425072335.jpg'),
+(7,2,1,'Rocky','M','2022-03-12','descripcion','S','R','S','N','20220425072336.jpg'),
+(8,3,34,'Bella','H','2019-04-12','descripcion','N','R','S','S','20220425072337.jpg'),
+(9,3,1,'Lola','H','2019-04-12','descripcion','S','R','N','N','20220425072338.jpg'),
+(10,2,1,'Blanca','H','2020-04-12','descripcion','N','R','S','S','20220425072339.jpg'),
+(11,1,31,'Mia','H','2020-04-12','descripcion','S','A','S','N','20220425072340.jpg'),
+(12,3,1,'Balto','M','2020-04-12','descripcion','S','R','S','S','20220425072341.jpg'),
+(13,1,1,'Peluchin','M','2020-08-17','descripcion','N','R','S','S','20220425072342.jpg'),
+(14,2,31,'Lisa','H','2020-12-21','descripcion','N','R','S','N','20220425072343.jpg'),
+(15,1,1,'Any','H','2020-07-03','descripcion','N','A','S','S','20220425072344.jpg'),
+(16,3,60,'Cosmo','M','2021-04-12','descripcion','S','R','S','N','20220425072345.jpg'),
+(17,3,1,'Mané','M','2021-04-12','descripcion','S','R','S','N','20220425072346.jpg'),
+(18,2,60,'Max','M','2021-04-12','descripcion','S','R','N','S','20220425072347.jpg'),
+(19,3,31,'Misha','H','2022-01-10','descripcion','S','R','S','N','20220425072348.jpg'),
+(20,1,8,'Polita','H','2022-01-11','descripcion','S','A','S','S','20220425072349.jpg'),
+(21,2,31,'Frida','H','2022-02-02','descripcion','N','R','S','S','20220425072350.jpg'),
+(22,2,1,'Nina','H','2022-02-10','descripcion','S','A','S','N','20220425072351.jpg'),
+(23,2,1,'Paco','M','2020-09-01','lo encontramos en el mercado.','N','A','S','N','20220425072352.jpg'),
+(24,1,4,'Iron-man','M','2022-01-05','Jugueton','N','R','S','N','20220425072353.jpg'),
+(25,2,1,'Peluche','M','2022-01-06','Prueba','N','R','S','N','20220425072354.jpg');
 
 /*Table structure for table `mascotasperdidas` */
 
