@@ -2,7 +2,8 @@
     require_once 'datatable.php';
     require_once 'acceso-seguro.php';
     if($_SESSION['nivelacceso']!= "C"){
-      exit();
+        echo "<strong>No tiene el nivel de acceso requerido</strong>";
+        exit();
     }
 ?>
 
