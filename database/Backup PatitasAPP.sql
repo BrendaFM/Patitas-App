@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.4.22-MariaDB : Database - patitasapp
+MySQL - 10.4.21-MariaDB : Database - patitasapp
 *********************************************************************
 */
 
@@ -169,7 +169,7 @@ CREATE TABLE `mascotas` (
   KEY `fk_idraza_masc` (`idraza`),
   CONSTRAINT `fk_idraza_masc` FOREIGN KEY (`idraza`) REFERENCES `razas` (`idraza`),
   CONSTRAINT `fk_idusuario_masc` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `mascotas` */
 
@@ -198,7 +198,8 @@ insert  into `mascotas`(`idmascota`,`idusuario`,`idraza`,`nombremascota`,`genero
 (22,2,1,'Nina','H','2022-02-10','descripcion','S','A','S','N','20220425072351.jpg'),
 (23,2,1,'Paco','M','2020-09-01','lo encontramos en el mercado.','N','A','S','N','20220425072352.jpg'),
 (24,1,4,'Iron-man','M','2022-01-05','Jugueton','N','R','S','N','20220425072353.jpg'),
-(25,2,1,'Peluche','M','2022-01-06','Prueba','N','R','S','N','20220425072354.jpg');
+(25,2,1,'Peluche','M','2022-01-06','Prueba','N','R','S','N','20220425072354.jpg'),
+(26,1,31,'Cleopatra','H','2021-08-17','se duerme mucho','N','R','S','N','20220427061845.jpg');
 
 /*Table structure for table `mascotasperdidas` */
 
@@ -1240,9 +1241,11 @@ DELIMITER $$
 	IN _nombreusuario 	VARCHAR(15)
 )
 BEGIN
-	SELECT * 
-		FROM usuarios
-	WHERE nombreusuario = _nombreusuario;
+	SELECT	usuarios.idusuario, personas.apellidos, personas.nombres,
+				usuarios.nombreusuario, usuarios.clave, usuarios.nivelacceso
+		FROM usuarios 
+		INNER JOIN personas ON personas.idpersona = usuarios.idpersona
+	WHERE nombreusuario = _nombreusuario AND estado = 'A'; -- A = Activo & I = Inactivo --
 END */$$
 DELIMITER ;
 
