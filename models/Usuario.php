@@ -1,25 +1,19 @@
 <?php
 
-require_once '../core/conexion.php';
+require_once '../core/model.master.php';
 
-class Usuario {
 
-    public function __CONSTRUCT(){
-        $conexion = new Conexion();
-        $this->pdo = $conexion->connectServer();
+class Usuario extends ModelMaster{
+
+  //Login
+  public function login(array $data){
+    try{
+      return parent::execProcedureLogin($data, "spu_usuarios_login", true);
+
+    } catch (Exception $error){
+      die($error->getMessage());
     }
-    
-    public function login($nombreUsuario){
-        try{
-            $comando = $this->pdo->prepare("CALL spu_usuarios_login(?)");
-            $comando->execute(array($nombreUsuario));
-            
-            return $comando->fetch(PDO::FETCH_ASSOC);
-        }
-        catch(Exception $e){
-            die($e->getMessage());
-        }
-    }
+  }
 
     // public function registrarUsuario($idpersona, $nombreusuario, $clave){
     //     try{

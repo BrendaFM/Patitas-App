@@ -1,3 +1,11 @@
+<?php 
+  session_start();
+  
+  if ($_SESSION['acceso'] == false){
+    //Login
+    header('Location:index.php');
+  }
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -63,6 +71,22 @@
       <span class="brand-text font-weight-light">Patitas App</span>
     </a>
 
+    <div class="sidebar mt-3">
+      <nav>
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="main.php?view=mascotas" class="nav-link">
+            <i class="fas fa-user ml-1"></i>
+            <p>&nbsp; &nbsp;<?= $_SESSION['apellidos']?></p>
+            <br>
+            <p class="ml-4">&nbsp; <?= $_SESSION['nombres']?></p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <hr>
 
     <!-- Sidebar -->
     <div class="sidebar mt-4">
@@ -145,54 +169,68 @@
             </a>
           </li>
 
-          <li class="nav-header">Colaborador</li>
+          <?php 
+            if($_SESSION['nivelacceso'] == 'C'){
+              echo'
+
+              <li class="nav-header">Colaborador</li>
+
+                <li class="nav-item">
+                  <a href="main.php?view=mascotas-registro" class="nav-link ">
+                    <i class="fas fa-save nav-icon"></i>
+                    <p>Registro Mascota</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="main.php?view=adopciones-registro" class="nav-link ">
+                    <i class="fas fa-save nav-icon"></i>
+                    <p>Registro Adopción</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="main.php?view=eventos-registro" class="nav-link ">
+                    <i class="fas fa-save nav-icon"></i>
+                    <p>Registro Eventos</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="main.php?view=voluntarios-registro" class="nav-link ">
+                    <i class="fas fa-save nav-icon"></i>
+                    <p>Registro Voluntarios</p>
+                  </a>
+                </li>
+                
+                <li class="nav-item">
+                  <a href="main.php?view=donaciones-registro" class="nav-link ">
+                    <i class="fas fa-save nav-icon"></i>
+                    <p>Registro Donaciones</p>
+                  </a>
+                </li>
+                        
+                <li class="nav-item">
+                  <a href="main.php?view=padrinos-registro" class="nav-link ">
+                    <i class="fas fa-save nav-icon"></i>
+                    <p>Registro Padrinos</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="main.php?view=mascotas-perdidas-registro" class="nav-link ">
+                    <i class="fas fa-save nav-icon"></i>
+                    <p>Registro Perdidos</p>
+                  </a>
+                </li>
+                ';
+            }
+          ?>
 
           <li class="nav-item">
-            <a href="main.php?view=mascotas-registro" class="nav-link ">
-              <i class="fas fa-save nav-icon"></i>
-              <p>Registro Mascota</p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="main.php?view=adopciones-registro" class="nav-link ">
-              <i class="fas fa-save nav-icon"></i>
-              <p>Registro Adopción</p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="main.php?view=eventos-registro" class="nav-link ">
-              <i class="fas fa-save nav-icon"></i>
-              <p>Registro Eventos</p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="main.php?view=voluntarios-registro" class="nav-link ">
-              <i class="fas fa-save nav-icon"></i>
-              <p>Registro Voluntarios</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="main.php?view=donaciones-registro" class="nav-link ">
-              <i class="fas fa-save nav-icon"></i>
-              <p>Registro Donaciones</p>
-            </a>
-          </li>
-                  
-          <li class="nav-item">
-            <a href="main.php?view=padrinos-registro" class="nav-link ">
-              <i class="fas fa-save nav-icon"></i>
-              <p>Registro Padrinos</p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="main.php?view=mascotas-perdidas-registro" class="nav-link ">
-              <i class="fas fa-save nav-icon"></i>
-              <p>Registro Perdidos</p>
+            <a href="controllers/Usuario.controller.php?op=cerrar-sesion" class="nav-link ">
+            <i class="fas fa-times nav-icon"></i>
+              <p>Cerrar Sesión</p>
             </a>
           </li>
 

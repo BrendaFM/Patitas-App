@@ -1,5 +1,9 @@
 <?php
     require_once 'datatable.php';
+    require_once 'acceso-seguro.php';
+    if($_SESSION['nivelacceso']!= "C"){
+      exit();
+    }
 ?>
 
 <div class="row">

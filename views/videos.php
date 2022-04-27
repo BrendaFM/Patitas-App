@@ -1,3 +1,6 @@
+<?php
+    require_once 'acceso-seguro.php';
+?>
 <p class="h1 m-2" style="text-align:center">Galería de Videos</p>
 <br>
 

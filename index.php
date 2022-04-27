@@ -1,3 +1,14 @@
+<?php 
+session_start(); 
+
+if (isset($_SESSION['acceso'])){
+  if ($_SESSION['acceso'] == true){
+    //Si tiene la sesión activa, entonces NO puedes estar acá
+    header('Location:main.php');
+  }
+}
+
+?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="views/css/diseño.css">
@@ -52,39 +63,62 @@
 		}
 		cargarPersonas();
 
+		// function iniciarSesion(){
+        //     var usuario = $("#usuariologin").val();
+        //     var clave = $("#clavelogin").val();
+
+        //     if (usuario == "" || clave == ""){
+        //        Swal.fire({
+        //              icon: 'warning',
+        //              title: '¡Complete la información para iniciar sesión!'
+        //        });
+        //     }else{
+        //        var datos = {
+        //           'op'              : 'login',
+        //           'nombreusuario'   : usuario,
+        //           'clave'           : clave
+        //        }; 
+
+        //        $.ajax({
+        //           url: 'controllers/Usuario.controller.php',
+        //           type: 'GET',
+        //           data: datos,
+        //           success: function(e){
+        //              if (e != ""){
+        //                 Swal.fire({
+        //                    icon: 'error',
+        //                    title: e
+        //                 });
+        //              }else{
+        //                 window.location.href = "main.php";
+        //              }
+        //           }
+        //        });
+        //     }
+        // }
+
 		function iniciarSesion(){
-            var usuario = $("#usuariologin").val();
-            var clave = $("#clavelogin").val();
+			if ($("#usuariologin").val() != "" && $("#clavelogin").val() != ""){
 
-            if (usuario == "" || clave == ""){
-               Swal.fire({
-                     icon: 'warning',
-                     title: '¡Complete la información para iniciar sesión!'
-               });
-            }else{
-               var datos = {
-                  'op'              : 'login',
-                  'nombreusuario'   : usuario,
-                  'clave'           : clave
-               }; 
-
-               $.ajax({
-                  url: 'controllers/Usuario.controller.php',
-                  type: 'GET',
-                  data: datos,
-                  success: function(e){
-                     if (e != ""){
-                        Swal.fire({
-                           icon: 'error',
-                           title: e
-                        });
-                     }else{
-                        window.location.href = "main.php";
-                     }
-                  }
-               });
-            }
-        }
+				$.ajax({
+					url: 'controllers/Usuario.controller.php',
+					type: 'GET',
+					data: {
+						op          	: 'login',
+						nombreusuario   : $("#usuariologin").val(),
+						clave			: $("#clavelogin").val()
+					},
+					success: function (result){
+						if ($.trim(result) == ""){
+							//Nos vamos al dashboard
+							window.location.href = 'main.php'
+						}else{
+							alert(result);
+						}
+					}
+				});
+			}
+      	}
 
 
 		function registrarUsuario(){

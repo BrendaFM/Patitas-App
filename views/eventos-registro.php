@@ -1,5 +1,10 @@
 <?php
     require_once 'datatable.php';
+    require_once 'acceso-seguro.php';
+    if($_SESSION['nivelacceso']!= "C"){
+        echo "<strong>No tiene el nivel de acceso requerido</strong>";
+        exit();
+    }
 ?>
 <div class="row">
     <div class="col-md-4">

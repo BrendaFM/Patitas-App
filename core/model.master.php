@@ -102,6 +102,54 @@ class ModelMaster extends Conexion{
     }
   }
 
+  public function execProcedureLogin(array $array, $storeProcedure, $return = false){
+
+    try{
+
+      //Se obtiene las claves contenidas en el arreglo
+
+      $parameters = self::getParameters($array);
+
+      //Ejecución del procedimiento almacenado
+
+      $commandSQL = $this->pdo->prepare("call $storeProcedure($parameters)");
+
+
+
+      //Enviamos todos los valores asociados
+
+      foreach($array as $key => $value){
+
+        $commandSQL->bindValue(":" . $key, $value);
+
+      }
+
+
+
+      //Ejecutamos el comando
+
+      $commandSQL->execute();
+
+
+
+      //Solo si se solicitó retorno de datos
+
+      if ($return){
+
+        return $commandSQL->fetchAll(PDO::FETCH_ASSOC);
+
+      }
+
+
+
+    }catch (Exception $e){
+
+      die($e->getMessage());
+
+    }
+
+  }
+
 
 }
 

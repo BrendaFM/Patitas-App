@@ -1,6 +1,8 @@
 <?php
 require_once '../models/Mascota.php';
 
+session_start();
+
 date_default_timezone_set("America/Lima");
 $mascota = new Mascota();
 
@@ -337,7 +339,12 @@ if (isset($_GET['op'])){
 
             // Mostrar un registro, por cada iteración
             foreach($datosObtenidos as $fila){
-    
+
+                $boton = "";
+
+                if($_SESSION['nivelacceso'] == 'C'){
+                    $boton = "<button class='btn bg-gradient-secondary eliminar' style='float: right;' data-idmascota='$fila->idmascotaperdida'>Encontrado</button>";
+                }
                 echo "
                     <div class='col-md-3 col-lg-3 pb-3'>
                         <div class='card card-custom bg-white border-white border-0'>
@@ -352,7 +359,7 @@ if (isset($_GET['op'])){
                                 <p class='card-text' style='text-align:justify'><b>Lugar encontrado:</b>
                                     <a href='$fila->ubicacion'>Ubicacion Aqui</a>
                                 </p>
-                                <button class='btn bg-gradient-secondary eliminar' style='float: right;' data-idmascota='$fila->idmascotaperdida'>Encontrado</button>
+                                $boton
                             </div>
                         </div>
                     </div>

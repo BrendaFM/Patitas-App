@@ -1,4 +1,6 @@
-
+<?php
+    require_once 'acceso-seguro.php';
+?>
 <p class="h1 m-2" style="text-align:center">Mascotas que pasaron por nuestro albergue</p>
 <br>
 <div class="row m-2" id='galeria'>

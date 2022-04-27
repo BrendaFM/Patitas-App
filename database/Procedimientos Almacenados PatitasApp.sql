@@ -43,10 +43,16 @@ CREATE PROCEDURE spu_usuarios_login
 	IN _nombreusuario 	VARCHAR(15)
 )
 BEGIN
-	SELECT * 
-		FROM usuarios
-	WHERE nombreusuario = _nombreusuario;
+	SELECT	usuarios.idusuario, personas.apellidos, personas.nombres,
+				usuarios.nombreusuario, usuarios.clave, usuarios.nivelacceso
+		FROM usuarios 
+		INNER JOIN personas ON personas.idpersona = usuarios.idpersona
+	WHERE nombreusuario = _nombreusuario AND estado = 'A'; -- A = Activo & I = Inactivo --
 END $$
+
+SELECT * FROM usuarios
+
+CALL spu_usuarios_login('anderson');
 
 DELIMITER $$
 CREATE PROCEDURE spu_colaborador_registro

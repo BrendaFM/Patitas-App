@@ -1,4 +1,6 @@
-
+<?php
+    require_once 'acceso-seguro.php';
+?>
 <div style="margin: 0px 90px 0px 90px">
 
 <p class="display-4" style="text-align:center;">Información del Albergue</p>
