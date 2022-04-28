@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.4.21-MariaDB : Database - patitasapp
+MySQL - 10.4.20-MariaDB : Database - patitasapp
 *********************************************************************
 */
 
@@ -434,7 +434,7 @@ CREATE TABLE `usuarios` (
 
 insert  into `usuarios`(`idusuario`,`idpersona`,`nombreusuario`,`clave`,`fechaalta`,`fechabaja`,`estado`,`nivelacceso`) values 
 (1,1,'Luis','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-09',NULL,'A','C'),
-(2,2,'Anderson','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-09',NULL,'A','C'),
+(2,2,'Anderson','$2y$10$1RGse/lmJg0AiQJ2DPimyu4H3Lnz8mYLDV6KqYJ/jIldP71uyQUTK','2022-04-09',NULL,'A','C'),
 (3,3,'Brenda','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-09',NULL,'A','C'),
 (4,4,'Jhon','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-09',NULL,'A','U');
 
@@ -1229,6 +1229,21 @@ BEGIN
     SELECT * FROM razas
     WHERE idanimal = _idanimal;
 END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_usuarios_actualizarclave` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_usuarios_actualizarclave` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_usuarios_actualizarclave`(
+	IN _idusuario INT,
+	IN _clave	varchar(100)
+)
+begin
+	UPDATE usuarios set clave = _clave where idusuario = _idusuario;
+end */$$
 DELIMITER ;
 
 /* Procedure structure for procedure `spu_usuarios_login` */

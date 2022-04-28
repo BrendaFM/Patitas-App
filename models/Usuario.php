@@ -15,15 +15,15 @@ class Usuario extends ModelMaster{
     }
   }
 
-    // public function registrarUsuario($idpersona, $nombreusuario, $clave){
-    //     try{
-    //       $comando = $this->pdo->prepare("CALL spu_usuarios_registro(?,?,?)");
-    //       $comando->execute(array($idpersona, $nombreusuario, password_hash($clave, PASSWORD_BCRYPT)));
-    //     }
-    //     catch(Exception $e){
-    //       die($e->getMessage());
-    //     }
-    // }
+    public function actualizarClave(array $data){
+      try {
+        parent::execProcedureLogin($data, "spu_usuarios_actualizarclave", false);
+      } catch (Exception $error) {
+          die($error->getMessage());
+      }{
+
+      }
+    }
 }
 
 ?>

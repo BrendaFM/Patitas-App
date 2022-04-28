@@ -73,6 +73,28 @@ if (isset($_GET['op'])){
     header('Location:../');
   }
 
+  if ($_GET['op'] == 'actualizarClave'){
+    // la clave actual enviada coincide con la que iniciamos sesion
+
+    $claveActual = $_GET['claveActual'];
+    $claveNueva = $_GET['claveNueva'];
+
+    if(password_verify($claveActual, $_SESSION['clave'])){
+      //El usuario indico correctamente la clave original
+
+      $datos = [
+        "idusuario" => $_SESSION['idusuario'],
+        "clave"     => password_hash($claveNueva, PASSWORD_BCRYPT)
+      ];
+
+      $usuario->actualizarClave($datos);
+
+      echo "OK";
+    }else{
+      echo "La clave actual no es correcta";
+    }
+  }
+
 }
 
 ?>

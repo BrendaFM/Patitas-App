@@ -75,8 +75,8 @@
       <nav>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="main.php?view=mascotas" class="nav-link">
-            <i class="fas fa-user ml-1"></i>
+            <a href="main.php?view=cambiar-clave" class="nav-link">
+            <i class="fas fa-lock"></i>
             <p>&nbsp; &nbsp;<?= $_SESSION['apellidos']?></p>
             <br>
             <p class="ml-4">&nbsp; <?= $_SESSION['nombres']?></p>
@@ -229,7 +229,7 @@
 
           <li class="nav-item">
             <a href="controllers/Usuario.controller.php?op=cerrar-sesion" class="nav-link ">
-            <i class="fas fa-times nav-icon"></i>
+            <i class="fas fa-sign-out-alt nav-icon"></i>
               <p>Cerrar Sesión</p>
             </a>
           </li>
@@ -273,7 +273,7 @@
       <hr>
       <p><strong>Apellidos y Nombres:</strong></p>
       <p>Boada Ramos, Luis Anderson.</p>
-      <p><strong>Edad:</strong> 18</p>
+      <p><strong>Edad:</strong> 19</p>
       <hr>
       <p><strong>Apellidos y Nombres:</strong></p>
       <p>Francia Minaya, Brenda Andrea.</p>

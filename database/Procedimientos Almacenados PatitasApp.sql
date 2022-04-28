@@ -33,6 +33,8 @@ BEGIN
 	ORDER BY apellidos;
 END $$
 
+
+
 -- ------------------------------------------------------------
 -- INICIO DE SESIÓN
 -- ------------------------------------------------------------
@@ -43,16 +45,10 @@ CREATE PROCEDURE spu_usuarios_login
 	IN _nombreusuario 	VARCHAR(15)
 )
 BEGIN
-	SELECT	usuarios.idusuario, personas.apellidos, personas.nombres,
-				usuarios.nombreusuario, usuarios.clave, usuarios.nivelacceso
-		FROM usuarios 
-		INNER JOIN personas ON personas.idpersona = usuarios.idpersona
-	WHERE nombreusuario = _nombreusuario AND estado = 'A'; -- A = Activo & I = Inactivo --
+	SELECT * 
+		FROM usuarios
+	WHERE nombreusuario = _nombreusuario;
 END $$
-
-SELECT * FROM usuarios
-
-CALL spu_usuarios_login('anderson');
 
 DELIMITER $$
 CREATE PROCEDURE spu_colaborador_registro
@@ -86,6 +82,16 @@ BEGIN
 	WHERE idpersona = _idpersona;
 END $$
 
+DELIMITER $$
+CREATE PROCEDURE spu_usuarios_actualizarclave
+(
+	IN _idusuario INT,
+	IN _clave	VARCHAR(100)
+)
+BEGIN
+	UPDATE usuarios SET clave = _clave WHERE idusuario = _idusuario;
+END $$
+SELECT * FROM usuarios;
 -- ------------------------------------------------------------
 -- RAZAS
 -- ------------------------------------------------------------
