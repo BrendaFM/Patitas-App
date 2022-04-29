@@ -34,15 +34,17 @@ if (isset($_SESSION['acceso'])){
 			<input type="password" placeholder="Contraseña" id="clavelogin">
 			<input type="button" value="Login" id="login">
 		</div>
-		<div class="register-show">
-			<h2>Registro</h2>
-			<select id="idpersona">
-			</select>
-			<input id="nombreusuario" type="text" placeholder="Nombre de usuario">
-			<input id="clave" type="text" placeholder="Contraseña">
-			<input id="registro-usuario" type="button" value="Registar Usuario" class="m-1">
-			<a href="views/personas-registro-index.php" type="button" class="m-1">Registrar Persona</a>
-		</div>
+		<form action="" id="formularioRegistro">
+			<div class="register-show">
+				<h2>Registro</h2>
+				<select id="idpersona">
+				</select>
+				<input id="nombreusuario" type="text" placeholder="Nombre de usuario">
+				<input id="clave" type="text" placeholder="Contraseña">
+				<input id="registro-usuario" type="button" value="Registar Usuario" class="m-1">
+				<a href="views/personas-registro-index.php" type="button" class="m-1">Registrar Persona</a>
+			</div>
+		</form>
 	</div>
 </div>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -61,41 +63,6 @@ if (isset($_SESSION['acceso'])){
 				}
 			});
 		}
-		cargarPersonas();
-
-		// function iniciarSesion(){
-        //     var usuario = $("#usuariologin").val();
-        //     var clave = $("#clavelogin").val();
-
-        //     if (usuario == "" || clave == ""){
-        //        Swal.fire({
-        //              icon: 'warning',
-        //              title: '¡Complete la información para iniciar sesión!'
-        //        });
-        //     }else{
-        //        var datos = {
-        //           'op'              : 'login',
-        //           'nombreusuario'   : usuario,
-        //           'clave'           : clave
-        //        }; 
-
-        //        $.ajax({
-        //           url: 'controllers/Usuario.controller.php',
-        //           type: 'GET',
-        //           data: datos,
-        //           success: function(e){
-        //              if (e != ""){
-        //                 Swal.fire({
-        //                    icon: 'error',
-        //                    title: e
-        //                 });
-        //              }else{
-        //                 window.location.href = "main.php";
-        //              }
-        //           }
-        //        });
-        //     }
-        // }
 
 		function iniciarSesion(){
 			if ($("#usuariologin").val() != "" && $("#clavelogin").val() != ""){
@@ -135,14 +102,14 @@ if (isset($_SESSION['acceso'])){
                 Swal.fire({
                   icon: 'question',
                   title: 'RECORSEN',
-                  text: '¿Está seguro de registrar un nuevo Administrador?',
+                  text: '¿Está seguro de registrar un nuevo Usuario?',
                   showCancelButton: true,
                   cancelButtonText: 'Cancelar',
                   confirmButtonText: 'Aceptar'
                 }).then((result) => {
 					if (result.isConfirmed){
 						var datos = {
-							'op'            : 'registrar-Usuario',
+							'op'            : 'registrarUsuario',
 							'idpersona'     : idpersona,
 							'nombreusuario' : nombreusuario,
 							'clave'       	: clave
@@ -154,13 +121,14 @@ if (isset($_SESSION['acceso'])){
 							data: datos,
 							success: function(e){
 								Swal.fire("El proceso finalizó correctamente");
+								$("#formularioRegistro")[0].reset();
 							}
 						});
 					} 
                 });
           }
         }
-
+		cargarPersonas();
 		$("#login").click(iniciarSesion);
 		$("#registro-usuario").click(registrarUsuario);
 
@@ -183,4 +151,6 @@ if (isset($_SESSION['acceso'])){
 			$('.register-show').removeClass('show-log-panel');
 		}
 	});
+
+
 </script>

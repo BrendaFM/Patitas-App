@@ -58,7 +58,7 @@ CREATE PROCEDURE spu_colaborador_registro
 	IN _clave VARCHAR(100)
 )
 BEGIN
-	INSERT INTO usuarios (idpersona, nombreusuario, clave, fechaalta, fechabaja, estado, nivelusuario)
+	INSERT INTO usuarios (idpersona, nombreusuario, clave, fechaalta, fechabaja, estado, nivelacceso)
 		VALUES (_idpersona, _nombreusuario, _clave, CURDATE(), NULL, 'A', 'C');
 	
 	UPDATE personas SET
@@ -74,7 +74,7 @@ CREATE PROCEDURE spu_usuarios_registro
 	IN _clave VARCHAR(100)
 )
 BEGIN
-	INSERT INTO usuarios (idpersona, nombreusuario, clave, fechaalta, fechabaja, estado, nivelusuario)
+	INSERT INTO usuarios (idpersona, nombreusuario, clave, fechaalta, fechabaja, estado, nivelacceso)
 		VALUES (_idpersona, _nombreusuario, _clave, CURDATE(), NULL, 'A', 'U');
 		
 	UPDATE personas SET
@@ -91,7 +91,7 @@ CREATE PROCEDURE spu_usuarios_actualizarclave
 BEGIN
 	UPDATE usuarios SET clave = _clave WHERE idusuario = _idusuario;
 END $$
-SELECT * FROM usuarios;
+
 -- ------------------------------------------------------------
 -- RAZAS
 -- ------------------------------------------------------------

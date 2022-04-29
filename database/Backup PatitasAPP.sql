@@ -290,10 +290,9 @@ insert  into `personas`(`idpersona`,`apellidos`,`nombres`,`tipodoc`,`numdoc`,`di
 (9,'Jesus Antonio','Navarro Hernandez','D','61306814','Jr Bolivar 115','917246237','N','N'),
 (10,'Flavio','Torres Boada','C','12121233','San Antonio de Salas - Chincha Baja','975542123','N','N'),
 (11,'Junior','Roque Montes','D','33212121','San Antonio de Salas - Chincha Baja','945454578','N','N'),
-(12,'Nestor','Tasayco Torres','C','44221133','Chincha Alta','955575321','N','N'),
-(13,'Niurka','Castilla','C','55778899','Santa Luisa - Chincha Baja','964522145','N','N'),
-(14,'Maryory','Mendoza Matias','D','22145533','Lomo Largo - Sunampe','957575753','N','S'),
-(15,'Boada Belleza','Anderson Luis','D','75464554','Plaza de Armas de Chincha Alta','989685641','N','N');
+(12,'Nestor','Tasayco Torres','C','44221133','Chincha Alta','955575321','S','N'),
+(13,'Niurka','Castilla','C','55778899','Santa Luisa - Chincha Baja','964522145','S','N'),
+(14,'Maryory','Mendoza Matias','D','22145533','Lomo Largo - Sunampe','957575753','S','S');
 
 /*Table structure for table `razas` */
 
@@ -428,7 +427,7 @@ CREATE TABLE `usuarios` (
   UNIQUE KEY `uk_idpersona_user` (`idpersona`),
   UNIQUE KEY `uk_nombreusuario_user` (`nombreusuario`),
   CONSTRAINT `fk_idpersona_user` FOREIGN KEY (`idpersona`) REFERENCES `personas` (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `usuarios` */
 
@@ -436,7 +435,10 @@ insert  into `usuarios`(`idusuario`,`idpersona`,`nombreusuario`,`clave`,`fechaal
 (1,1,'Luis','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-09',NULL,'A','C'),
 (2,2,'Anderson','$2y$10$1RGse/lmJg0AiQJ2DPimyu4H3Lnz8mYLDV6KqYJ/jIldP71uyQUTK','2022-04-09',NULL,'A','C'),
 (3,3,'Brenda','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-09',NULL,'A','C'),
-(4,4,'Jhon','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-09',NULL,'A','U');
+(4,4,'Jhon','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-09',NULL,'A','U'),
+(5,14,'Maryory','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-28',NULL,'A','U'),
+(6,13,'Niurka','$2y$10$eJ9lcUCL14N5DbE.2QNJG.3pOPwtH//PCTh2z61T4amb2KBlRpJ5C','2022-04-28',NULL,'A','U'),
+(7,12,'Nestor','$2y$10$aCB1lbGGRD.6lwd63tvAGuL7LqlL/NW.1uIkly90ygttmyE4T9Hle','2022-04-28',NULL,'A','U');
 
 /*Table structure for table `voluntarios` */
 
@@ -1276,7 +1278,7 @@ DELIMITER $$
 	IN _clave VARCHAR(100)
 )
 BEGIN
-	INSERT INTO usuarios (idpersona, nombreusuario, clave, fechaalta, fechabaja, estado, nivelusuario)
+	INSERT INTO usuarios (idpersona, nombreusuario, clave, fechaalta, fechabaja, estado, nivelacceso)
 		VALUES (_idpersona, _nombreusuario, _clave, CURDATE(), NULL, 'A', 'U');
 		
 	UPDATE personas SET

@@ -15,15 +15,21 @@ class Usuario extends ModelMaster{
     }
   }
 
-    public function actualizarClave(array $data){
-      try {
-        parent::execProcedureLogin($data, "spu_usuarios_actualizarclave", false);
-      } catch (Exception $error) {
-          die($error->getMessage());
-      }{
-
-      }
+  public function actualizarClave(array $data){
+    try {
+      parent::execProcedureLogin($data, "spu_usuarios_actualizarclave", false);
+    } catch (Exception $error) {
+        die($error->getMessage());
     }
+  }
+
+  public function registrarUsuario(array $data){
+    try{
+      parent::execProcedure($data, "spu_usuarios_registro", false);
+    }catch(Exception $error){
+      die($error->getMessage());
+    }
+  }
 }
 
 ?>

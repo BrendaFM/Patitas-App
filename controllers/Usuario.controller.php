@@ -95,6 +95,15 @@ if (isset($_GET['op'])){
     }
   }
 
+  if ($_GET['op'] == 'registrarUsuario'){
+    $clave = $_GET["clave"];
+    $usuario->registrarUsuario([
+      "idpersona"     => $_GET["idpersona"],
+      "nombreusuario" => $_GET["nombreusuario"],
+      "clave"         => password_hash( $clave, PASSWORD_BCRYPT)
+    ]);
+  }
+
 }
 
 ?>
