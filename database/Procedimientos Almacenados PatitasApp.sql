@@ -92,23 +92,23 @@ BEGIN
 	UPDATE usuarios SET clave = _clave WHERE idusuario = _idusuario;
 END $$
 
-DELIMITER $$
-CREATE PROCEDURE spu_actualizar_a_colaborador(IN _idusuario INT)
-BEGIN
-	UPDATE usuarios SET
+delimiter $$
+create procedure spu_actualizar_a_colaborador(in _idusuario int)
+begin
+	update usuarios set
 		nivelacceso = 'C'
 	WHERE idusuario = _idusuario;
-END $$
+end $$
 
 DELIMITER $$
 CREATE PROCEDURE spu_listausuarios_registrados()
 BEGIN
-	SELECT idusuario, personas.apellidos, personas.nombres, fechaalta, nivelacceso
-		FROM usuarios
-		INNER JOIN personas ON personas.idpersona = usuarios.idpersona
-		WHERE nivelacceso = 'U';
+	select idusuario, personas.apellidos, personas.nombres, fechaalta, nivelacceso
+		from usuarios
+		inner join personas on personas.idpersona = usuarios.idpersona
+		where nivelacceso = 'U';
 END $$
-
+select * from usuarios;
 -- ------------------------------------------------------------
 -- RAZAS
 -- ------------------------------------------------------------

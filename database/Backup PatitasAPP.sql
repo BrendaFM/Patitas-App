@@ -219,14 +219,15 @@ CREATE TABLE `mascotasperdidas` (
   KEY `fk_idraza_masp` (`idraza`),
   CONSTRAINT `fk_idraza_masp` FOREIGN KEY (`idraza`) REFERENCES `razas` (`idraza`),
   CONSTRAINT `fk_idusuario_masp` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `mascotasperdidas` */
 
 insert  into `mascotasperdidas`(`idmascotaperdida`,`idusuario`,`idraza`,`genero`,`observaciones`,`ubicacion`,`fotografia`,`fecha`) values 
 (1,2,1,'M','Tenia una correa roja','https://goo.gl/maps/SES4KYjPoZPdqzSt5','20220425041651.jpg','2022-04-25'),
 (2,1,1,'M','Esta lastimado de la patita','https://goo.gl/maps/5X4egvfJTsT3bj4i7','20220425041631.jpg','2022-04-25'),
-(5,2,1,'M','El perro se ve desorientado','https://goo.gl/maps/wKY2Wo2KUsxC19ZTA','20220425061847.jpg','2022-04-25');
+(5,2,1,'M','El perro se ve desorientado','https://goo.gl/maps/wKY2Wo2KUsxC19ZTA','20220425061847.jpg','2022-04-25'),
+(6,2,1,'M','Encontrado en el parque y tenia un collar con el nombre del dueño. ','https://www.google.com.pe/maps/@-13.526422,-76.1315688,15.21z/data=!4m2!7m1!2e1?hl=es-419','20220504021405.jpg','2022-05-04');
 
 /*Table structure for table `padrinos` */
 
@@ -285,7 +286,7 @@ insert  into `personas`(`idpersona`,`apellidos`,`nombres`,`tipodoc`,`numdoc`,`di
 (4,'Francia Minaya','Jhon Edward','D','22244400','Chincha Alta','999000333','S','N'),
 (5,'Roberto Carlos','Rey Sanches','D','39581934','Jr 28 De Julio 18','978195723','N','N'),
 (6,'Juan Fernando','Quispe Guerra','C','81571482','Los Cedros 134','961841923','N','N'),
-(7,'Adriana Carolina','De la Cruz','D','28195012','Leoncio Prado 186','946172931','N','N'),
+(7,'Adriana Carolina','De la Cruz','D','28195012','Leoncio Prado 186','946172931','S','N'),
 (8,'Efraín Marcelo','Gonzales Perez','C','12481593','Av. Salaverry 359','989548933','N','N'),
 (9,'Jesus Antonio','Navarro Hernandez','D','61306814','Jr Bolivar 115','917246237','N','N'),
 (10,'Flavio','Torres Boada','C','12121233','San Antonio de Salas - Chincha Baja','975542123','N','N'),
@@ -427,7 +428,7 @@ CREATE TABLE `usuarios` (
   UNIQUE KEY `uk_idpersona_user` (`idpersona`),
   UNIQUE KEY `uk_nombreusuario_user` (`nombreusuario`),
   CONSTRAINT `fk_idpersona_user` FOREIGN KEY (`idpersona`) REFERENCES `personas` (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `usuarios` */
 
@@ -435,10 +436,11 @@ insert  into `usuarios`(`idusuario`,`idpersona`,`nombreusuario`,`clave`,`fechaal
 (1,1,'Luis','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-09',NULL,'A','C'),
 (2,2,'Anderson','$2y$10$1RGse/lmJg0AiQJ2DPimyu4H3Lnz8mYLDV6KqYJ/jIldP71uyQUTK','2022-04-09',NULL,'A','C'),
 (3,3,'Brenda','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-09',NULL,'A','C'),
-(4,4,'Jhon','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-09',NULL,'A','U'),
-(5,14,'Maryory','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-28',NULL,'A','U'),
+(4,4,'Jhon','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-09',NULL,'A','C'),
+(5,14,'Maryory','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-28',NULL,'A','C'),
 (6,13,'Niurka','$2y$10$eJ9lcUCL14N5DbE.2QNJG.3pOPwtH//PCTh2z61T4amb2KBlRpJ5C','2022-04-28',NULL,'A','U'),
-(7,12,'Nestor','$2y$10$aCB1lbGGRD.6lwd63tvAGuL7LqlL/NW.1uIkly90ygttmyE4T9Hle','2022-04-28',NULL,'A','U');
+(7,12,'Nestor','$2y$10$aCB1lbGGRD.6lwd63tvAGuL7LqlL/NW.1uIkly90ygttmyE4T9Hle','2022-04-28',NULL,'A','U'),
+(8,7,'Adriana','$2y$10$QplUuNVAGp1p8SMV/N0t1Oj3XhZKtabTBD905IqfJLNejviLrx1M6','2022-04-28',NULL,'A','C');
 
 /*Table structure for table `voluntarios` */
 
@@ -474,6 +476,20 @@ insert  into `voluntarios`(`idvoluntario`,`idpersona`,`fechainicio`,`fechafin`,`
 (14,14,'2022-04-20',NULL,'Bañado de perros'),
 (15,1,'2022-04-20','2022-04-25','Paseo a los perros.'),
 (16,4,'2022-04-20','2022-04-20','Limpieza de interior del albergue.');
+
+/* Procedure structure for procedure `spu_actualizar_a_colaborador` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_actualizar_a_colaborador` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_actualizar_a_colaborador`(in _idusuario int)
+begin
+	update usuarios set
+		nivelacceso = 'C'
+	WHERE idusuario = _idusuario;
+end */$$
+DELIMITER ;
 
 /* Procedure structure for procedure `spu_adopciones_eliminar` */
 
@@ -543,7 +559,7 @@ DELIMITER $$
 	IN _clave VARCHAR(100)
 )
 BEGIN
-	INSERT INTO usuarios (idpersona, nombreusuario, clave, fechaalta, fechabaja, estado, nivelusuario)
+	INSERT INTO usuarios (idpersona, nombreusuario, clave, fechaalta, fechabaja, estado, nivelacceso)
 		VALUES (_idpersona, _nombreusuario, _clave, CURDATE(), NULL, 'A', 'C');
 	
 	UPDATE personas SET
@@ -813,6 +829,21 @@ SELECT  tipoapoyos.tipoapoyo, SUM(cantidad) AS "Total Soles" , YEAR(fechaapoyo) 
     INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo
     WHERE tipoapoyo = "Monetario"
     GROUP BY YEAR(fechaapoyo);
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_listausuarios_registrados` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_listausuarios_registrados` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_listausuarios_registrados`()
+BEGIN
+	select idusuario, personas.apellidos, personas.nombres, fechaalta, nivelacceso
+		from usuarios
+		inner join personas on personas.idpersona = usuarios.idpersona
+		where nivelacceso = 'U';
 END */$$
 DELIMITER ;
 
