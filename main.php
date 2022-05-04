@@ -89,7 +89,7 @@
     <hr>
 
     <!-- Sidebar -->
-    <div class="sidebar mt-4">
+    <div class="sidebar mt-4 ">
 
       <!-- SidebarSearch Form -->
       <div class="form-inline">
@@ -223,6 +223,13 @@
                     <p>Registro Perdidos</p>
                   </a>
                 </li>
+
+                <li class="nav-item">
+                  <a href="main.php?view=colaborador-registro" class="nav-link ">
+                    <i class="fas fa-save nav-icon"></i>
+                    <p>Registrar Colaboradores</p>
+                  </a>
+                </li>
                 ';
             }
           ?>
@@ -294,19 +301,18 @@
 
   <!-- Main Footer -->
   <footer class="main-footer">
-    <!-- Default to the left -->
-    <strong>Contáctenos en: </strong> 
-    
-    <a href="https://www.facebook.com/refugiopatitasdelsur/" type="btn">
-      <button  type="button" class="btn" style="font-family:Source Sans Pro"><i class="fab fa-facebook-square"></i> &nbsp;Refugio Patitas del Sur</button>
-    </a>
-    <a href="https://instagram.com/refugio.patitasds?igshid=YmMyMTA2M2Y=" type="btn">
-      <button  type="button" class="btn" style="font-family:Source Sans Pro"><i class="fab fa-instagram"></i> &nbsp;@refugio.patitasds</button>
-    </a>
-    <a href="tel:941110100" type="btn">
-      <button  type="button" class="btn" style="font-family:Source Sans Pro"><i class="fas fa-phone-square-alt"></i> &nbsp;941110100</button>
-    </a>
-
+        <!-- Default to the left -->
+      <strong>Contáctenos en: </strong> 
+      
+      <a href="https://www.facebook.com/refugiopatitasdelsur/" type="btn">
+        <button  type="button" class="btn" style="font-family:Source Sans Pro"><i class="fab fa-facebook-square"></i> &nbsp;Refugio Patitas del Sur</button>
+      </a>
+      <a href="https://instagram.com/refugio.patitasds?igshid=YmMyMTA2M2Y=" type="btn">
+        <button  type="button" class="btn" style="font-family:Source Sans Pro"><i class="fab fa-instagram"></i> &nbsp;@refugio.patitasds</button>
+      </a>
+      <a href="tel:941110100" type="btn">
+        <button  type="button" class="btn" style="font-family:Source Sans Pro"><i class="fas fa-phone-square-alt"></i> &nbsp;941110100</button>
+      </a>
   </footer>
 </div>
 <!-- ./wrapper -->

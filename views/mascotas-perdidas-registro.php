@@ -27,8 +27,8 @@
     <div class="card-body">
         <form id="formularioRegistroMascota" enctype="multipart/form-data">
           <div class="form-group">
-            <label for="">PERSONA</label>
-            <input class="form-control" id="idusuario" type="text">
+            <label for="">Colaborador</label>
+            <input disabled=»disabled» class="form-control" codigo="<?=$_SESSION['idusuario']?>" id="idusuario" value="<?=$_SESSION['apellidos'] . ' ' . $_SESSION['nombres']?>" type="text">
           </div>
 
           <div class="row form-group">
@@ -95,7 +95,7 @@
     });
 
     function registrarMascota(){
-      let idusuario = $("#idusuario").val();
+      let idusuario = $("#idusuario").attr('codigo');
       let idraza = $("#razas").val();
       let genero = $("#genero").val();
       let observaciones = $("#observaciones").val();

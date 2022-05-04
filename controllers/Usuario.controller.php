@@ -104,6 +104,49 @@ if (isset($_GET['op'])){
     ]);
   }
 
+  if ($_GET['op'] == 'registrarColaborador'){
+    $clave = $_GET["clave"];
+    $usuario->registrarColaborador([
+      "idpersona"     => $_GET["idpersona"],
+      "nombreusuario" => $_GET["nombreusuario"],
+      "clave"         => password_hash( $clave, PASSWORD_BCRYPT)
+    ]);
+  }
+
+  if($_GET['op'] == 'listarUsuariosRegistrados'){
+    $datos = $usuario->listarUsuariosRegistrados();
+
+    if(count($datos) == 0){
+      echo "
+      <tr>
+          <td class='text-center' colspan='5'>No se encuentran datos</td>             
+      </tr>";
+    }else{
+        $i = 1;
+        foreach($datos as $tabla){
+            echo "
+                <tr>
+                    <td class='text-center'> $i </td>
+                    <td class='text-center'>$tabla->apellidos</td>
+                    <td class='text-center'>$tabla->nombres</td>
+                    <td class='text-center'> $tabla->fechaalta</td>
+                    <td class='text-center'>
+                        <a href='#' data-idusuario='$tabla->idusuario' class='btn btn-sm btn-outline-secondary actualizar'>
+                          <i class='fas fa-edit'></i>
+                        </a>
+                    </td>
+                </tr>
+            ";
+            $i++;
+        }
+
+    }
+  }
+
+  if($_GET['op'] == 'actualizarUsuariosAColaboradores'){
+    $usuario->actualizarUsuariosAColaboradores(["idusuario"=> $_GET['idusuario']]);
+  }
+
 }
 
 ?>

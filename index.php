@@ -122,6 +122,7 @@ if (isset($_SESSION['acceso'])){
 							success: function(e){
 								Swal.fire("El proceso finalizó correctamente");
 								$("#formularioRegistro")[0].reset();
+								cargarPersonas();
 							}
 						});
 					} 
