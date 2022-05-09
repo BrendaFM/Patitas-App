@@ -147,6 +147,11 @@ if (isset($_GET['op'])){
     $usuario->actualizarUsuariosAColaboradores(["idusuario"=> $_GET['idusuario']]);
   }
 
-}
+  if($_GET['op'] == 'listarColaboradores'){
+    $datos = $usuario->listarColaboradores();
+    
+    echo json_encode($datos);
+  }
 
+}
 ?>

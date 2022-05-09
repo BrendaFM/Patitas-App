@@ -152,6 +152,32 @@ class Mascota extends ModelMaster{
           die($error->getMessage());
         }
     }
+
+    public function cargarMascotaPerdida(){
+        try{
+            return parent::getRows("spu_duenoencontrado_cargar");
+        }catch(Exception $error){
+            die($error->getMessage());
+        }
+    }
+
+    public function registrarMascotaDueno(array $data){
+        try{
+            parent::execProcedure($data, "spu_duenoencontrado_registrar", false);
+        }catch(Exception $error){
+            die($error->getMessage());
+        }
+    }
+
+    public function listarMascotaDueno(){
+        try{
+            return parent::getRows("spu_duenoencontrado_listar");
+        } 
+        catch (Exception $error){
+            die($error->getMessage());
+        }
+    }
+
     
 }
 

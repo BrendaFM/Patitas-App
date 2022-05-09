@@ -76,7 +76,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="main.php?view=cambiar-clave" class="nav-link">
-            <i class="fas fa-lock"></i>
+            <i class="fas fa-key"></i>
             <p>&nbsp; &nbsp;<?= $_SESSION['apellidos']?></p>
             <br>
             <p class="ml-4">&nbsp; <?= $_SESSION['nombres']?></p>

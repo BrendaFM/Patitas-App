@@ -54,6 +54,15 @@ class Usuario extends ModelMaster{
       die($error->getMessage());
     }
   }
+
+  public function listarColaboradores(){
+    try{
+      return parent::getRows("spu_colaboradores_listar");
+    }catch(Exception $error){
+      die($error->getMessage());
+    }
+  }
+
 }
 
 ?>

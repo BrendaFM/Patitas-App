@@ -339,12 +339,6 @@ if (isset($_GET['op'])){
 
             // Mostrar un registro, por cada iteración
             foreach($datosObtenidos as $fila){
-
-                $boton = "";
-
-                if($_SESSION['nivelacceso'] == 'C'){
-                    $boton = "<button class='btn bg-gradient-secondary eliminar' style='float: right;' data-idmascota='$fila->idmascotaperdida'>Encontrado</button>";
-                }
                 echo "
                     <div class='col-md-3 col-lg-3 pb-3'>
                         <div class='card card-custom bg-white border-white border-0'>
@@ -359,7 +353,6 @@ if (isset($_GET['op'])){
                                 <p class='card-text' style='text-align:justify'><b>Lugar encontrado:</b>
                                     <a href='$fila->ubicacion'>Ubicacion Aqui</a>
                                 </p>
-                                $boton
                             </div>
                         </div>
                     </div>
@@ -401,6 +394,55 @@ if (isset($_GET['op'])){
                     </div>
                     ";  
             }
+        }
+    }
+
+    if($_GET['op'] == 'cargarMascotaPerdida'){
+        $datosObtenidos = $mascota->cargarMascotaPerdida();
+
+        if(count($datosObtenidos) == 0){
+            echo "<option>No hay ninguna mascota perdida</option>";
+        }else{
+            echo "<option value=''>Seleccione</option>";
+            foreach($datosObtenidos as $fila){
+                echo "
+                    <option value='$fila->idmascotaperdida'>$fila->animal - $fila->raza - $fila->genero - $fila->fecha</option>
+                ";
+            }
+        }
+    }
+
+    if($_GET['op'] == 'registrarMascotaDueno'){
+        $mascota->registrarMascotaDueno([
+            "idpersona" => $_GET["idpersona"],
+            "idmascotaperdida" => $_GET["idmascotaperdida"]
+        ]);
+    }
+
+    if($_GET['op'] == 'listarMascotaDueno'){
+        $datosObtenidos = $mascota->listarMascotaDueno();
+
+        if(count($datosObtenidos) == 0){
+            echo "
+            <tr>
+                <td class='text-center' colspan='5'>No se encuentran datos</td>             
+            </tr>";
+        }else{
+            $i = 1;
+            foreach($datosObtenidos as $tabla){
+                echo "
+                    <tr>
+                        <td class='text-center'> $i </td>
+                        <td class='text-center'> $tabla->dueno</td>
+                        <td class='text-center'>$tabla->telefono</td>
+                        <td class='text-center'>$tabla->animal</td>
+                        <td class='text-center'> $tabla->genero</td>
+                        <td class='text-center'> $tabla->fecha</td>
+                    </tr>
+                ";
+                $i++;
+            }
+
         }
     }
 }

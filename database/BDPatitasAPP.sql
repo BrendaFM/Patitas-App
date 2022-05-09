@@ -5,11 +5,11 @@ CREATE TABLE personas
 (
 	idpersona	INT AUTO_INCREMENT PRIMARY KEY,
 	apellidos	VARCHAR(30)	NOT NULL,
-	nombres 	VARCHAR(30)	NOT NULL,
+	nombres 		VARCHAR(30)	NOT NULL,
 	tipodoc		CHAR(1)		NOT NULL,
 	numdoc		CHAR(8)		NOT NULL,
 	direccion	VARCHAR(40)	NOT NULL,
-	telefono	CHAR(9)		NULL,
+	telefono		CHAR(9)		NULL,
 	logeado		CHAR(1)		NOT NULL,
 	voluntario 	CHAR(1)		NOT NULL,
 	CONSTRAINT uk_numdoc_per UNIQUE (numdoc)
@@ -152,8 +152,19 @@ CREATE TABLE mascotasperdidas
 	ubicacion				TEXT		NOT NULL,
 	fotografia				VARCHAR(100)	NOT NULL,
 	fecha 					DATE 		NOT NULL,
+	recuperado				CHAR(1)	NOT NULL,
 	CONSTRAINT fk_idusuario_masp FOREIGN KEY (idusuario) REFERENCES usuarios(idusuario),
 	CONSTRAINT fk_idraza_masp FOREIGN KEY (idraza) REFERENCES razas(idraza)
 ) ENGINE = INNODB;
 
-  
+SELECT * FROM mascotasperdidas
+
+CREATE TABLE duenoencontrado
+(
+	iddueno				INT 		AUTO_INCREMENT PRIMARY KEY,
+	idpersona 			INT 		NOT NULL,
+	idmascotaperdida 	INT 		NOT NULL,
+	fecha 				DATE 		NOT NULL,
+	CONSTRAINT fk_idpersona_due FOREIGN KEY (idpersona) REFERENCES personas(idpersona),
+	CONSTRAINT fk_idmascotaperdida_due FOREIGN KEY (idmascotaperdida) REFERENCES mascotasperdidas(idmascotaperdida)
+) ENGINE = INNODB
