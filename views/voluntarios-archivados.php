@@ -12,13 +12,10 @@
         <div class="col-md-12">
             <div  class=" card card-outline card-info">
                 <div class="card-header">
-                    <p class="card-title mt-2" style="font-size: 22px">Lista de Voluntario</p>
-                    <a href="main.php?view=voluntarios-archivados">
-                        <button style="background-color: white;" type="button" class="btn btn-lg float-right"><i class="fas fa-folder-open"></i> &nbsp;Voluntarios Archivados</button>
-                    </a>
+                    <p class="card-title mt-2" style="font-size: 22px">Voluntarios Archivados</p>
                 </div>
                 <div class="card-body table-responsive">
-                    <table class="table" id="tablaVoluntario">
+                    <table class="table" id="TablaVoluntariosArchivados">
                         <thead>
                             <tr>
                                 <th class="text-center">N°</th>
@@ -29,7 +26,7 @@
                                 <th class="text-center">Operación</th>
                             </tr>
                         </thead>
-                        <tbody class="table" id="datosVoluntario">
+                        <tbody class="table" id="datosVoluntariosArchivados">
                             
                         </tbody>
                     </table>
@@ -43,16 +40,16 @@
 
     $(document).ready(function(){
 
-        function listarVoluntarios(){
+        function voluntariosArchivados(){
             $.ajax({
                 url: 'controllers/Voluntario.controller.php',
                 type: 'GET',
-                data: 'op=listarVoluntarios',
+                data: 'op=voluntariosArchivados',
                 success: function(e){
-                    var tabla = $("#tablaVoluntario").DataTable();
+                    var tabla = $("#TablaVoluntariosArchivados").DataTable();
                     tabla.destroy();
-                    $("#datosVoluntario").html(e);
-                    $("#tablaVoluntario").DataTable({
+                    $("#datosVoluntariosArchivados").html(e);
+                    $("#TablaVoluntariosArchivados").DataTable({
                         language: { url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json' },
                         columnDefs: [
                         {
@@ -67,28 +64,22 @@
             });
         }
 
-        $("#datosVoluntario").on("click", ".noactivo", function(){
-            Swal.fire({
-                icon: 'info',
-                title: 'Ya finalizó su voluntariado'
-            });
-        });
 
-        $("#datosVoluntario").on("click",".terminar" , function(){
-            let idvoluntario = $(this).attr('data-idvoluntario');
+        $("#datosVoluntariosArchivados").on("click",".reactivar" , function(){
+            let idvoluntario = $(this).attr('data-idvoluntarioarchivado');
             let idpersona = $(this).attr('data-idpersona');
 
             Swal.fire({
                 icon: 'question',
                 title: 'PATITAS APP',
-                text: 'Esta seguro de terminar Voluntariado?',
+                text: 'Esta seguro de reactivar este Voluntariado?',
                 showCancelButton: true,
                 cancelButtonText: 'Cancelar',
                 confirmButtonText: 'Confirmar',
             }).then((result)=>{
                 if(result.isConfirmed){
                     var datos = {
-                        'op' : 'terminarVoluntariado',
+                        'op' : 'reactivarVoluntariado',
                         'idvoluntario' : idvoluntario,
                         'idpersona' : idpersona
                     };
@@ -100,16 +91,16 @@
                         success: function(e){
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Finalizado correctamente'
+                                title: 'Reactivar correctamente'
                             });
-                            listarVoluntarios();
+                            voluntariosArchivados();
                         }
                     });
                 }
             });
         });
-        
-        listarVoluntarios();
+
+        voluntariosArchivados();
     });
 
 </script>

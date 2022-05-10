@@ -13,6 +13,15 @@ class Voluntario extends ModelMaster{
         }
     }
 
+    public function voluntariosArchivados(){
+      try{
+        return parent::getRows("spu_voluntarios_archivados");
+      }
+      catch(Exception $error){
+        die($error->getMessage());
+      }
+    }
+
     public function registrarVoluntario(array $data){
         try{
           parent::execProcedure($data, "spu_voluntarios_registrar", false);
@@ -31,9 +40,9 @@ class Voluntario extends ModelMaster{
       }
     }
 
-    public function terminarVoluntariado(array $data){
+    public function reactivarVoluntariado(array $data){
       try{
-          parent::execProcedure($data, "spu_voluntarios_terminar", false);
+          parent::execProcedure($data, "spu_voluntarios_devolver", false);
       }catch(Exception $error){
           die($error->getMessage());
       }

@@ -153,8 +153,8 @@ CREATE PROCEDURE spu_mascotas_registro_perdidos
 	IN _fotografia			VARCHAR(100)
 )
 BEGIN
-	INSERT INTO mascotasperdidas (idusuario, idraza, genero, observaciones, ubicacion, fotografia, fecha, recuperado)
-		VALUES (_idusuario, _idraza, _genero, _observaciones, _ubicacion, _fotografia, CURDATE(), "N");
+	INSERT INTO mascotasperdidas (idusuario, idraza, genero, observaciones, ubicacion, fotografia, fecha)
+		VALUES (_idusuario, _idraza, _genero, _observaciones, _ubicacion, _fotografia, CURDATE());
 END $$
 
 DELIMITER $$
@@ -227,9 +227,7 @@ BEGIN
 		END 'genero', animales.animal, idmascotaperdida, fecha, ubicacion, fotografia
 		FROM mascotasperdidas
 	INNER JOIN razas ON razas.idraza = mascotasperdidas.idraza
-		INNER JOIN animales ON animales.idanimal = razas.idanimal
-		WHERE recuperado = "N"
-		ORDER BY fecha DESC;
+		INNER JOIN animales ON animales.idanimal = razas.idanimal;
 END $$
 
 DELIMITER $$
@@ -501,25 +499,37 @@ DELIMITER $$
 CREATE PROCEDURE spu_voluntarios_listar()
 BEGIN
 	SELECT idvoluntario, personas.idpersona, personas.apellidos, personas.nombres, voluntarios.fechainicio, voluntarios.fechafin, voluntarios.descripcionvol, personas.voluntario
-	FROM voluntarios
+		FROM voluntarios
 		INNER JOIN personas ON personas.idpersona = voluntarios.idpersona
-	ORDER BY fechafin;
+		WHERE fechafin IS NULL
+	ORDER BY fechainicio DESC;
 END $$
 
 DELIMITER $$
-CREATE PROCEDURE spu_voluntarios_terminar
+CREATE PROCEDURE spu_voluntarios_archivados()
+BEGIN
+	SELECT idvoluntario, personas.idpersona, personas.apellidos, personas.nombres, voluntarios.fechainicio, voluntarios.fechafin, voluntarios.descripcionvol, personas.voluntario
+		FROM voluntarios
+		INNER JOIN personas ON personas.idpersona = voluntarios.idpersona
+		WHERE fechafin IS NOT NULL
+	ORDER BY fechainicio DESC;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE spu_voluntarios_devolver
 (
 	IN _idvoluntario INT,
 	IN _idpersona INT
 	
 )
 BEGIN
-	UPDATE voluntarios SET 
-		fechafin = CURDATE()
+	UPDATE voluntarios SET
+		fechainicio = CURDATE(),
+		fechafin = NULL
 	WHERE idvoluntario = _idvoluntario;
 	
 	UPDATE personas SET
-		voluntario = "N"
+		voluntario = "S"
 	WHERE idpersona = _idpersona;
 END $$
 
@@ -529,7 +539,6 @@ CREATE PROCEDURE spu_voluntarios_cargar()
 BEGIN
 	SELECT * FROM personas WHERE voluntario = "N";
 END $$
-
 
 -- ------------------------------------------------------------
 -- DONACIONES
@@ -694,67 +703,3 @@ SELECT personas.apellidos, personas.nombres, tipoapoyos.tipoapoyo, SUM(cantidad)
     ORDER BY cantidad DESC
     LIMIT 3;
 END $$
-
--- ------------------------------------------------------------
--- colaboradores
--- ------------------------------------------------------------
-
-DELIMITER $$
-CREATE PROCEDURE spu_colaboradores_listar()
-BEGIN
-	SELECT idusuario, personas.apellidos, personas.nombres, nivelacceso
-	FROM usuarios
-	INNER JOIN personas ON personas.idpersona = usuarios.idpersona
-	WHERE nivelacceso = "C";
-END $$
-
--- ------------------------------------------------------------
--- dueño encontrado
--- ------------------------------------------------------------
-
-DELIMITER $$
-CREATE PROCEDURE spu_duenoencontrado_registrar
-(
-	IN _idpersona				INT,
-	IN _idmascotaperdida 	INT
-)
-BEGIN
-	INSERT INTO duenoencontrado (idpersona, idmascotaperdida, fecha)
-		VALUES (_idpersona, _idmascotaperdida, CURDATE());
-	
-	UPDATE mascotasperdidas SET
-		recuperado = "S"
-	WHERE idmascotaperdida = _idmascotaperdida;
-END $$
-
-DELIMITER $$
-CREATE PROCEDURE spu_duenoencontrado_cargar()
-BEGIN
-	SELECT idmascotaperdida, animales.animal, razas.raza, fecha,
-	CASE
-			WHEN genero = 'H' THEN 'Hembra'
-			WHEN genero = "M" THEN 'Macho'           
-		END 'genero'
-	FROM mascotasperdidas
-	INNER JOIN razas ON razas.idraza = mascotasperdidas.idraza
-	INNER JOIN animales ON animales.idanimal = razas.idanimal
-	WHERE recuperado = "N";
-END $$
-
-DELIMITER $$
-CREATE PROCEDURE spu_duenoencontrado_listar()
-BEGIN
-	SELECT iddueno, CONCAT(personas.apellidos, ' ', personas.nombres) AS dueno, personas.telefono, animales.animal, 
-	CASE
-			WHEN mascotasperdidas.genero = 'H' THEN 'Hembra'
-			WHEN mascotasperdidas.genero = "M" THEN 'Macho'           
-		END 'genero', duenoencontrado.fecha
-	
-	FROM duenoencontrado
-	INNER JOIN personas ON personas.idpersona = duenoencontrado.idpersona
-	INNER JOIN mascotasperdidas ON mascotasperdidas.idmascotaperdida = duenoencontrado.idmascotaperdida
-	INNER JOIN razas ON razas.idraza = mascotasperdidas.idraza
-	INNER JOIN animales ON animales.idanimal = razas.idanimal
-	WHERE recuperado = "S";
-END $$
-

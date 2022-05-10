@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.4.21-MariaDB : Database - patitasapp
+MySQL - 10.4.20-MariaDB : Database - patitasapp
 *********************************************************************
 */
 
@@ -308,19 +308,19 @@ CREATE TABLE `personas` (
 /*Data for the table `personas` */
 
 insert  into `personas`(`idpersona`,`apellidos`,`nombres`,`tipodoc`,`numdoc`,`direccion`,`telefono`,`logeado`,`voluntario`) values 
-(1,'Boada Ramos','Luis Anderson','D','12345678','Av España 123','987654321','S','N'),
+(1,'Boada Ramos','Luis Anderson','D','12345678','Av España 123','987654321','S','S'),
 (2,'Belleza Torres','Anderson David','D','37194023','Jr 28 De Julio 123','972648117','S','N'),
 (3,'Francia Minaya','Brenda Andrea','D','74720939','Av Artemio Molina 454','964918123','S','N'),
 (4,'Francia Minaya','Jhon Edward','D','22244400','Chincha Alta','999000333','S','N'),
 (5,'Roberto Carlos','Rey Sanches','D','39581934','Jr 28 De Julio 18','978195723','N','N'),
-(6,'Juan Fernando','Quispe Guerra','C','81571482','Los Cedros 134','961841923','N','N'),
+(6,'Juan Fernando','Quispe Guerra','C','81571482','Los Cedros 134','961841923','N','S'),
 (7,'Adriana Carolina','De la Cruz','D','28195012','Leoncio Prado 186','946172931','S','N'),
 (8,'Efraín Marcelo','Gonzales Perez','C','12481593','Av. Salaverry 359','989548933','S','N'),
 (9,'Jesus Antonio','Navarro Hernandez','D','61306814','Jr Bolivar 115','917246237','N','N'),
 (10,'Flavio','Torres Boada','C','12121233','San Antonio de Salas - Chincha Baja','975542123','N','N'),
 (11,'Junior','Roque Montes','D','33212121','San Antonio de Salas - Chincha Baja','945454578','N','N'),
 (12,'Nestor','Tasayco Torres','C','44221133','Chincha Alta','955575321','S','N'),
-(13,'Niurka','Castilla','C','55778899','Santa Luisa - Chincha Baja','964522145','S','N'),
+(13,'Niurka','Castilla','C','55778899','Santa Luisa - Chincha Baja','964522145','S','S'),
 (14,'Maryory','Mendoza Matias','D','22145533','Lomo Largo - Sunampe','957575753','S','N');
 
 /*Table structure for table `razas` */
@@ -489,19 +489,19 @@ CREATE TABLE `voluntarios` (
 /*Data for the table `voluntarios` */
 
 insert  into `voluntarios`(`idvoluntario`,`idpersona`,`fechainicio`,`fechafin`,`descripcionvol`) values 
-(1,6,'2017-11-23','2017-11-25','Ayudo con la limpieza'),
+(1,6,'2022-05-09',NULL,'Ayudo con la limpieza'),
 (2,9,'2018-04-17','2018-04-30','Cambio de cama de mascotas'),
 (3,12,'2018-09-12','2018-09-13','Construir casa para las mascotas'),
-(4,6,'2019-05-09','2019-06-09','Baños a las mascotas'),
+(4,6,'2022-05-09',NULL,'Baños a las mascotas'),
 (5,7,'2020-03-15','2022-04-20','Cambio de cama de mascotas'),
 (6,11,'2020-08-19','2022-04-20','Ayudo con la limpieza'),
-(7,13,'2022-04-05','2022-04-20','Construir casa para las mascotas'),
-(8,6,'2022-11-16','2022-04-20','Baños a las mascotas'),
+(7,13,'2022-05-09',NULL,'Construir casa para las mascotas'),
+(8,6,'2022-05-09',NULL,'Baños a las mascotas'),
 (9,13,'2021-08-29','2022-04-20','Ayudo con la limpieza'),
 (10,9,'2021-10-30','2022-04-20','Construir casa para las mascotas'),
 (11,10,'2022-04-09',NULL,'Limpieza.'),
 (12,14,'2022-04-11',NULL,'Paseo a los perros'),
-(13,1,'2022-04-20','2022-04-20','Limpieza en el albergue.'),
+(13,1,'2022-05-09',NULL,'Limpieza en el albergue.'),
 (14,14,'2022-04-20','2022-05-09','Bañado de perros'),
 (15,1,'2022-04-20','2022-04-25','Paseo a los perros.'),
 (16,4,'2022-04-20','2022-04-20','Limpieza de interior del albergue.');
@@ -1427,6 +1427,22 @@ BEGIN
 END */$$
 DELIMITER ;
 
+/* Procedure structure for procedure `spu_voluntarios_archivados` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_voluntarios_archivados` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_voluntarios_archivados`()
+BEGIN
+	SELECT idvoluntario, personas.idpersona, personas.apellidos, personas.nombres, voluntarios.fechainicio, voluntarios.fechafin, voluntarios.descripcionvol, personas.voluntario
+		FROM voluntarios
+		INNER JOIN personas ON personas.idpersona = voluntarios.idpersona
+		WHERE fechafin IS NOT NULL
+	ORDER BY fechainicio DESC;
+END */$$
+DELIMITER ;
+
 /* Procedure structure for procedure `spu_voluntarios_cargar` */
 
 /*!50003 DROP PROCEDURE IF EXISTS  `spu_voluntarios_cargar` */;
@@ -1439,6 +1455,29 @@ BEGIN
 END */$$
 DELIMITER ;
 
+/* Procedure structure for procedure `spu_voluntarios_devolver` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_voluntarios_devolver` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_voluntarios_devolver`(
+	IN _idvoluntario INT,
+	IN _idpersona INT
+	
+)
+BEGIN
+	UPDATE voluntarios SET
+		fechainicio = CURDATE(),
+		fechafin = NULL
+	WHERE idvoluntario = _idvoluntario;
+	
+	UPDATE personas SET
+		voluntario = "S"
+	WHERE idpersona = _idpersona;
+END */$$
+DELIMITER ;
+
 /* Procedure structure for procedure `spu_voluntarios_listar` */
 
 /*!50003 DROP PROCEDURE IF EXISTS  `spu_voluntarios_listar` */;
@@ -1448,9 +1487,10 @@ DELIMITER $$
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_voluntarios_listar`()
 BEGIN
 	SELECT idvoluntario, personas.idpersona, personas.apellidos, personas.nombres, voluntarios.fechainicio, voluntarios.fechafin, voluntarios.descripcionvol, personas.voluntario
-	FROM voluntarios
+		FROM voluntarios
 		INNER JOIN personas ON personas.idpersona = voluntarios.idpersona
-	order by fechafin;
+		where fechafin is null
+	ORDER BY fechainicio desc;
 END */$$
 DELIMITER ;
 
@@ -1471,28 +1511,6 @@ BEGIN
 	UPDATE personas SET
 		voluntario = "S"
 	where idpersona = _idpersona;
-END */$$
-DELIMITER ;
-
-/* Procedure structure for procedure `spu_voluntarios_terminar` */
-
-/*!50003 DROP PROCEDURE IF EXISTS  `spu_voluntarios_terminar` */;
-
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_voluntarios_terminar`(
-	IN _idvoluntario INT,
-	IN _idpersona INT
-	
-)
-BEGIN
-	UPDATE voluntarios SET 
-		fechafin = CURDATE()
-	WHERE idvoluntario = _idvoluntario;
-	
-	UPDATE personas SET
-		voluntario = "N"
-	WHERE idpersona = _idpersona;
 END */$$
 DELIMITER ;
 

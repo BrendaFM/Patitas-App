@@ -5,6 +5,7 @@ $voluntario = new Voluntario();
 
 // despues
 if (isset($_GET['op'])){
+
     if ($_GET['op'] == 'listarVoluntarios') {
         $datosObtenidos = $voluntario->listarVoluntarios();
         
@@ -17,42 +18,19 @@ if (isset($_GET['op'])){
             $i = 1;
             foreach($datosObtenidos as $tabla){
 
-                $fechafinalizada = "";
-                $finalizarVoluntariado = "";
 
-                if($tabla->fechafin == ""){
-                  $fechafinalizada = "
-                     Activo
-                  ";
-                }else{
-                    $fechafinalizada = "
-                      $tabla->fechafin
-                    ";
-                }
-
-                if($tabla->fechafin == null){
-                  $finalizarVoluntariado = "
-                      <a href='#' data-idvoluntario='$tabla->idvoluntario' data-idpersona='$tabla->idpersona' class='btn btn-sm btn-outline-info terminar'>
-                          <i class='fas fa-clinic-medical'></i>
-                      </a>
-                  ";
-                }else{
-                    $finalizarVoluntariado = "
-                        <a  class='btn btn-sm btn-outline-info noactivo'>
-                            <i class='fas fa-check'></i>
-                        </a> 
-                    ";
-                }
 
                 echo "
                     <tr>
                         <td class='text-center'> $i </td>
                         <td class='text-center'>$tabla->apellidos,  $tabla->nombres</td>
                         <td class='text-center'> $tabla->fechainicio</td>
-                        <td class='text-center'> {$fechafinalizada} </td>
+                        <td class='text-center'> Activo </td>
                         <td class='text-center'> $tabla->descripcionvol</td>
                         <td class='text-center'>
-                            {$finalizarVoluntariado}
+                            <a href='#' data-idvoluntario='$tabla->idvoluntario' data-idpersona='$tabla->idpersona' class='btn btn-sm btn-outline-info terminar'>
+                                <i class='fas fa-clinic-medical'></i>
+                            </a>
                         </td>
                     </tr>
                 ";
@@ -60,6 +38,38 @@ if (isset($_GET['op'])){
             }
 
         }
+    }
+
+    if ($_GET['op'] == 'voluntariosArchivados'){
+      $datosObtenidos = $voluntario->voluntariosArchivados();
+      
+      if(count($datosObtenidos) == 0){
+        echo "
+        <tr>
+            <td class='text-center' colspan='5'>No se encuentran datos</td>             
+        </tr>";
+      }else{
+          $i = 1;
+          foreach($datosObtenidos as $tabla){
+
+              echo "
+                  <tr>
+                      <td class='text-center'> $i </td>
+                      <td class='text-center'>$tabla->apellidos,  $tabla->nombres</td>
+                      <td class='text-center'> $tabla->fechainicio</td>
+                      <td class='text-center'> $tabla->fechafin </td>
+                      <td class='text-center'> $tabla->descripcionvol</td>
+                      <td class='text-center'>
+                        <a href='#' data-idvoluntarioarchivado='$tabla->idvoluntario' data-idpersona='$tabla->idpersona' class='btn btn-sm btn-outline-info reactivar'>
+                            <i class='fas fa-undo-alt'></i>
+                        </a>
+                      </td>
+                  </tr>
+              ";
+              $i++;
+          }
+
+      }
     }
 
     if ($_GET['op'] == 'registrarVoluntario'){
@@ -86,8 +96,8 @@ if (isset($_GET['op'])){
       }
     }
 
-    if($_GET['op'] == 'terminarVoluntariado'){
-      $voluntario->terminarVoluntariado([
+    if($_GET['op'] == 'reactivarVoluntariado'){
+      $voluntario->reactivarVoluntariado([
         "idvoluntario" => $_GET['idvoluntario'],
         "idpersona" => $_GET['idpersona']
       ]);
