@@ -9,8 +9,8 @@
     <div class="card card-outline card-info">
         <div class="card-header">
             <p class="card-title mt-2" style="font-size: 22px">Registro de Donaciones</p>
-            <a href="main.php?view=grafico-donaciones">
-                <button style="background-color: white;" type="button" class="btn btn-lg float-right"><i class="far fa-chart-bar"></i> &nbsp;Ver Gráfico</button>
+            <a href="main.php?view=gasto-registro">
+                <button style="background-color: white;" type="button" class="btn btn-lg float-right"><i class="fas fa-shopping-cart"></i> &nbsp;Añadir Gasto</button>
             </a>
         </div>
         <div class="card-body">
@@ -54,7 +54,10 @@
             <button id="guardar" class="btn bg-gradient-info">Guardar</button>
         </div>
     </div>
+
+
     <br>
+
     <div class="card card-outline card-info">
         <div class="card-body text-center">
             <p>Si la persona no se encuentra registrada de clic al siguiente botón.</p>
@@ -63,22 +66,30 @@
             </a>
         </div>
     </div>
+
     <br>
+
     <div class="card card-outline card-info">
         <div class="card-body text-center">
             <h5>Reportes:</h5>
             <a href="main.php?view=tabla-soles">
-                <button style=" font-size: 18px;" type="button" class="btn bg-gradient-info">Soles donados</button>
+                <button style=" font-size: 18px;" type="button" class="btn bg-gradient-info">Dinero</button>
             </a>
             <a href="main.php?view=tabla-comida">
-                <button style=" font-size: 18px;" type="button" class="btn bg-gradient-info">Kilogramos donados</button>
+                <button style=" font-size: 18px;" type="button" class="btn bg-gradient-info">Kilogramos de Comida</button>
             </a>
             <a href="main.php?view=otras-donaciones-tabla">
                 <button style=" font-size: 18px;" type="button" class="btn bg-gradient-info">Otras donaciones</button>
             </a>
+
+            <a href="main.php?view=grafico-donaciones">
+                <button style=" font-size: 18px;" type="button" class="btn bg-gradient-info">Reporte en Gráfico</button>
+            </a>
         </div>
     </div>
+
     <br>
+    
 </div>
 
 <script>

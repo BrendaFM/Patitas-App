@@ -166,6 +166,39 @@ CREATE TABLE `fotos` (
 
 /*Data for the table `fotos` */
 
+/*Table structure for table `gastos` */
+
+DROP TABLE IF EXISTS `gastos`;
+
+CREATE TABLE `gastos` (
+  `idgastos` int(11) NOT NULL AUTO_INCREMENT,
+  `idusuario` int(11) NOT NULL,
+  `idtipoapoyo` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `cantidadsalida` decimal(5,2) DEFAULT NULL,
+  `descripcion` text NOT NULL,
+  PRIMARY KEY (`idgastos`),
+  KEY `fk_tipoapoyo_gas` (`idtipoapoyo`),
+  KEY `fk_idusuario_gas` (`idusuario`),
+  CONSTRAINT `fk_idusuario_gas` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`),
+  CONSTRAINT `fk_tipoapoyo_gas` FOREIGN KEY (`idtipoapoyo`) REFERENCES `tipoapoyos` (`idtipoapoyo`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `gastos` */
+
+insert  into `gastos`(`idgastos`,`idusuario`,`idtipoapoyo`,`fecha`,`cantidadsalida`,`descripcion`) values 
+(1,1,1,'2022-05-10',30.00,'Desayuno'),
+(2,2,1,'2022-05-10',30.00,'Almuerzo'),
+(3,3,1,'2022-05-10',30.00,'Cena'),
+(4,2,1,'2022-05-10',1.00,'Para perrito rescatado'),
+(5,1,1,'2022-05-10',1.00,'Para 3 gatos rescatados'),
+(6,1,2,'2022-05-10',50.00,'Platos para comida'),
+(7,2,2,'2022-05-10',100.00,'Cama para perro'),
+(8,3,2,'2022-05-10',120.00,'Medicinas para perros adultos'),
+(9,2,2,'2022-05-10',150.00,'Casas para gatos'),
+(10,1,2,'2022-05-10',200.00,'Cirugia para gato'),
+(11,3,2,'2022-05-10',40.00,'Madera para casa de perro.');
+
 /*Table structure for table `mascotas` */
 
 DROP TABLE IF EXISTS `mascotas`;
@@ -664,7 +697,7 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_donaciones_dinero`()
 BEGIN
-SELECT  personas.apellidos, personas.nombres, tipoapoyos.tipoapoyo, fechaapoyo, cantidad, descripcion
+SELECT  personas.apellidos, personas.nombres, fechaapoyo, cantidad, descripcion
         FROM donaciones
     INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo
     INNER JOIN personas ON personas.idpersona = donaciones.idpersona 
@@ -867,6 +900,88 @@ DELIMITER $$
 BEGIN
 	INSERT INTO eventos (idmascota, idtipoevento, fechahora ,informacion)
 		VALUES (_idmascota, _idtipoevento, CURDATE() ,_informacion);
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_gastos_comida` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_gastos_comida` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_gastos_comida`()
+BEGIN
+SELECT  personas.apellidos, personas.nombres, tipoapoyos.tipoapoyo, fecha, cantidadsalida, descripcion
+        FROM gastos
+    INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = gastos.idtipoapoyo
+    INNER JOIN usuarios ON usuarios.idusuario = gastos.idusuario
+    INNER JOIN personas ON personas.idpersona = usuarios.idpersona 
+    WHERE tipoapoyo = "Comida";
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_gastos_comida_total` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_gastos_comida_total` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_gastos_comida_total`()
+BEGIN
+SELECT SUM(cantidadsalida) AS gastototal 
+    FROM gastos
+    INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = gastos.idtipoapoyo
+    WHERE tipoapoyo = "Comida";
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_gastos_dinero` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_gastos_dinero` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_gastos_dinero`()
+BEGIN
+SELECT  personas.apellidos, personas.nombres, tipoapoyos.tipoapoyo, fecha, cantidadsalida, descripcion
+        FROM gastos
+    INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = gastos.idtipoapoyo
+    INNER JOIN usuarios ON usuarios.idusuario = gastos.idusuario
+    INNER JOIN personas ON personas.idpersona = usuarios.idpersona 
+    WHERE tipoapoyo = "Monetario";
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_gastos_dinero_total` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_gastos_dinero_total` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_gastos_dinero_total`()
+BEGIN
+SELECT SUM(cantidadsalida) AS gastototal 
+    FROM gastos
+    INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = gastos.idtipoapoyo
+    WHERE tipoapoyo = "Monetario";
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_gastos_registrar` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_gastos_registrar` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_gastos_registrar`(
+    IN _idusuario       INT,
+    IN _idtipoapoyo     INT,
+    IN _cantidadsalida  INT,
+    IN _descripcion    	TEXT
+)
+BEGIN
+    INSERT INTO gastos (idusuario, idtipoapoyo, fecha, cantidadsalida, descripcion)
+        VALUES (_idusuario, _idtipoapoyo, NOW(), _cantidadsalida, _descripcion);
 END */$$
 DELIMITER ;
 

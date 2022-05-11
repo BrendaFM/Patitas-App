@@ -171,4 +171,16 @@ CREATE TABLE duenoencontrado
 	fecha 				DATE 		NOT NULL,
 	CONSTRAINT fk_idpersona_due FOREIGN KEY (idpersona) REFERENCES personas(idpersona),
 	CONSTRAINT fk_idmascotaperdida_due FOREIGN KEY (idmascotaperdida) REFERENCES mascotasperdidas(idmascotaperdida)
-) ENGINE = INNODB
+) ENGINE = INNODB;
+
+CREATE TABLE gastos
+(
+    idgastos            	INT             AUTO_INCREMENT PRIMARY KEY,
+    idusuario            	INT             NOT NULL,
+    idtipoapoyo            	INT             NOT NULL,
+    fecha                	DATE             NOT NULL,
+    cantidadsalida          DECIMAL(5,2)     NULL,
+    descripcion         	TEXT            NOT NULL,
+    CONSTRAINT fk_tipoapoyo_gas FOREIGN KEY (idtipoapoyo) REFERENCES tipoapoyos(idtipoapoyo),
+    CONSTRAINT fk_idusuario_gas FOREIGN KEY (idusuario) REFERENCES usuarios(idusuario)
+)ENGINE = INNODB;

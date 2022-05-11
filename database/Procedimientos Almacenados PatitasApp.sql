@@ -750,7 +750,7 @@ END $$
 DELIMITER $$
 CREATE PROCEDURE spu_donaciones_dinero()
 BEGIN
-SELECT  personas.apellidos, personas.nombres, tipoapoyos.tipoapoyo, fechaapoyo, cantidad, descripcion
+SELECT  personas.apellidos, personas.nombres, fechaapoyo, cantidad, descripcion
         FROM donaciones
     INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = donaciones.idtipoapoyo
     INNER JOIN personas ON personas.idpersona = donaciones.idpersona 
@@ -778,3 +778,74 @@ SELECT personas.apellidos, personas.nombres, tipoapoyos.tipoapoyo, SUM(cantidad)
     ORDER BY cantidad DESC
     LIMIT 3;
 END $$
+
+-- ---------- ---------------
+--  GASTOS   --
+-- ---------- ---------------
+
+DELIMITER $$
+CREATE PROCEDURE spu_gastos_registrar
+(
+    IN _idusuario       INT,
+    IN _idtipoapoyo     INT,
+    IN _cantidadsalida  INT,
+    IN _descripcion    	TEXT
+)
+BEGIN
+    INSERT INTO gastos (idusuario, idtipoapoyo, fecha, cantidadsalida, descripcion)
+        VALUES (_idusuario, _idtipoapoyo, NOW(), _cantidadsalida, _descripcion);
+END $$
+
+CALL spu_gastos_registrar(1, 1, 30.00, "Desayuno");
+CALL spu_gastos_registrar(2, 1, 30.00, "Almuerzo");
+CALL spu_gastos_registrar(3, 1, 30.00, "Cena");
+CALL spu_gastos_registrar(2, 1, 1.00, "Para perrito rescatado");
+CALL spu_gastos_registrar(1, 1, 1.00, "Para 3 gatos rescatados");
+CALL spu_gastos_registrar(1, 2, 50.00, "Platos para comida");
+CALL spu_gastos_registrar(2, 2, 100.00, "Cama para perro");
+CALL spu_gastos_registrar(3, 2, 120.00, "Medicinas para perros adultos");
+CALL spu_gastos_registrar(2, 2, 150.00, "Casas para gatos");
+CALL spu_gastos_registrar(1, 2, 200.00, "Cirugia para gato");
+
+SELECT * FROM gastos
+
+DELIMITER $$
+CREATE PROCEDURE spu_gastos_comida()
+BEGIN
+SELECT  personas.apellidos, personas.nombres, tipoapoyos.tipoapoyo, fecha, cantidadsalida, descripcion
+        FROM gastos
+    INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = gastos.idtipoapoyo
+    INNER JOIN usuarios ON usuarios.idusuario = gastos.idusuario
+    INNER JOIN personas ON personas.idpersona = usuarios.idpersona 
+    WHERE tipoapoyo = "Comida";
+END $$
+ 
+DELIMITER $$
+CREATE PROCEDURE spu_gastos_comida_total()
+BEGIN
+SELECT SUM(cantidadsalida) AS gastototal 
+    FROM gastos
+    INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = gastos.idtipoapoyo
+    WHERE tipoapoyo = "Comida";
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE spu_gastos_dinero()
+BEGIN
+SELECT  personas.apellidos, personas.nombres, tipoapoyos.tipoapoyo, fecha, cantidadsalida, descripcion
+        FROM gastos
+    INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = gastos.idtipoapoyo
+    INNER JOIN usuarios ON usuarios.idusuario = gastos.idusuario
+    INNER JOIN personas ON personas.idpersona = usuarios.idpersona 
+    WHERE tipoapoyo = "Monetario";
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE spu_gastos_dinero_total()
+BEGIN
+SELECT SUM(cantidadsalida) AS gastototal 
+    FROM gastos
+    INNER JOIN tipoapoyos ON tipoapoyos.idtipoapoyo = gastos.idtipoapoyo
+    WHERE tipoapoyo = "Monetario";
+END $$
+
