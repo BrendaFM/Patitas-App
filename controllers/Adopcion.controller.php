@@ -10,12 +10,7 @@ if(isset($_GET['op'])){
     if($_GET['op'] == 'listarAdopcion'){
         $datosObtenidos = $adopcion->listarAdopcion();
 
-        if(count($datosObtenidos) == 0){
-            echo "
-            <tr>
-                <td class='text-center' colspan='5'>No se encuentran datos</td>             
-            </tr>";
-        }else{
+        if(count($datosObtenidos) != 0){
             $i = 1;
             foreach($datosObtenidos as $tabla){
                 echo "

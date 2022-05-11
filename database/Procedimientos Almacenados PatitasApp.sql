@@ -406,6 +406,50 @@ BEGIN
         INNER JOIN animales ON animales.idanimal = razas.idanimal
         WHERE estado = "R" ORDER BY animales.animal;
 END $$
+-- ------------------------------------------------------------
+-- TIPO DE EVENTOS
+-- ------------------------------------------------------------
+
+DELIMITER $$
+CREATE PROCEDURE spu_tipoeventos_registrar
+(
+	IN _tipoevento	VARCHAR(100)
+)
+BEGIN
+	INSERT INTO tipoeventos (tipoevento, fechainicio, fechatermino)
+		VALUES (_tipoevento, CURDATE() , NULL);
+END $$
+
+CALL spu_tipoeventos_registrar("Campaña de esterilización 'Mascotas Felices'")
+
+DELIMITER $$
+CREATE PROCEDURE spu_tipoeventos_listar()
+BEGIN
+	SELECT * FROM tipoeventos WHERE fechatermino IS NULL;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE spu_tipoeventos_terminados_listar()
+BEGIN
+	SELECT * FROM tipoeventos WHERE fechatermino IS NOT NULL;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE spu_tipoeventos_terminar
+(
+	IN _idtipoevento INT
+)
+BEGIN
+	UPDATE tipoeventos SET 
+		fechatermino = CURDATE()
+	WHERE idtipoevento = _idtipoevento;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE spu_tipoeventos_listar_todo()
+BEGIN
+	SELECT * FROM tipoeventos ORDER BY tipoevento;
+END $$
 
 -- ------------------------------------------------------------
 -- EVENTOS
@@ -426,9 +470,23 @@ END $$
 DELIMITER $$
 CREATE PROCEDURE spu_eventos_listar()
 BEGIN
-	SELECT idevento, mascotas.nombremascota, tipoeventos.tipoevento, fechahora, informacion FROM eventos
+	SELECT idevento, animales.animal, mascotas.nombremascota, tipoeventos.tipoevento, fechahora, informacion FROM eventos
 	INNER JOIN tipoeventos ON tipoeventos.idtipoevento = eventos.idtipoevento
-	INNER JOIN mascotas ON mascotas.idmascota = eventos.idmascota;
+	INNER JOIN mascotas ON mascotas.idmascota = eventos.idmascota
+	INNER JOIN razas ON razas.idraza = mascotas.idraza
+	INNER JOIN animales ON animales.idanimal = razas.idanimal;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE spu_eventos_filtro_tipoeventos(IN _idtipoevento INT)
+BEGIN
+SELECT idevento, animales.animal, mascotas.nombremascota, tipoeventos.tipoevento, fechahora, informacion
+	FROM eventos
+		INNER JOIN tipoeventos ON tipoeventos.idtipoevento = eventos.idtipoevento
+		INNER JOIN mascotas ON mascotas.idmascota = eventos.idmascota
+		INNER JOIN razas ON razas.idraza = mascotas.idraza
+		INNER JOIN animales ON animales.idanimal = razas.idanimal
+	WHERE tipoeventos.idtipoevento = _idtipoevento;  
 END $$
 
 -- ------------------------------------------------------------
@@ -513,6 +571,23 @@ BEGIN
 		INNER JOIN personas ON personas.idpersona = voluntarios.idpersona
 		WHERE fechafin IS NOT NULL
 	ORDER BY fechainicio DESC;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE spu_voluntarios_terminar
+(
+	IN _idvoluntario INT,
+	IN _idpersona INT
+	
+)
+BEGIN
+	UPDATE voluntarios SET 
+		fechafin = CURDATE()
+	WHERE idvoluntario = _idvoluntario;
+	
+	UPDATE personas SET
+		voluntario = "N"
+	WHERE idpersona = _idpersona;
 END $$
 
 DELIMITER $$

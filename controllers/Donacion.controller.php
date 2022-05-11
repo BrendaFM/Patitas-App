@@ -39,12 +39,7 @@ if(isset($_GET['op'])){
     if($_GET['op'] == 'otrasDonaciones'){
       $datos = $donacion->otrasDonaciones();
 
-      if(count($datos) == 0){
-        echo "
-        <tr>
-            <td class='text-center' colspan='5'>No se encuentran datos</td>
-        </tr>";
-      }else{
+      if(count($datos) != 0){
           $i = 1;
           foreach($datos as $tabla){
               echo "
@@ -58,19 +53,13 @@ if(isset($_GET['op'])){
               ";
               $i++;
           }
-
       }
     }
 
     if($_GET['op'] == 'DonacionesComida'){
       $datos = $donacion->DonacionesComida();
 
-      if(count($datos) == 0){
-        echo "
-        <tr>
-            <td class='text-center' colspan='5'>No se encuentran datos</td>
-        </tr>";
-      }else{
+      if(count($datos) != 0){
           $i = 1;
           foreach($datos as $tabla){
               echo "
@@ -108,12 +97,7 @@ if(isset($_GET['op'])){
     if($_GET['op'] == 'DonacionesDinero'){
       $datos = $donacion->DonacionesDinero();
 
-      if(count($datos) == 0){
-        echo "
-        <tr>
-            <td class='text-center' colspan='5'>No se encuentran datos</td>
-        </tr>";
-      }else{
+      if(count($datos) != 0){
           $i = 1;
           foreach($datos as $tabla){
               echo "

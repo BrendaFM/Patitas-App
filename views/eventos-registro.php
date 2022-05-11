@@ -20,7 +20,10 @@
 
         <div class=" card card-outline card-info">
             <div class="card-header">
-                <p class="card-title" style="font-size: 22px">Registro de Eventos</p>
+                <p class="card-title mt-2" style="font-size: 22px">Registro de Eventos</p>
+                <a href="main.php?view=tipoevento-registro">
+                    <button style="background-color: white; font-size: 18px" type="button" class="btn btn-lg float-right"><i class="fas fa-calendar-plus"></i> &nbsp;Crear nuevo evento</button>
+                </a>
             </div>
             <!-- /.card-header -->
             
@@ -40,12 +43,6 @@
                             <div class="col-md-12 mt-3">
                                 <label for="idtipoevento">Selecciona un Evento</label>
                                 <select id="idtipoevento" class="form-control form-control-border">
-                                    <option value="">Seleccione</option>
-                                    <option value="1">Vacunación</option>
-                                    <option value="2">Chequeo de rutina</option>
-                                    <option value="3">Desparacitación</option>
-                                    <option value="4">Intervención</option>
-                                    <option value="5">Otros</option>
                                 </select>
                             </div>
                         </div>
@@ -71,17 +68,21 @@
     <div class="col-md-8">
         <div  class=" card card-outline card-info">
             <div class="card-header">
-                <p class="card-title" style="font-size: 22px">Lista de Eventos</p>
+                <p class="card-title mt-2" style="font-size: 22px">Lista General</p>
+                <a href="main.php?view=reporte-eventos">
+                    <button style="background-color: white; font-size: 18px" type="button" class="btn btn-lg float-right"><i class="fas fa-folder"></i> &nbsp;Reporte</button>
+                </a>
             </div>
             <div class="card-body table-responsive">
                 <table class="table" id="tablaEventos">
                     <thead>
                         <tr>
                             <th class="text-center">N°</th>
+                            <th class="text-center">Tipo de Mascota</th>
                             <th class="text-center">Mascota</th>
                             <th class="text-center">Tipo de Evento</th>
-                            <th class="text-center">Fecha y Hora</th>
-                            <th class="text-center">Informacion</th>
+                            <th class="text-center">Fecha</th>
+                            <th class="text-center">Información</th>
                         </tr>
                     </thead>
                     <tbody class="table" id="datosEventos">
@@ -175,8 +176,10 @@
                                 title: 'Registrado correctamente'
                             });
                             $("#formularioEventos")[0].reset();
-                            cargarMascota();
+
                             listarEventos();
+                            cargarMascota();
+                            cargarTipoEvento();
                         }
                     });
                 }
@@ -197,7 +200,19 @@
         });
     }
     
+    function cargarTipoEvento(){
+        $.ajax({
+            url: 'controllers/Eventos.controller.php',
+            type: 'GET',
+            data: 'op=cargarTipoeventos',
+            success: function(e){
+                $("#idtipoevento").html(e);
+            }
+        });
+    }
+
     $("#guardar").click(registrarEvento);
+    cargarTipoEvento();
     cargarMascota();
     listarEventos();
     });

@@ -96,6 +96,13 @@ if (isset($_GET['op'])){
       }
     }
 
+    if($_GET['op'] == 'terminarVoluntariado'){
+      $voluntario->terminarVoluntariado([
+        "idvoluntario" => $_GET['idvoluntario'],
+        "idpersona" => $_GET['idpersona']
+      ]);
+    }
+
     if($_GET['op'] == 'reactivarVoluntariado'){
       $voluntario->reactivarVoluntariado([
         "idvoluntario" => $_GET['idvoluntario'],

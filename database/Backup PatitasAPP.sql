@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.4.20-MariaDB : Database - patitasapp
+MySQL - 10.4.22-MariaDB : Database - patitasapp
 *********************************************************************
 */
 
@@ -141,20 +141,14 @@ CREATE TABLE `eventos` (
   KEY `fk_idtipoevento_event` (`idtipoevento`),
   CONSTRAINT `fk_idmascota_event` FOREIGN KEY (`idmascota`) REFERENCES `mascotas` (`idmascota`),
   CONSTRAINT `fk_idtipoevento_event` FOREIGN KEY (`idtipoevento`) REFERENCES `tipoeventos` (`idtipoevento`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `eventos` */
 
 insert  into `eventos`(`idevento`,`idmascota`,`idtipoevento`,`fechahora`,`informacion`) values 
-(1,1,4,'2016-01-15','Operación'),
-(2,2,1,'2017-01-15','Contra la Rabia'),
-(3,2,2,'2018-01-15','Visita al veterinario'),
-(4,5,1,'2017-01-15','Vacuna por resfrío'),
-(5,9,4,'2019-01-15','Operación'),
-(6,9,3,'2020-01-15','Medicacion para la desparasitacion'),
-(7,11,4,'2020-01-15','Operación'),
-(8,12,1,'2020-01-15','Vacuna Polivalente'),
-(9,3,4,'2022-04-09','Fractura en la pierna.');
+(1,1,2,'2022-05-10','Estuvo tranquilo al ser vacunado.'),
+(2,10,2,'2022-05-10','Estuvo agresiva pero luego se calmó.'),
+(3,20,3,'2022-05-10','Estuvo calmada en todo momento.');
 
 /*Table structure for table `fotos` */
 
@@ -425,19 +419,19 @@ DROP TABLE IF EXISTS `tipoeventos`;
 
 CREATE TABLE `tipoeventos` (
   `idtipoevento` int(11) NOT NULL AUTO_INCREMENT,
-  `tipoevento` varchar(20) DEFAULT NULL,
+  `tipoevento` varchar(100) NOT NULL,
+  `fechainicio` date NOT NULL,
+  `fechatermino` date DEFAULT NULL,
   PRIMARY KEY (`idtipoevento`),
   UNIQUE KEY `uk_evento_tipo` (`tipoevento`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tipoeventos` */
 
-insert  into `tipoeventos`(`idtipoevento`,`tipoevento`) values 
-(2,'Chequeo de rutina'),
-(3,'Desparasitación'),
-(4,'Intervencion'),
-(5,'Otros'),
-(1,'Vacunacion');
+insert  into `tipoeventos`(`idtipoevento`,`tipoevento`,`fechainicio`,`fechatermino`) values 
+(1,'Luchemos contra la rabia canina','2020-10-08','2022-05-10'),
+(2,'Campaña de vacunación \"Parvovirus nunca más\"','2022-05-10',NULL),
+(3,'Campaña de vacunación \"Juntos contra la rabia canina\"','2022-05-10',NULL);
 
 /*Table structure for table `usuarios` */
 
@@ -489,13 +483,13 @@ CREATE TABLE `voluntarios` (
 /*Data for the table `voluntarios` */
 
 insert  into `voluntarios`(`idvoluntario`,`idpersona`,`fechainicio`,`fechafin`,`descripcionvol`) values 
-(1,6,'2022-05-09',NULL,'Ayudo con la limpieza'),
+(1,6,'2022-05-10',NULL,'Ayudo con la limpieza'),
 (2,9,'2018-04-17','2018-04-30','Cambio de cama de mascotas'),
 (3,12,'2018-09-12','2018-09-13','Construir casa para las mascotas'),
-(4,6,'2022-05-09',NULL,'Baños a las mascotas'),
+(4,6,'2022-05-10',NULL,'Baños a las mascotas'),
 (5,7,'2020-03-15','2022-04-20','Cambio de cama de mascotas'),
 (6,11,'2020-08-19','2022-04-20','Ayudo con la limpieza'),
-(7,13,'2022-05-09',NULL,'Construir casa para las mascotas'),
+(7,13,'2022-05-10',NULL,'Construir casa para las mascotas'),
 (8,6,'2022-05-09',NULL,'Baños a las mascotas'),
 (9,13,'2021-08-29','2022-04-20','Ayudo con la limpieza'),
 (10,9,'2021-10-30','2022-04-20','Construir casa para las mascotas'),
@@ -825,6 +819,24 @@ BEGIN
 END */$$
 DELIMITER ;
 
+/* Procedure structure for procedure `spu_eventos_filtro_tipoeventos` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_eventos_filtro_tipoeventos` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_eventos_filtro_tipoeventos`(IN _idtipoevento INT)
+BEGIN
+SELECT idevento, animales.animal, mascotas.nombremascota, tipoeventos.tipoevento, fechahora, informacion
+	FROM eventos
+		INNER JOIN tipoeventos ON tipoeventos.idtipoevento = eventos.idtipoevento
+		INNER JOIN mascotas ON mascotas.idmascota = eventos.idmascota
+		INNER JOIN razas ON razas.idraza = mascotas.idraza
+		INNER JOIN animales ON animales.idanimal = razas.idanimal
+	WHERE tipoeventos.idtipoevento = _idtipoevento;  
+END */$$
+DELIMITER ;
+
 /* Procedure structure for procedure `spu_eventos_listar` */
 
 /*!50003 DROP PROCEDURE IF EXISTS  `spu_eventos_listar` */;
@@ -833,9 +845,11 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_eventos_listar`()
 BEGIN
-	SELECT idevento, mascotas.nombremascota, tipoeventos.tipoevento, fechahora, informacion FROM eventos
+	SELECT idevento, animales.animal, mascotas.nombremascota, tipoeventos.tipoevento, fechahora, informacion FROM eventos
 	INNER JOIN tipoeventos ON tipoeventos.idtipoevento = eventos.idtipoevento
-	INNER JOIN mascotas ON mascotas.idmascota = eventos.idmascota;
+	INNER JOIN mascotas ON mascotas.idmascota = eventos.idmascota
+	INNER JOIN razas ON razas.idraza = mascotas.idraza
+	INNER JOIN animales ON animales.idanimal = razas.idanimal;
 END */$$
 DELIMITER ;
 
@@ -1373,6 +1387,73 @@ BEGIN
 END */$$
 DELIMITER ;
 
+/* Procedure structure for procedure `spu_tipoeventos_listar` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_tipoeventos_listar` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_tipoeventos_listar`()
+BEGIN
+	Select * from tipoeventos where fechatermino is null;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_tipoeventos_listar_todo` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_tipoeventos_listar_todo` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_tipoeventos_listar_todo`()
+BEGIN
+	SELECT * FROM tipoeventos order by tipoevento;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_tipoeventos_registrar` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_tipoeventos_registrar` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_tipoeventos_registrar`(
+	IN _tipoevento	VARCHAR(100)
+)
+BEGIN
+	INSERT INTO tipoeventos (tipoevento, fechainicio, fechatermino)
+		VALUES (_tipoevento, CURDATE() , NULL);
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_tipoeventos_terminados_listar` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_tipoeventos_terminados_listar` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_tipoeventos_terminados_listar`()
+BEGIN
+	SELECT * FROM tipoeventos WHERE fechatermino IS NOT NULL;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_tipoeventos_terminar` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_tipoeventos_terminar` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_tipoeventos_terminar`(
+	IN _idtipoevento INT
+)
+BEGIN
+	UPDATE tipoeventos SET 
+		fechatermino = CURDATE()
+	WHERE idtipoevento = _idtipoevento;
+END */$$
+DELIMITER ;
+
 /* Procedure structure for procedure `spu_usuarios_actualizarclave` */
 
 /*!50003 DROP PROCEDURE IF EXISTS  `spu_usuarios_actualizarclave` */;
@@ -1511,6 +1592,28 @@ BEGIN
 	UPDATE personas SET
 		voluntario = "S"
 	where idpersona = _idpersona;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `spu_voluntarios_terminar` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_voluntarios_terminar` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_voluntarios_terminar`(
+	IN _idvoluntario INT,
+	IN _idpersona INT
+	
+)
+BEGIN
+	UPDATE voluntarios SET 
+		fechafin = CURDATE()
+	WHERE idvoluntario = _idvoluntario;
+	
+	UPDATE personas SET
+		voluntario = "N"
+	WHERE idpersona = _idpersona;
 END */$$
 DELIMITER ;
 

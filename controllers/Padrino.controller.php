@@ -16,12 +16,7 @@ if (isset($_GET['op'])){
     if($_GET['op'] == 'listarPadrino'){
         $datosObtenidos = $padrino->listarPadrino();
 
-        if(count($datosObtenidos) == 0){
-            echo "
-            <tr>
-                <td class='text-center' colspan='5'>No se encuentran datos</td>             
-            </tr>";
-        }else{
+        if(count($datosObtenidos) != 0){
             $i = 1;
             foreach($datosObtenidos as $tabla){
                 echo "
@@ -41,7 +36,6 @@ if (isset($_GET['op'])){
                 ";
                 $i++;
             }
-
         }
     }
 

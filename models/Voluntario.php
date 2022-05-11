@@ -40,6 +40,14 @@ class Voluntario extends ModelMaster{
       }
     }
 
+    public function terminarVoluntariado(array $data){
+      try{
+          parent::execProcedure($data, "spu_voluntarios_terminar", false);
+      }catch(Exception $error){
+          die($error->getMessage());
+      }
+    }
+
     public function reactivarVoluntariado(array $data){
       try{
           parent::execProcedure($data, "spu_voluntarios_devolver", false);

@@ -78,9 +78,13 @@ CREATE TABLE adopciones
 CREATE TABLE tipoeventos
 (	
 	idtipoevento		INT AUTO_INCREMENT PRIMARY KEY,
-	tipoevento			VARCHAR(20),
+	tipoevento			VARCHAR(100)		NOT NULL,
+	fechainicio			DATE 			NOT NULL,
+	fechatermino		DATE 			NULL,
 	CONSTRAINT uk_evento_tipo UNIQUE (tipoevento)
 ) ENGINE = INNODB;
+
+INSERT INTO tipoeventos (tipoevento, fechainicio) VALUES ("Luchemos contra la rabia canina", "2020-10-08");
 
 CREATE TABLE eventos
 (
