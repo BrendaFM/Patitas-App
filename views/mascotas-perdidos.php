@@ -4,8 +4,15 @@
 <p class="h1 m-2" style="text-align:center">Mascotas Perdidas</p>
 
 <br>
-<a class="btn bg-gradient-secondary" style="float: right;"href="main.php?view=dueno-encontrado-registro">Encontraste al dueño de una mascota?</a>
-<br>
+
+<?php 
+if($_SESSION['nivelacceso'] == 'C'){
+    echo'
+    <a class="btn bg-gradient-secondary" style="float: right;"href="main.php?view=dueno-encontrado-registro">Encontraste al dueño de una mascota?</a>
+    <br>
+    ';  
+}
+?>
 <br>
 <div class="row m-2" id='card-mascota'>
 

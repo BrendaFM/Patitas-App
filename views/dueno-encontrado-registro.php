@@ -23,6 +23,7 @@
         <div class=" card card-outline card-info">
             <div class="card-header">
                 <p class="card-title" style="font-size: 22px">Registro de Mascotas Encontradas</p>
+                
             </div>
             <!-- /.card-header -->
             
@@ -70,6 +71,9 @@
         <div  class=" card card-outline card-info">
             <div class="card-header">
                 <p class="card-title" style="font-size: 22px">Mascotas encontradas</p>
+                <a href="main.php?view=mascotas-perdidos">
+                    <button style="background-color: white;" type="button" class="btn btn-lg float-right"><i class="fas fa-arrow-circle-left"></i> &nbsp;Volver atrás</button>
+                </a>
             </div>
             <div class="card-body table-responsive">
                 <table class="table" id="tablaMascotaDueno">
@@ -79,6 +83,7 @@
                             <th class="text-center">Dueño</th>
                             <th class="text-center">Teléfono</th>
                             <th class="text-center">Animal</th>
+                            <th class="text-center">Nombre</th>
                             <th class="text-center">Genero</th>
                             <th class="text-center">Fecha</th>
                         </tr>

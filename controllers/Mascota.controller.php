@@ -347,6 +347,7 @@ if (isset($_GET['op'])){
                                 <img class='img-fluid' src='./img/avatar.jpg' alt='Avatar' />
                             </div>
                             <d class='card-body' style='overflow-y: auto'>
+                                <p class='card-text' style='text-align:justify'><b>Nombre Temporal:</b> $fila->nombretemp</p>
                                 <p class='card-text' style='text-align:justify'><b>Tipo de animal:</b> $fila->animal</p>
                                 <p class='card-text' style='text-align:justify'><b>Género:</b> $fila->genero</p>
                                 <p class='card-text' style='text-align:justify'><b>Fecha encontrado:</b> $fila->fecha</p>
@@ -406,7 +407,7 @@ if (isset($_GET['op'])){
             echo "<option value=''>Seleccione</option>";
             foreach($datosObtenidos as $fila){
                 echo "
-                    <option value='$fila->idmascotaperdida'>$fila->animal - $fila->raza - $fila->genero - $fila->fecha</option>
+                    <option value='$fila->idmascotaperdida'>$fila->nombretemp - $fila->animal - $fila->raza</option>
                 ";
             }
         }
@@ -436,6 +437,7 @@ if (isset($_GET['op'])){
                         <td class='text-center'> $tabla->dueno</td>
                         <td class='text-center'>$tabla->telefono</td>
                         <td class='text-center'>$tabla->animal</td>
+                        <td class='text-center'>$tabla->nombretemp</td>
                         <td class='text-center'> $tabla->genero</td>
                         <td class='text-center'> $tabla->fecha</td>
                     </tr>
@@ -480,6 +482,7 @@ if(isset($_POST['op'])){
                 $mascota->registrarMascotaPerdidos([
                     "idusuario"         => $_POST["idusuario"],
                     "idraza"            => $_POST["idraza"],
+                    "nombretemp"        => $_POST["nombretemp"],
                     "genero"            => $_POST["genero"],
                     "observaciones"     => $_POST["observaciones"],
                     "ubicacion"         => $_POST["ubicacion"],

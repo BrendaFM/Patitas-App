@@ -206,7 +206,9 @@
                 <li class="nav-item">
                   <a href="main.php?view=donaciones-registro" class="nav-link ">
                     <i class="fas fa-save nav-icon"></i>
-                    <p>Registro Donaciones</p>
+                    <p>Registro Donaciones y</p>
+                    <br>
+                    <p class="ml-4">&nbsp; &nbsp;Gastos</p>
                   </a>
                 </li>
                         
@@ -276,7 +278,7 @@
       <hr>
       <p><strong>Apellidos y Nombres:</strong></p>
       <p>Belleza Torres, Anderson David.</p>
-      <p><strong>Edad:</strong> 18</p>
+      <p><strong>Edad:</strong> 19</p>
       <hr>
       <p><strong>Apellidos y Nombres:</strong></p>
       <p>Boada Ramos, Luis Anderson.</p>

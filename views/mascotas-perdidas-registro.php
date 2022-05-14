@@ -48,13 +48,20 @@
               </div>
           </div>
 
-          <div class="form-group">
+          <div class="row form-group">
+            <div class="col-md-6">
+            <label for="nombretemp">Nombre Temporal</label>
+              <input type="text" class="form-control form-control-border" id="nombretemp" placeholder="Coloque un nombre temporal">
+            </div>
+            <div class="col-md-6">
               <label for="genero">Genero</label>
               <select id="genero" class="form-control select2 form-control-border" style="width: 100%;">
                   <option value="">Seleccione</option>
                   <option value="M"> Macho </option>
                   <option value="H"> Hembra </option>
               </select>
+
+            </div>
           </div>
 
           <div class="form-group">
@@ -63,7 +70,7 @@
           </div>
 
           <div class="form-group">
-              <label for="ubicacion">Ubicacion</label>
+              <label for="ubicacion">Ubicación</label>
               <input type="text" class="form-control form-control-border" id="ubicacion" placeholder="Ubicacion de la mascota">
           </div>
 
@@ -97,13 +104,14 @@
     function registrarMascota(){
       let idusuario = $("#idusuario").attr('codigo');
       let idraza = $("#razas").val();
+      let nombretemp = $("#nombretemp").val();
       let genero = $("#genero").val();
       let observaciones = $("#observaciones").val();
       let ubicacion = $("#ubicacion").val();
       let fotografia = $("#fotografia")[0].files[0]
 
       // Validacion
-      if(idusuario == "" ||  idraza == "" || genero == "" || observaciones == "" || ubicacion == ""){
+      if(idusuario == "" ||  idraza == ""|| nombretemp == "" || genero == "" || observaciones == "" || ubicacion == ""){
         Swal.fire({
           icon: 'warning',
           title: 'Por favor complete todos los campos, son obligatorios'
@@ -123,6 +131,7 @@
             formData.append('op', 'registrarMascotaPerdidos');
             formData.append('idusuario', idusuario);
             formData.append('idraza', idraza);
+            formData.append('nombretemp', nombretemp);
             formData.append('genero', genero);
             formData.append('observaciones', observaciones);
             formData.append('ubicacion', ubicacion);

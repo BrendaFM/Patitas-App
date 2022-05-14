@@ -84,8 +84,6 @@ CREATE TABLE tipoeventos
 	CONSTRAINT uk_evento_tipo UNIQUE (tipoevento)
 ) ENGINE = INNODB;
 
-INSERT INTO tipoeventos (tipoevento, fechainicio) VALUES ("Luchemos contra la rabia canina", "2020-10-08");
-
 CREATE TABLE eventos
 (
 	idevento		INT 		AUTO_INCREMENT PRIMARY KEY,
@@ -150,7 +148,8 @@ CREATE TABLE mascotasperdidas
 (
 	idmascotaperdida		INT 		AUTO_INCREMENT PRIMARY KEY,
 	idusuario 				INT 		NOT NULL,
-	idraza					INT 		NOT NULL,	
+	idraza					INT 		NOT NULL,
+	nombretemp				VARCHAR(30)	NOT NULL,
 	genero					CHAR(1)	NOT NULL,
 	observaciones			TEXT		NOT NULL,
 	ubicacion				TEXT		NOT NULL,
@@ -160,8 +159,6 @@ CREATE TABLE mascotasperdidas
 	CONSTRAINT fk_idusuario_masp FOREIGN KEY (idusuario) REFERENCES usuarios(idusuario),
 	CONSTRAINT fk_idraza_masp FOREIGN KEY (idraza) REFERENCES razas(idraza)
 ) ENGINE = INNODB;
-
-SELECT * FROM mascotasperdidas
 
 CREATE TABLE duenoencontrado
 (

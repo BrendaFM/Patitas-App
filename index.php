@@ -65,8 +65,12 @@ if (isset($_SESSION['acceso'])){
 		}
 
 		function iniciarSesion(){
-			if ($("#usuariologin").val() != "" && $("#clavelogin").val() != ""){
-
+			if ($("#usuariologin").val() == "" && $("#clavelogin").val() == ""){
+				Swal.fire({
+                icon: 'warning',
+                title: '¡Complete la información!'
+            	});
+			}else{
 				$.ajax({
 					url: 'controllers/Usuario.controller.php',
 					type: 'GET',
@@ -80,7 +84,7 @@ if (isset($_SESSION['acceso'])){
 							//Nos vamos al dashboard
 							window.location.href = 'main.php'
 						}else{
-							alert(result);
+							Swal.fire(result);
 						}
 					}
 				});
