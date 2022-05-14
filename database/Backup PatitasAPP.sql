@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.4.22-MariaDB : Database - patitasapp
+MySQL - 10.4.21-MariaDB : Database - patitasapp
 *********************************************************************
 */
 
@@ -31,7 +31,7 @@ CREATE TABLE `adopciones` (
   KEY `fk_idmascota_adop` (`idmascota`),
   CONSTRAINT `fk_idmascota_adop` FOREIGN KEY (`idmascota`) REFERENCES `mascotas` (`idmascota`),
   CONSTRAINT `fk_idpersona_adop` FOREIGN KEY (`idpersona`) REFERENCES `personas` (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `adopciones` */
 
@@ -44,7 +44,8 @@ insert  into `adopciones`(`idadopcion`,`idpersona`,`idmascota`,`fechaadopcion`,`
 (6,8,20,'2022-03-01',NULL),
 (7,6,22,'2022-03-27',NULL),
 (8,1,3,'2022-04-11',NULL),
-(10,8,23,'2022-04-11',NULL);
+(10,8,23,'2022-04-11',NULL),
+(11,3,27,'2022-05-13',NULL);
 
 /*Table structure for table `animales` */
 
@@ -221,7 +222,7 @@ CREATE TABLE `mascotas` (
   KEY `fk_idraza_masc` (`idraza`),
   CONSTRAINT `fk_idraza_masc` FOREIGN KEY (`idraza`) REFERENCES `razas` (`idraza`),
   CONSTRAINT `fk_idusuario_masc` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `mascotas` */
 
@@ -249,9 +250,10 @@ insert  into `mascotas`(`idmascota`,`idusuario`,`idraza`,`nombremascota`,`genero
 (21,2,31,'Frida','H','2022-02-02','descripcion','N','R','S','S','20220425072350.jpg'),
 (22,2,1,'Nina','H','2022-02-10','descripcion','S','A','S','N','20220425072351.jpg'),
 (23,2,1,'Paco','M','2020-09-01','lo encontramos en el mercado.','N','A','S','N','20220425072352.jpg'),
-(24,1,4,'Iron-man','M','2022-01-05','Jugueton','N','R','S','N','20220425072353.jpg'),
+(24,1,4,'Iron-man','M','2022-01-05','Jugueton','N','R','S','S','20220425072353.jpg'),
 (25,2,1,'Peluche','M','2022-01-06','Prueba','N','R','S','N','20220425072354.jpg'),
-(26,1,31,'Cleopatra','H','2021-08-17','se duerme mucho','N','R','S','N','20220427061845.jpg');
+(26,1,31,'Cleopatra','H','2021-08-17','se duerme mucho','N','R','S','N','20220427061845.jpg'),
+(27,1,31,'Cremita','H','2022-01-03','gato pequeño','N','A','S','N','20220513061843.jpg');
 
 /*Table structure for table `mascotasperdidas` */
 
@@ -261,6 +263,7 @@ CREATE TABLE `mascotasperdidas` (
   `idmascotaperdida` int(11) NOT NULL AUTO_INCREMENT,
   `idusuario` int(11) NOT NULL,
   `idraza` int(11) NOT NULL,
+  `nombretemp` varchar(30) NOT NULL,
   `genero` char(1) NOT NULL,
   `observaciones` text NOT NULL,
   `ubicacion` text NOT NULL,
@@ -272,17 +275,18 @@ CREATE TABLE `mascotasperdidas` (
   KEY `fk_idraza_masp` (`idraza`),
   CONSTRAINT `fk_idraza_masp` FOREIGN KEY (`idraza`) REFERENCES `razas` (`idraza`),
   CONSTRAINT `fk_idusuario_masp` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `mascotasperdidas` */
 
-insert  into `mascotasperdidas`(`idmascotaperdida`,`idusuario`,`idraza`,`genero`,`observaciones`,`ubicacion`,`fotografia`,`fecha`,`recuperado`) values 
-(2,1,1,'M','Esta lastimado de la patita','https://goo.gl/maps/5X4egvfJTsT3bj4i7','20220425041631.jpg','2022-04-25','S'),
-(5,2,1,'M','El perro se ve desorientado','https://goo.gl/maps/wKY2Wo2KUsxC19ZTA','20220425061847.jpg','2022-04-25','S'),
-(6,2,1,'M','Encontrado en el parque y tenia un collar con el nombre del dueño. ','https://www.google.com.pe/maps/@-13.526422,-76.1315688,15.21z/data=!4m2!7m1!2e1?hl=es-419','20220504021405.jpg','2022-05-04','N'),
-(8,1,39,'M','Se encontro en la plaza de armas de Grocio Prado','https://goo.gl/maps/jZcgrQM3DV7rPm266','20220509051700.jpg','2022-05-09','N'),
-(9,1,31,'H','Se encontro en la Plaza de Armas de Grocio Prado','https://goo.gl/maps/jZcgrQM3DV7rPm266','20220509051741.jpg','2022-05-09','S'),
-(10,1,31,'H','Se encontro en Grocio Prado','https://goo.gl/maps/jZcgrQM3DV7rPm266','20220509051724.jpg','2022-05-09','N');
+insert  into `mascotasperdidas`(`idmascotaperdida`,`idusuario`,`idraza`,`nombretemp`,`genero`,`observaciones`,`ubicacion`,`fotografia`,`fecha`,`recuperado`) values 
+(2,1,1,'Paco','M','Esta lastimado de la patita','https://goo.gl/maps/5X4egvfJTsT3bj4i7','20220425041631.jpg','2022-04-25','S'),
+(5,2,1,'Firulais','M','El perro se ve desorientado','https://goo.gl/maps/wKY2Wo2KUsxC19ZTA','20220425061847.jpg','2022-04-25','S'),
+(6,2,1,'Dog','M','Encontrado en el parque y tenia un collar con el nombre del dueño. ','https://www.google.com.pe/maps/@-13.526422,-76.1315688,15.21z/data=!4m2!7m1!2e1?hl=es-419','20220504021405.jpg','2022-05-04','N'),
+(8,1,39,'Gris','M','Se encontro en la plaza de armas de Grocio Prado','https://goo.gl/maps/jZcgrQM3DV7rPm266','20220509051700.jpg','2022-05-09','N'),
+(9,1,31,'Pelusa','H','Se encontro en la Plaza de Armas de Grocio Prado','https://goo.gl/maps/jZcgrQM3DV7rPm266','20220509051741.jpg','2022-05-09','S'),
+(10,1,31,'Cat','H','Se encontro en Grocio Prado','https://goo.gl/maps/jZcgrQM3DV7rPm266','20220509051724.jpg','2022-05-09','N'),
+(11,1,1,'Negro','M','estaba deambulando cerca de la parroquia','https://goo.gl/maps/PgLHKyWU3qWqFV8f7','20220513061832.jpg','2022-05-13','N');
 
 /*Table structure for table `padrinos` */
 
@@ -298,7 +302,7 @@ CREATE TABLE `padrinos` (
   KEY `fk_idpersona_pad` (`idpersona`),
   CONSTRAINT `fk_idmascota_pad` FOREIGN KEY (`idmascota`) REFERENCES `mascotas` (`idmascota`),
   CONSTRAINT `fk_idpersona_pad` FOREIGN KEY (`idpersona`) REFERENCES `personas` (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `padrinos` */
 
@@ -343,7 +347,7 @@ insert  into `personas`(`idpersona`,`apellidos`,`nombres`,`tipodoc`,`numdoc`,`di
 (6,'Juan Fernando','Quispe Guerra','C','81571482','Los Cedros 134','961841923','N','S'),
 (7,'Adriana Carolina','De la Cruz','D','28195012','Leoncio Prado 186','946172931','S','N'),
 (8,'Efraín Marcelo','Gonzales Perez','C','12481593','Av. Salaverry 359','989548933','S','N'),
-(9,'Jesus Antonio','Navarro Hernandez','D','61306814','Jr Bolivar 115','917246237','N','N'),
+(9,'Jesus Antonio','Navarro Hernandez','D','61306814','Jr Bolivar 115','917246237','S','N'),
 (10,'Flavio','Torres Boada','C','12121233','San Antonio de Salas - Chincha Baja','975542123','N','N'),
 (11,'Junior','Roque Montes','D','33212121','San Antonio de Salas - Chincha Baja','945454578','N','N'),
 (12,'Nestor','Tasayco Torres','C','44221133','Chincha Alta','955575321','S','N'),
@@ -483,7 +487,7 @@ CREATE TABLE `usuarios` (
   UNIQUE KEY `uk_idpersona_user` (`idpersona`),
   UNIQUE KEY `uk_nombreusuario_user` (`nombreusuario`),
   CONSTRAINT `fk_idpersona_user` FOREIGN KEY (`idpersona`) REFERENCES `personas` (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `usuarios` */
 
@@ -491,12 +495,13 @@ insert  into `usuarios`(`idusuario`,`idpersona`,`nombreusuario`,`clave`,`fechaal
 (1,1,'Luis','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-09',NULL,'A','C'),
 (2,2,'Anderson','$2y$10$1RGse/lmJg0AiQJ2DPimyu4H3Lnz8mYLDV6KqYJ/jIldP71uyQUTK','2022-04-09',NULL,'A','C'),
 (3,3,'Brenda','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-09',NULL,'A','C'),
-(4,4,'Jhon','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-09',NULL,'A','C'),
+(4,4,'Jhon','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-09',NULL,'A','U'),
 (5,14,'Maryory','$2y$10$dvgzm2Jmh0u98DerZSGkX.QH5rVqqD/ctSC3UCgYNj4jFh0CgR5mi','2022-04-28',NULL,'A','C'),
-(6,13,'Niurka','$2y$10$eJ9lcUCL14N5DbE.2QNJG.3pOPwtH//PCTh2z61T4amb2KBlRpJ5C','2022-04-28',NULL,'A','U'),
+(6,13,'Niurka','$2y$10$XuwgTJwj.H5SI7XfQqd8keDvgAlkWVOl8amJl6nqxrFjEbW42w4.u','2022-04-28',NULL,'A','U'),
 (7,12,'Nestor','$2y$10$aCB1lbGGRD.6lwd63tvAGuL7LqlL/NW.1uIkly90ygttmyE4T9Hle','2022-04-28',NULL,'A','C'),
-(8,7,'Adriana','$2y$10$QplUuNVAGp1p8SMV/N0t1Oj3XhZKtabTBD905IqfJLNejviLrx1M6','2022-04-28',NULL,'A','C'),
-(9,8,'Efrain','$2y$10$Mmh/kWH9TRYvzYKyYelr7OTV2HMQnSEFGBPTgZXkQxKmZnvGuEEHa','2022-05-09',NULL,'A','C');
+(8,7,'Adriana','$2y$10$QplUuNVAGp1p8SMV/N0t1Oj3XhZKtabTBD905IqfJLNejviLrx1M6','2022-04-28',NULL,'A','U'),
+(9,8,'Efrain','$2y$10$Mmh/kWH9TRYvzYKyYelr7OTV2HMQnSEFGBPTgZXkQxKmZnvGuEEHa','2022-05-09',NULL,'A','C'),
+(10,9,'jesus','$2y$10$dQsm0jNxKIVTghCQZcs2MeEDJFut2vSaohi8uiC6jvysuLs7q61ua','2022-05-13',NULL,'A','U');
 
 /*Table structure for table `voluntarios` */
 
@@ -511,7 +516,7 @@ CREATE TABLE `voluntarios` (
   PRIMARY KEY (`idvoluntario`),
   KEY `fk_idpersona_vol` (`idpersona`),
   CONSTRAINT `fk_idpersona_vol` FOREIGN KEY (`idpersona`) REFERENCES `personas` (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `voluntarios` */
 
@@ -528,10 +533,11 @@ insert  into `voluntarios`(`idvoluntario`,`idpersona`,`fechainicio`,`fechafin`,`
 (10,9,'2021-10-30','2022-04-20','Construir casa para las mascotas'),
 (11,10,'2022-04-09',NULL,'Limpieza.'),
 (12,14,'2022-04-11',NULL,'Paseo a los perros'),
-(13,1,'2022-05-09',NULL,'Limpieza en el albergue.'),
+(13,1,'2022-05-09','2022-05-13','Limpieza en el albergue.'),
 (14,14,'2022-04-20','2022-05-09','Bañado de perros'),
 (15,1,'2022-04-20','2022-04-25','Paseo a los perros.'),
-(16,4,'2022-04-20','2022-04-20','Limpieza de interior del albergue.');
+(16,4,'2022-04-20','2022-04-20','Limpieza de interior del albergue.'),
+(17,1,'2022-05-13',NULL,'Construccion de casa para perritos');
 
 /* Procedure structure for procedure `spu_actualizar_a_colaborador` */
 
@@ -781,15 +787,15 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_duenoencontrado_cargar`()
 BEGIN
-	SELECT idmascotaperdida, animales.animal, razas.raza, fecha,
-	CASE
-			WHEN genero = 'H' THEN 'Hembra'
-			WHEN genero = "M" THEN 'Macho'           
-		END 'genero'
-	FROM mascotasperdidas
-	INNER JOIN razas ON razas.idraza = mascotasperdidas.idraza
-	INNER JOIN animales ON animales.idanimal = razas.idanimal
-	WHERE recuperado = "N";
+    SELECT idmascotaperdida, animales.animal, razas.raza, fecha,
+    CASE
+            WHEN genero = 'H' THEN 'Hembra'
+            WHEN genero = "M" THEN 'Macho'
+        END 'genero', nombretemp
+    FROM mascotasperdidas
+    INNER JOIN razas ON razas.idraza = mascotasperdidas.idraza
+    INNER JOIN animales ON animales.idanimal = razas.idanimal
+    WHERE recuperado = "N";
 END */$$
 DELIMITER ;
 
@@ -801,18 +807,18 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_duenoencontrado_listar`()
 BEGIN
-	SELECT iddueno, CONCAT(personas.apellidos, ' ', personas.nombres) AS dueno, personas.telefono, animales.animal, 
-	CASE
-			WHEN mascotasperdidas.genero = 'H' THEN 'Hembra'
-			WHEN mascotasperdidas.genero = "M" THEN 'Macho'           
-		END 'genero', duenoencontrado.fecha
-	
-	FROM duenoencontrado
-	INNER JOIN personas ON personas.idpersona = duenoencontrado.idpersona
-	INNER JOIN mascotasperdidas ON mascotasperdidas.idmascotaperdida = duenoencontrado.idmascotaperdida
-	INNER JOIN razas ON razas.idraza = mascotasperdidas.idraza
-	INNER JOIN animales ON animales.idanimal = razas.idanimal
-	WHERE recuperado = "S";
+    SELECT iddueno, CONCAT(personas.apellidos, ' ', personas.nombres) AS dueno, personas.telefono, animales.animal, 
+    CASE
+            WHEN mascotasperdidas.genero = 'H' THEN 'Hembra'
+            WHEN mascotasperdidas.genero = "M" THEN 'Macho'
+        END 'genero', duenoencontrado.fecha, mascotasperdidas.nombretemp
+
+    FROM duenoencontrado
+    INNER JOIN personas ON personas.idpersona = duenoencontrado.idpersona
+    INNER JOIN mascotasperdidas ON mascotasperdidas.idmascotaperdida = duenoencontrado.idmascotaperdida
+    INNER JOIN razas ON razas.idraza = mascotasperdidas.idraza
+    INNER JOIN animales ON animales.idanimal = razas.idanimal
+    WHERE recuperado = "S";
 END */$$
 DELIMITER ;
 
@@ -1108,12 +1114,11 @@ BEGIN
 	SELECT CASE
 			WHEN genero = 'H' THEN 'Hembra'
 			WHEN genero = "M" THEN 'Macho'           
-		END 'genero', animales.animal, idmascotaperdida, fecha, ubicacion, fotografia
+		END 'genero', animales.animal, idmascotaperdida, fecha, ubicacion, fotografia, nombretemp
 		FROM mascotasperdidas
 	INNER JOIN razas ON razas.idraza = mascotasperdidas.idraza
 		INNER JOIN animales ON animales.idanimal = razas.idanimal
-		where recuperado = "N"
-		ORDER BY fecha desc;
+		WHERE recuperado= "N";
 END */$$
 DELIMITER ;
 
@@ -1182,12 +1187,12 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotas_cargar_padrinos`()
 BEGIN
-	select * 
-		from mascotas 
-		inner join razas on razas.idraza = mascotas.idraza
-		inner join animales ON animales.idanimal = razas.idanimal 
-		where apadrinado = "N" order by animales.animal; 
-end */$$
+	SELECT * 
+		FROM mascotas 
+		INNER JOIN razas ON razas.idraza = mascotas.idraza
+		INNER JOIN animales ON animales.idanimal = razas.idanimal 
+		WHERE apadrinado = "N" and estado = "R" ORDER BY animales.animal; 
+END */$$
 DELIMITER ;
 
 /* Procedure structure for procedure `spu_mascotas_eliminar` */
@@ -1343,14 +1348,15 @@ DELIMITER $$
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotas_registro_perdidos`(
 	IN _idusuario 			INT,
 	IN _idraza 			INT,
+	IN _nombretemp		VARCHAR(30),
 	IN _genero			CHAR(1),
 	IN _observaciones		TEXT,
 	IN _ubicacion		TEXT,
 	IN _fotografia			VARCHAR(100)
 )
 BEGIN
-	INSERT INTO mascotasperdidas (idusuario, idraza, genero, observaciones, ubicacion, fotografia, fecha, recuperado)
-		VALUES (_idusuario, _idraza, _genero, _observaciones, _ubicacion, _fotografia, CURDATE(), "N");
+	INSERT INTO mascotasperdidas (idusuario, idraza, nombretemp, genero, observaciones, ubicacion, fotografia, fecha, recuperado)
+		VALUES (_idusuario, _idraza, _nombretemp, _genero, _observaciones, _ubicacion, _fotografia, CURDATE(), "N");
 END */$$
 DELIMITER ;
 
