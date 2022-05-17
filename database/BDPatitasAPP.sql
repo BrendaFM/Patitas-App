@@ -95,15 +95,6 @@ CREATE TABLE eventos
 	CONSTRAINT fk_idtipoevento_event FOREIGN KEY (idtipoevento) REFERENCES tipoeventos(idtipoevento)
 ) ENGINE = INNODB;
 
-CREATE TABLE fotos
-(
-	idfoto			INT 			AUTO_INCREMENT PRIMARY KEY,
-	idmascota 		INT 			NOT NULL,
-	ruta			VARCHAR(100)		NOT NULL,
-	comentariofoto	VARCHAR(100)	NOT NULL,
-	CONSTRAINT fk_idmascota_ft FOREIGN KEY (idmascota) REFERENCES mascotas(idmascota)
-)ENGINE = INNODB;
-
 CREATE TABLE padrinos
 (
 	idpadrino 		INT 		AUTO_INCREMENT PRIMARY KEY,

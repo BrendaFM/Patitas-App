@@ -23,7 +23,6 @@
   <link rel="stylesheet" href="views/css/card.css">
   <link rel="stylesheet" href="views/css/top3.css">
 
-
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -33,7 +32,7 @@
   }
 </style>
 <div class="wrapper">
-  
+
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -48,6 +47,22 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <?= $_SESSION['apellidos']?>
+          <?= $_SESSION['nombres']?>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <a href="main.php?view=cambiar-clave" class="dropdown-item">
+          <i class="fas fa-key"></i> Cambiar contraseña
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="controllers/Usuario.controller.php?op=cerrar-sesion" class="dropdown-item">
+          <i class="fas fa-sign-out-alt nav-icon"></i> Cerrar sesión
+          </a>
+        </div>
+      </li>
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
@@ -65,31 +80,14 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#062A47">
     <!-- Brand Logo -->
-    
     <a class="brand-link mt-1">
       <img src="img/huella2.png" class="brand-image img-circle" style="opacity: 0.8;">
       <span class="brand-text font-weight-light">Patitas App</span>
     </a>
-
-    <div class="sidebar mt-3">
-      <nav>
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item">
-            <a href="main.php?view=cambiar-clave" class="nav-link">
-            <i class="fas fa-key"></i>
-            <p>&nbsp; &nbsp;<?= $_SESSION['apellidos']?></p>
-            <br>
-            <p class="ml-4">&nbsp; <?= $_SESSION['nombres']?></p>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-
-    <hr>
+    <br>
 
     <!-- Sidebar -->
-    <div class="sidebar mt-4 ">
+    <div class="sidebar">
 
       <!-- SidebarSearch Form -->
       <div class="form-inline">
@@ -106,18 +104,17 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        
-          <!-- opciones -->
-          <li class="nav-header">Nuestros Refugiados</li>
+          
+        <!-- opciones -->
+        <li class="nav-header">Mascotas</li>
           <li class="nav-item">
             <a href="main.php?view=mascotas" class="nav-link">
               <i class="fas fa-list nav-icon"></i>
               <p>Todas las mascotas</p>
             </a>
           </li>
-          
-          <li class="nav-header">Mascotas</li>
 
+          
           <li class="nav-item">
             <a href="main.php?view=mascotas-perdidos" class="nav-link">
               <i class="fas fa-map-marker-alt nav-icon"></i>
@@ -138,6 +135,8 @@
               <p>Mascotas Adoptadas</p>
             </a>
           </li>
+
+          <li class="nav-header">Multimedia</li>
           
           <li class="nav-item">
             <a href="main.php?view=videos" class="nav-link">
@@ -236,13 +235,7 @@
             }
           ?>
 
-          <li class="nav-item">
-            <a href="controllers/Usuario.controller.php?op=cerrar-sesion" class="nav-link ">
-            <i class="fas fa-sign-out-alt nav-icon"></i>
-              <p>Cerrar Sesión</p>
-            </a>
-          </li>
-
+          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -336,6 +329,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js" integrity="sha512-R/QOHLpV1Ggq22vfDAWYOaMd5RopHrJNMxi8/lJu8Oihwi4Ho4BRFeiMiCefn9rasajKjnx9/fTQ/xkWnkDACg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script> -->
+
 <script>
   $(document).ready(function(){
     let content = getParam("view");
@@ -347,5 +341,6 @@
     }
   });
 </script>
+
 </body>
 </html>
