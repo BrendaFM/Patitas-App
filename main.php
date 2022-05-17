@@ -135,8 +135,6 @@
               <p>Mascotas Adoptadas</p>
             </a>
           </li>
-
-          <li class="nav-header">Multimedia</li>
           
           <li class="nav-item">
             <a href="main.php?view=videos" class="nav-link">

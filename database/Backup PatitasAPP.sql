@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.4.21-MariaDB : Database - patitasapp
+MySQL - 10.4.22-MariaDB : Database - patitasapp
 *********************************************************************
 */
 
@@ -150,22 +150,6 @@ insert  into `eventos`(`idevento`,`idmascota`,`idtipoevento`,`fechahora`,`inform
 (1,1,2,'2022-05-10','Estuvo tranquilo al ser vacunado.'),
 (2,10,2,'2022-05-10','Estuvo agresiva pero luego se calmó.'),
 (3,20,3,'2022-05-10','Estuvo calmada en todo momento.');
-
-/*Table structure for table `fotos` */
-
-DROP TABLE IF EXISTS `fotos`;
-
-CREATE TABLE `fotos` (
-  `idfoto` int(11) NOT NULL AUTO_INCREMENT,
-  `idmascota` int(11) NOT NULL,
-  `ruta` varchar(100) NOT NULL,
-  `comentariofoto` varchar(100) NOT NULL,
-  PRIMARY KEY (`idfoto`),
-  KEY `fk_idmascota_ft` (`idmascota`),
-  CONSTRAINT `fk_idmascota_ft` FOREIGN KEY (`idmascota`) REFERENCES `mascotas` (`idmascota`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `fotos` */
 
 /*Table structure for table `gastos` */
 
@@ -812,7 +796,6 @@ BEGIN
             WHEN mascotasperdidas.genero = 'H' THEN 'Hembra'
             WHEN mascotasperdidas.genero = "M" THEN 'Macho'
         END 'genero', duenoencontrado.fecha, mascotasperdidas.nombretemp
-
     FROM duenoencontrado
     INNER JOIN personas ON personas.idpersona = duenoencontrado.idpersona
     INNER JOIN mascotasperdidas ON mascotasperdidas.idmascotaperdida = duenoencontrado.idmascotaperdida
