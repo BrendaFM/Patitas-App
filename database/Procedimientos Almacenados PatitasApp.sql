@@ -101,6 +101,16 @@ BEGIN
 END $$
 
 DELIMITER $$
+CREATE PROCEDURE spu_actualizar_a_usuario(IN _idusuario INT)
+BEGIN
+	UPDATE usuarios SET
+		nivelacceso = 'U'
+	WHERE idusuario = _idusuario;
+END $$
+
+SELECT * FROM mascotas;
+
+DELIMITER $$
 CREATE PROCEDURE spu_listausuarios_registrados()
 BEGIN
 	SELECT idusuario, personas.apellidos, personas.nombres, fechaalta, nivelacceso
@@ -108,7 +118,16 @@ BEGIN
 		INNER JOIN personas ON personas.idpersona = usuarios.idpersona
 		WHERE nivelacceso = 'U';
 END $$
-SELECT * FROM usuarios;
+
+DELIMITER $$
+CREATE PROCEDURE spu_listacolaboradores_registrados()
+BEGIN
+	SELECT idusuario, personas.apellidos, personas.nombres, nombreusuario, nivelacceso
+		FROM usuarios
+		INNER JOIN personas ON personas.idpersona = usuarios.idpersona
+		WHERE nivelacceso = 'C';
+END $$
+
 -- ------------------------------------------------------------
 -- RAZAS
 -- ------------------------------------------------------------
@@ -197,6 +216,8 @@ BEGIN
 		INNER JOIN animales ON animales.idanimal = razas.idanimal 
 		WHERE apadrinado = "N" AND estado = "R" ORDER BY animales.animal; 
 END $$
+
+SELECT * FROM mascotas;
 
 DELIMITER $$
 CREATE PROCEDURE spu_mascotas_cargar_eventos()
@@ -513,7 +534,7 @@ END $$
 DELIMITER $$
 CREATE PROCEDURE spu_padrinos_listar()
 BEGIN
-	SELECT  idpadrino, fecha, 
+	SELECT  idpadrino, mascotas.idmascota, fecha, 
 	CASE
 		WHEN mascotas.vive = "S" THEN 'Sí'
 		WHEN  mascotas.vive= "N" THEN 'No'           
@@ -530,10 +551,15 @@ END $$
 DELIMITER $$
 CREATE PROCEDURE spu_padrino_eliminar
 (
-	IN _idpadrino INT
+	IN _idpadrino INT,
+	IN _idmascota INT
 )
-BEGIN
+BEGIN	
 	DELETE FROM padrinos WHERE idpadrino = _idpadrino;
+	
+	UPDATE mascotas SET
+		apadrinado = 'N'
+	WHERE idmascota = _idmascota;
 END $$
 
 -- ------------------------------------------------------------

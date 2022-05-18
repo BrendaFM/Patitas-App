@@ -81,7 +81,6 @@ if (isset($_SESSION['acceso'])){
 					},
 					success: function (result){
 						if ($.trim(result) == ""){
-							//Nos vamos al dashboard
 							window.location.href = 'main.php'
 						}else{
 							Swal.fire(result);
@@ -133,9 +132,16 @@ if (isset($_SESSION['acceso'])){
                 });
           }
         }
+		
 		cargarPersonas();
 		$("#login").click(iniciarSesion);
 		$("#registro-usuario").click(registrarUsuario);
+
+		$("#clavelogin").keypress(function (e){
+			if (e.keyCode == 13){
+				iniciarSesion();
+			}
+    	});
 
 	});
 
@@ -156,6 +162,4 @@ if (isset($_SESSION['acceso'])){
 			$('.register-show').removeClass('show-log-panel');
 		}
 	});
-
-
 </script>

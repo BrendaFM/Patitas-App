@@ -1,53 +1,52 @@
 <?php
+    require_once 'datatable.php';
     require_once 'acceso-seguro.php';
     if($_SESSION['nivelacceso']!= "C"){
         echo "<strong>No tiene el nivel de acceso requerido</strong>";
         exit();
     }
-
-    require_once 'datatable.php';
 ?>
-
 <div class="container">
-    <div  class=" card card-outline card-info ">
-        <div class="card-header">
-            <p class="card-title mt-2" style="font-size: 22px">Lista de Usuarios</p>
-            <a href="main.php?view=colaborador-registro">
-                <button style="background-color: white;" type="button" class="btn btn-lg float-right"><i class="fas fa-arrow-circle-left"></i> &nbsp;Volver atrás</button>
-            </a>
-        </div>
-        <div class="card-body table-responsive">
-            <table class="table" id="tablaUsuarios">
-                <thead>
-                    <tr>
-                        <th class="text-center">N°</th>
-                        <th class="text-center">Apellidos</th>
-                        <th class="text-center">Nombres</th>
-                        <th class="text-center">Fecha de Registro</th>
-                        <th class="text-center">Operación</th>
-                    </tr>
-                </thead>
-                <tbody  id="datosUsuarios">
-                    <!-- Se carga de manera dinamica -->
-                </tbody>
-            </table>
+    <div class="row">
+        <div class="col-md-12">
+            <div  class=" card card-outline card-info">
+                <div class="card-header">
+                    <p class="card-title mt-2" style="font-size: 22px">Lista de Colaboradores</p>
+                </div>
+                <div class="card-body">
+                    <table class="table" id="tablaColaboradores">
+                        <thead>
+                            <tr>
+                                <th class="text-center">N°</th>
+                                <th class="text-center">Apellidos</th>
+                                <th class="text-center">Nombres</th>
+                                <th class="text-center">Nombre de usuario</th>
+                                <th class="text-center">Operaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table" id="datosColaboradores">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<br>
 
 <script>
     $(document).ready(function(){
 
-        function listarUsuariosRegistrados(){
+        function listarColaboradoreRegistrados(){
             $.ajax({
                 url: 'controllers/Usuario.controller.php',
                 type: 'GET', 
-                data:  'op=listarUsuariosRegistrados',
+                data:  'op=listarColaboradores',
                 success: function(e) {
-                    var tabla = $("#tablaUsuarios").DataTable();
+                    var tabla = $("#tablaColaboradores").DataTable();
                     tabla.destroy();
-                    $("#datosUsuarios").html(e);
-                    $("#tablaUsuarios").DataTable({
+                    $("#datosColaboradores").html(e);
+                    $("#tablaColaboradores").DataTable({
                         language: { url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json' },
                         columnDefs: [
                         {
@@ -62,24 +61,21 @@
             });
         }
 
-
-        $("#datosUsuarios").on("click", ".actualizar", function(){
-        let idusuario = $(this).attr('data-idusuario');
-
+        $("#datosColaboradores").on("click", ".quitar", function(){
+            let idusuario = $(this).attr('data-idusuario');
             Swal.fire({
                 icon: 'question',
                 title: 'PATITAS APP',
-                text: '¿Está seguro de hacer colaborador a este Usuario?',
+                text: '¿Está seguro de quitarle el colaborador a este usuario?',
                 showCancelButton: true,
                 cancelButtonText: 'Cancelar',
                 confirmButtonText: 'Confirmar',
             }).then((result)=>{
                 if(result.isConfirmed){
                     var datos = {
-                        'op' : 'actualizarUsuariosAColaboradores',
+                        'op' : 'actualizarColaboradoresAUsuarios',
                         'idusuario' : idusuario
                     };
-
                     $.ajax({
                         url: 'controllers/Usuario.controller.php',
                         type: 'GET',
@@ -89,12 +85,13 @@
                                 icon: 'success',
                                 title: 'Actualizado correctamente'
                             });
-                            listarUsuariosRegistrados();
+                            listarColaboradoreRegistrados();
                         }
                     });
                 }
             });
         });
-        listarUsuariosRegistrados();
+
+        listarColaboradoreRegistrados();
     });
 </script>

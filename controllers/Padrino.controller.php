@@ -28,7 +28,7 @@ if (isset($_GET['op'])){
                         <td class='text-center'> $tabla->fecha</td>
                         <td class='text-center'> $tabla->vive</td>
                         <td class='text-center'>
-                            <a href='#' data-idpadrino='$tabla->idpadrino' class='btn btn-sm btn-outline-secondary eliminar'>
+                            <a href='#' data-idpadrino='$tabla->idpadrino' data-idmascota='$tabla->idmascota' class='btn btn-sm btn-outline-secondary eliminar'>
                             <i class='fas fa-trash-alt'></i>
                             </a>
                         </td>
@@ -41,10 +41,10 @@ if (isset($_GET['op'])){
 
     if($_GET['op'] == 'eliminarPadrino'){
         $padrino->eliminarPadrino([
-            "idpadrino" => $_GET['idpadrino']
+            "idpadrino" => $_GET['idpadrino'],
+            "idmascota" => $_GET['idmascota']
         ]);
     }
-
 }
 
 ?>

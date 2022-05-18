@@ -14,6 +14,7 @@ class Mascota extends ModelMaster{
             die($error->getMessage());
         }
     }
+    
     public function listarMascotasGaleria(){
         try{
             return parent::getRows("spu_mascotas_general");

@@ -97,69 +97,131 @@
 <script>
     $(document).ready(function(){
 
-    $("#cancelar").click(function(){
-        Swal.fire({
-            icon: 'question',
-            title: 'PATITAS APP',
-            text: '¿Está seguro de cancelar el proceso?',
-            text: 'Se borraran todos los datos de los campos completados',
-            showCancelButton: true,
-            cancelButtonText: 'NO',
-            confirmButtonText: 'SI'
-        }).then((result) => {
-            if(result.isConfirmed){
-                $("#formularioPadrino")[0].reset();
-            }
-        });
-        
-    });
-
-    function listarPadrino(){
-        $.ajax({
-            url: 'controllers/Padrino.controller.php',
-            type: 'GET',
-            data: 'op=listarPadrino',
-            success: function(e){
-                var tabla = $("#tablaPadrino").DataTable();
-                tabla.destroy();
-                $("#datosPadrino").html(e);
-                $("#tablaPadrino").DataTable({
-                    language: { url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json' },
-                    columnDefs: [
-                    {
-                        visible: true,
-                        searchable: true
-                    }
-                    ],
-                    dom: 'Bfrtip',
-                    buttons: ['copy', 'print', 'pdf', 'excel']
-                });
-            }
-        });
-    }
-
-    function registrarPadrino(){
-        let idpersona = $("#idpersona").val();
-        let idmascota = $("#idmascota").val();
-
-        if(idpersona == "" || idmascota == ""){
-            Swal.fire({
-                icon: 'warning',
-                title: 'Por favor complete todos los campos, son obligatorios'
-            });
-        }else{
+        $("#cancelar").click(function(){
             Swal.fire({
                 icon: 'question',
                 title: 'PATITAS APP',
-                text: '¿Está seguro de registrar?',
+                text: '¿Está seguro de cancelar el proceso?',
+                text: 'Se borraran todos los datos de los campos completados',
+                showCancelButton: true,
+                cancelButtonText: 'NO',
+                confirmButtonText: 'SI'
+            }).then((result) => {
+                if(result.isConfirmed){
+                    $("#formularioPadrino")[0].reset();
+                }
+            });
+            
+        });
+
+        function listarPadrino(){
+            $.ajax({
+                url: 'controllers/Padrino.controller.php',
+                type: 'GET',
+                data: 'op=listarPadrino',
+                success: function(e){
+                    var tabla = $("#tablaPadrino").DataTable();
+                    tabla.destroy();
+                    $("#datosPadrino").html(e);
+                    $("#tablaPadrino").DataTable({
+                        language: { url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json' },
+                        columnDefs: [
+                        {
+                            visible: true,
+                            searchable: true
+                        }
+                        ],
+                        dom: 'Bfrtip',
+                        buttons: ['copy', 'print', 'pdf', 'excel']
+                    });
+                }
+            });
+        }
+
+        function registrarPadrino(){
+            let idpersona = $("#idpersona").val();
+            let idmascota = $("#idmascota").val();
+
+            if(idpersona == "" || idmascota == ""){
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Por favor complete todos los campos, son obligatorios'
+                });
+            }else{
+                Swal.fire({
+                    icon: 'question',
+                    title: 'PATITAS APP',
+                    text: '¿Está seguro de registrar?',
+                    showCancelButton: true,
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonText: 'Confirmar'
+                }).then((result) =>{
+                    if(result.isConfirmed){
+                        var datos ={
+                            'op' : 'registrarPadrino',
+                            'idpersona' : idpersona,
+                            'idmascota' : idmascota
+                        };
+
+                        $.ajax({
+                            url: 'controllers/Padrino.controller.php',
+                            type: 'GET',
+                            data: datos,
+                            success: function(e){
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Registrado correctamente'
+                                });
+                                $("#formularioPadrino")[0].reset();
+                                cargarMascota();
+                                listarPadrino();
+                            }
+                        });
+                    }
+                });
+            }
+
+            
+        }
+
+        function cargarPersona(){
+            $.ajax({
+                url: 'controllers/Persona.controller.php',
+                type: 'GET',
+                data: 'op=cargarPersonasTotal',
+                success: function(e){
+                    $("#idpersona").html(e);
+                }
+            });
+        }
+
+        function cargarMascota(){
+            $.ajax({
+                url: 'controllers/Mascota.controller.php',
+                type: 'GET',
+                data: 'op=cargarMascotaPadrino',
+                success: function(e){
+                    $("#idmascota").html(e);
+                }
+            });
+        }
+
+        $("#datosPadrino").on("click",".eliminar" , function(){
+            let idpadrino = $(this).attr('data-idpadrino');
+            let idmascota = $(this).attr('data-idmascota');
+
+            Swal.fire({
+                icon: 'question',
+                title: 'PATITAS APP',
+                text: 'Esta seguro de eliminar padrino?',
                 showCancelButton: true,
                 cancelButtonText: 'Cancelar',
-                confirmButtonText: 'Confirmar'
-            }).then((result) =>{
+                confirmButtonText: 'Confirmar',
+            }).then((result)=>{
                 if(result.isConfirmed){
-                    var datos ={
-                        'op' : 'registrarPadrino',
-                        'idpersona' : idpersona,
+                    var datos = {
+                        'op' : 'eliminarPadrino',
+                        'idpadrino' : idpadrino,
                         'idmascota' : idmascota
                     };
 
@@ -170,78 +232,19 @@
                         success: function(e){
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Registrado correctamente'
+                                title: 'Finalizado correctamente'
                             });
-                            $("#formularioPadrino")[0].reset();
-                            cargarMascota();
                             listarPadrino();
+                            cargarMascota();
                         }
                     });
                 }
             });
-        }
-
-        
-    }
-
-    function cargarPersona(){
-        $.ajax({
-            url: 'controllers/Persona.controller.php',
-            type: 'GET',
-            data: 'op=cargarPersonasTotal',
-            success: function(e){
-                $("#idpersona").html(e);
-            }
         });
-    }
 
-    function cargarMascota(){
-        $.ajax({
-            url: 'controllers/Mascota.controller.php',
-            type: 'GET',
-            data: 'op=cargarMascotaPadrino',
-            success: function(e){
-                $("#idmascota").html(e);
-            }
-        });
-    }
-
-    $("#datosPadrino").on("click", ".eliminar", function(){
-        let idpadrino = $(this).attr('data-idpadrino');
-
-        Swal.fire({
-            icon: 'question',
-            title: 'PATITAS APP',
-            text: 'Esta seguro de eliminar?',
-            showCancelButton: true,
-            cancelButtonText: 'Cancelar',
-            confirmButtonText: 'Confirmar',
-        }).then((result)=>{
-            if(result.isConfirmed){
-                var datos = {
-                    'op' : 'eliminarPadrino',
-                    'idpadrino' : idpadrino
-                };
-
-                $.ajax({
-                    url: 'controllers/Padrino.controller.php',
-                    type: 'GET',
-                    data: datos,
-                    success: function(e){
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Eliminado correctamente'
-                        });
-                        listarPadrino();
-                    }
-                });
-            }
-        });
-    });
-
-    cargarPersona();
-    cargarMascota();
-    $("#registrarPadrino").click(registrarPadrino);
-    listarPadrino();
+        cargarPersona();
+        cargarMascota();
+        $("#registrarPadrino").click(registrarPadrino);
+        listarPadrino();
     });
 </script>

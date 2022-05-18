@@ -54,6 +54,18 @@
           <?= $_SESSION['nombres']?>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <?php 
+              if($_SESSION['nivelacceso'] == 'C'){
+                echo'
+                    <a href="main.php?view=colaborador-registro" class="dropdown-item">
+                    <i class="fas fa-user-check"></i> Registrar Colaborador
+                    </a>
+                    <a href="main.php?view=quitar-colaborador" class="dropdown-item">
+                    <i class="fas fa-user-times"></i> Quitar Colaborador
+                    </a>
+                  ';
+              }
+          ?>
           <a href="main.php?view=cambiar-clave" class="dropdown-item">
           <i class="fas fa-key"></i> Cambiar contraseña
           </a>
@@ -135,6 +147,8 @@
               <p>Mascotas Adoptadas</p>
             </a>
           </li>
+
+          <li class="nav-header">Multimedia</li>
           
           <li class="nav-item">
             <a href="main.php?view=videos" class="nav-link">
@@ -220,13 +234,6 @@
                   <a href="main.php?view=mascotas-perdidas-registro" class="nav-link ">
                     <i class="fas fa-save nav-icon"></i>
                     <p>Registro Perdidos</p>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="main.php?view=colaborador-registro" class="nav-link ">
-                    <i class="fas fa-save nav-icon"></i>
-                    <p>Registrar Colaboradores</p>
                   </a>
                 </li>
                 ';

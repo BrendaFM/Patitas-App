@@ -5,7 +5,6 @@ require_once '../core/model.master.php';
 
 class Usuario extends ModelMaster{
 
-  //Login
   public function login(array $data){
     try{
       return parent::execProcedureLogin($data, "spu_usuarios_login", true);
@@ -54,10 +53,18 @@ class Usuario extends ModelMaster{
       die($error->getMessage());
     }
   }
+  
+  public function actualizarColaboradoresAUsuarios(array $data){
+    try{
+      parent::execProcedure($data, "spu_actualizar_a_usuario", false);
+    }catch(Exception $error){
+      die($error->getMessage());
+    }
+  }
 
   public function listarColaboradores(){
     try{
-      return parent::getRows("spu_colaboradores_listar");
+      return parent::getRows("spu_listacolaboradores_registrados");
     }catch(Exception $error){
       die($error->getMessage());
     }
