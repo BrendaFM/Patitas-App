@@ -211,11 +211,11 @@ CREATE TABLE `mascotas` (
 /*Data for the table `mascotas` */
 
 insert  into `mascotas`(`idmascota`,`idusuario`,`idraza`,`nombremascota`,`genero`,`fechanacimiento`,`observaciones`,`esterilizacion`,`estado`,`vive`,`apadrinado`,`fotografia`) values 
-(1,1,1,'Nacho','M','2016-04-12','descripcion','S','A','S','S','20220425072330.jpg'),
+(1,1,1,'Nacho','M','2016-04-12','descripcion','S','A','S','N','20220425072330.jpg'),
 (2,1,31,'Alex','M','2016-08-17','descripcion','S','R','S','N','20220425072331.jpg'),
-(3,2,31,'Danna','H','2017-12-21','descripcion','N','A','S','S','20220425072332.jpg'),
+(3,2,31,'Danna','H','2017-12-21','descripcion','N','A','S','N','20220425072332.jpg'),
 (4,1,6,'Copita','H','2017-07-03','descripcion','N','A','S','N','20220425072333.jpg'),
-(5,2,8,'Bronko','M','2017-04-12','descripcion','S','A','S','S','20220425072334.jpg'),
+(5,2,8,'Bronko','M','2017-04-12','descripcion','S','A','S','N','20220425072334.jpg'),
 (6,3,31,'Charlie','M','2018-04-12','descripcion','S','R','S','S','20220425072335.jpg'),
 (7,2,1,'Rocky','M','2022-03-12','descripcion','S','R','S','N','20220425072336.jpg'),
 (8,3,34,'Bella','H','2019-04-12','descripcion','N','R','S','S','20220425072337.jpg'),
@@ -225,12 +225,12 @@ insert  into `mascotas`(`idmascota`,`idusuario`,`idraza`,`nombremascota`,`genero
 (12,3,1,'Balto','M','2020-04-12','descripcion','S','R','S','S','20220425072341.jpg'),
 (13,1,1,'Peluchin','M','2020-08-17','descripcion','N','R','S','S','20220425072342.jpg'),
 (14,2,31,'Lisa','H','2020-12-21','descripcion','N','R','S','N','20220425072343.jpg'),
-(15,1,1,'Any','H','2020-07-03','descripcion','N','A','S','S','20220425072344.jpg'),
+(15,1,1,'Any','H','2020-07-03','descripcion','N','A','S','N','20220425072344.jpg'),
 (16,3,60,'Cosmo','M','2021-04-12','descripcion','S','R','S','N','20220425072345.jpg'),
 (17,3,1,'Mané','M','2021-04-12','descripcion','S','R','S','N','20220425072346.jpg'),
 (18,2,60,'Max','M','2021-04-12','descripcion','S','R','N','S','20220425072347.jpg'),
 (19,3,31,'Misha','H','2022-01-10','descripcion','S','R','S','N','20220425072348.jpg'),
-(20,1,8,'Polita','H','2022-01-11','descripcion','S','A','S','S','20220425072349.jpg'),
+(20,1,8,'Polita','H','2022-01-11','descripcion','S','A','S','N','20220425072349.jpg'),
 (21,2,31,'Frida','H','2022-02-02','descripcion','N','R','S','S','20220425072350.jpg'),
 (22,2,1,'Nina','H','2022-02-10','descripcion','S','A','S','N','20220425072351.jpg'),
 (23,2,1,'Paco','M','2020-09-01','lo encontramos en el mercado.','N','A','S','N','20220425072352.jpg'),
@@ -286,21 +286,19 @@ CREATE TABLE `padrinos` (
   KEY `fk_idpersona_pad` (`idpersona`),
   CONSTRAINT `fk_idmascota_pad` FOREIGN KEY (`idmascota`) REFERENCES `mascotas` (`idmascota`),
   CONSTRAINT `fk_idpersona_pad` FOREIGN KEY (`idpersona`) REFERENCES `personas` (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `padrinos` */
 
 insert  into `padrinos`(`idpadrino`,`idpersona`,`idmascota`,`fecha`) values 
 (1,5,6,'2017-02-02'),
-(2,8,3,'2018-01-19'),
 (3,14,13,'2018-02-12'),
 (4,14,8,'2019-01-10'),
 (5,6,12,'2019-01-11'),
 (6,8,20,'2020-03-17'),
 (7,10,10,'2021-02-14'),
 (8,11,15,'2021-03-14'),
-(9,5,5,'2022-03-12'),
-(10,3,1,'2022-04-09');
+(9,5,5,'2022-03-12');
 
 /*Table structure for table `personas` */
 
@@ -537,6 +535,20 @@ begin
 end */$$
 DELIMITER ;
 
+/* Procedure structure for procedure `spu_actualizar_a_usuario` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_actualizar_a_usuario` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_actualizar_a_usuario`(IN _idusuario INT)
+BEGIN
+	UPDATE usuarios SET
+		nivelacceso = 'U'
+	WHERE idusuario = _idusuario;
+END */$$
+DELIMITER ;
+
 /* Procedure structure for procedure `spu_adopciones_eliminar` */
 
 /*!50003 DROP PROCEDURE IF EXISTS  `spu_adopciones_eliminar` */;
@@ -590,21 +602,6 @@ BEGIN
     inner join razas on razas.idraza = mascotas.idraza
     inner join animales on animales.idanimal = razas.idanimal
     WHERE estado = 'A';
-END */$$
-DELIMITER ;
-
-/* Procedure structure for procedure `spu_colaboradores_listar` */
-
-/*!50003 DROP PROCEDURE IF EXISTS  `spu_colaboradores_listar` */;
-
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_colaboradores_listar`()
-BEGIN
-	SELECT idusuario, personas.apellidos, personas.nombres, nivelacceso
-	from usuarios
-	INNER JOIN personas ON personas.idpersona = usuarios.idpersona
-	WHERE nivelacceso = "C";
 END */$$
 DELIMITER ;
 
@@ -1057,6 +1054,21 @@ SELECT  tipoapoyos.tipoapoyo, SUM(cantidad) AS "Total Soles" , YEAR(fechaapoyo) 
 END */$$
 DELIMITER ;
 
+/* Procedure structure for procedure `spu_listacolaboradores_registrados` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `spu_listacolaboradores_registrados` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_listacolaboradores_registrados`()
+BEGIN
+	SELECT idusuario, personas.apellidos, personas.nombres, nombreusuario, nivelacceso
+		FROM usuarios
+		INNER JOIN personas ON personas.idpersona = usuarios.idpersona
+		WHERE nivelacceso = 'C';
+END */$$
+DELIMITER ;
+
 /* Procedure structure for procedure `spu_listausuarios_registrados` */
 
 /*!50003 DROP PROCEDURE IF EXISTS  `spu_listausuarios_registrados` */;
@@ -1382,7 +1394,7 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_padrinos_listar`()
 BEGIN
-	SELECT  idpadrino, fecha, 
+	SELECT  idpadrino, mascotas.idmascota, fecha, 
 	CASE
 		WHEN mascotas.vive = "S" THEN 'Sí'
 		WHEN  mascotas.vive= "N" THEN 'No'           
@@ -1391,9 +1403,9 @@ BEGIN
 	FROM padrinos
 		INNER JOIN personas ON personas.idpersona = padrinos.idpersona
 		INNER JOIN mascotas ON mascotas.idmascota = padrinos.idmascota
-		INNER join razas ON razas.idraza = mascotas.idraza
-		inner join animales on animales.idanimal = razas.idanimal
-	order by personas.apellidos;
+		INNER JOIN razas ON razas.idraza = mascotas.idraza
+		INNER JOIN animales ON animales.idanimal = razas.idanimal
+	ORDER BY personas.apellidos;
 END */$$
 DELIMITER ;
 
@@ -1424,10 +1436,15 @@ DELIMITER ;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_padrino_eliminar`(
-	IN _idpadrino INT
+	IN _idpadrino INT,
+	IN _idmascota INT
 )
-BEGIN
+BEGIN	
 	DELETE FROM padrinos WHERE idpadrino = _idpadrino;
+	
+	UPDATE mascotas SET
+		apadrinado = 'N'
+	WHERE idmascota = _idmascota;
 END */$$
 DELIMITER ;
 
