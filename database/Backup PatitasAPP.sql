@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.4.22-MariaDB : Database - patitasapp
+MySQL - 10.4.20-MariaDB : Database - patitasapp
 *********************************************************************
 */
 
@@ -1081,20 +1081,6 @@ BEGIN
 		from usuarios
 		inner join personas on personas.idpersona = usuarios.idpersona
 		where nivelacceso = 'U';
-END */$$
-DELIMITER ;
-
-/* Procedure structure for procedure `spu_mascotasperdidas_eliminar` */
-
-/*!50003 DROP PROCEDURE IF EXISTS  `spu_mascotasperdidas_eliminar` */;
-
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_mascotasperdidas_eliminar`(
-_idmascotaperdida INT
-)
-BEGIN
-	DELETE FROM mascotasperdidas where idmascotaperdida = _idmascotaperdida;
 END */$$
 DELIMITER ;
 

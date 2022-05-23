@@ -88,14 +88,6 @@ class Mascota extends ModelMaster{
         }
     }
 
-    public function eliminarMascotaPerdido(array $data){
-        try{
-            parent::execProcedure($data, "spu_mascotasperdidas_eliminar", false);
-        }catch(Exception $error){
-            die($error->getMessage());
-        }
-    }
-
     public function reporteAdoptados(){
         try{
           return parent::getRows("spu_grafico_adoptados");

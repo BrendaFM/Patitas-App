@@ -31,39 +31,6 @@ if($_SESSION['nivelacceso'] == 'C'){
             });
         }
 
-        $("#card-mascota").on("click", ".eliminar", function(){
-            let idmascotaperdida = $(this).attr('data-idmascota');
-
-            Swal.fire({
-                icon: 'question',
-                title: 'PATITAS APP',
-                text: '¿Esta mascota fue encontrada?',
-                showCancelButton: true,
-                cancelButtonText: 'No',
-                confirmButtonText: 'Sí',
-            }).then((result)=>{
-                if(result.isConfirmed){
-                    var datos = {
-                        'op' : 'eliminarMascotaPerdido',
-                        'idmascotaperdida' : idmascotaperdida
-                    };
-
-                    $.ajax({
-                        url: 'controllers/Mascota.controller.php',
-                        type: 'GET',
-                        data: datos,
-                        success: function(e){
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Proceso terminado'
-                            });
-                            listarMascotasPerdidos();
-                        }
-                    });
-                }
-            });
-        });
-
         listarMascotasPerdidos();
     });
 </script>

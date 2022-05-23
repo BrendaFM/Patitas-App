@@ -362,10 +362,6 @@ if (isset($_GET['op'])){
         }
     }
 
-    if($_GET['op'] == 'eliminarMascotaPerdido'){
-        $mascota->eliminarMascotaPerdido(["idmascotaperdida" => $_GET['idmascotaperdida']]);
-    }
-
     if ($_GET['op'] == 'listarMascotasGaleria') {
         $datosObtenidos = $mascota->listarMascotasGaleria();
 

@@ -108,7 +108,6 @@ BEGIN
 	WHERE idusuario = _idusuario;
 END $$
 
-SELECT * FROM mascotas;
 
 DELIMITER $$
 CREATE PROCEDURE spu_listausuarios_registrados()
@@ -142,7 +141,6 @@ END $$
 -- ------------------------------------------------------------
 -- MASCOTAS
 -- ------------------------------------------------------------
-SELECT * FROM mascotas;
 
 DELIMITER $$
 CREATE PROCEDURE spu_mascotas_registro
@@ -217,7 +215,6 @@ BEGIN
 		WHERE apadrinado = "N" AND estado = "R" ORDER BY animales.animal; 
 END $$
 
-SELECT * FROM mascotas;
 
 DELIMITER $$
 CREATE PROCEDURE spu_mascotas_cargar_eventos()
@@ -251,15 +248,6 @@ BEGIN
 	INNER JOIN razas ON razas.idraza = mascotasperdidas.idraza
 		INNER JOIN animales ON animales.idanimal = razas.idanimal
 		WHERE recuperado= "N";
-END $$
-
-DELIMITER $$
-CREATE PROCEDURE spu_mascotasperdidas_eliminar
-(
-_idmascotaperdida INT
-)
-BEGIN
-	DELETE FROM mascotasperdidas WHERE idmascotaperdida = _idmascotaperdida;
 END $$
 
 DELIMITER $$
@@ -442,8 +430,6 @@ BEGIN
 	INSERT INTO tipoeventos (tipoevento, fechainicio, fechatermino)
 		VALUES (_tipoevento, CURDATE() , NULL);
 END $$
-
-CALL spu_tipoeventos_registrar("Campaña de esterilización 'Mascotas Felices'")
 
 DELIMITER $$
 CREATE PROCEDURE spu_tipoeventos_listar()
@@ -733,8 +719,6 @@ SELECT
     ORDER BY fechaadopcion;
 END $$
 
-SELECT * FROM adopciones;
-
 -- ---------- ---------------
 --  DONACIONES COMIDA   --
 -- ---------- ---------------
@@ -823,19 +807,6 @@ BEGIN
     INSERT INTO gastos (idusuario, idtipoapoyo, fecha, cantidadsalida, descripcion)
         VALUES (_idusuario, _idtipoapoyo, NOW(), _cantidadsalida, _descripcion);
 END $$
-
-CALL spu_gastos_registrar(1, 1, 30.00, "Desayuno");
-CALL spu_gastos_registrar(2, 1, 30.00, "Almuerzo");
-CALL spu_gastos_registrar(3, 1, 30.00, "Cena");
-CALL spu_gastos_registrar(2, 1, 1.00, "Para perrito rescatado");
-CALL spu_gastos_registrar(1, 1, 1.00, "Para 3 gatos rescatados");
-CALL spu_gastos_registrar(1, 2, 50.00, "Platos para comida");
-CALL spu_gastos_registrar(2, 2, 100.00, "Cama para perro");
-CALL spu_gastos_registrar(3, 2, 120.00, "Medicinas para perros adultos");
-CALL spu_gastos_registrar(2, 2, 150.00, "Casas para gatos");
-CALL spu_gastos_registrar(1, 2, 200.00, "Cirugia para gato");
-
-SELECT * FROM gastos
 
 DELIMITER $$
 CREATE PROCEDURE spu_gastos_comida()
